@@ -71,7 +71,7 @@
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingOne">
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
-                                        {% trans "Load an Image" %}
+                                        {% trans "Load an Existing Image" %}
                                     </button>
                                 </h2>
                                 <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
@@ -83,10 +83,10 @@
                                             <div class="form-group row mb-3">
                                                 <!--                                                        <label for="idcard" class="col-sm-2 col-form-label">{% trans "Upload Your ID" %}</label>-->
                                                 <div class="col-sm-10">
-                                                    <input class="form-control" accept="image/*" type="file" id="idcard" capture onchange="loadFile(event)">
+                                                    <input class="form-control" accept="image/*" type="file" id="idcard" onchange="loadFile(event)">
                                                 </div>
                                             </div>
-                                            <button type="button" id="IdVerification" class="btn btn-success btn-sm">{% trans "Upload" %} <i class="icon-paperplane ml-2"></i></button>
+
                                         </form>
 
                                     </div>
@@ -95,7 +95,7 @@
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingTwo">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
-                                        {% trans "Take a Picture" %}
+                                        {% trans "Take a Picture of Your ID" %}
                                     </button>
                                 </h2>
                                 <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
@@ -103,22 +103,24 @@
                                         <h5 class="card-title">{% trans "Capture Photo With Camera"%}</h5>
                                         <div class="row gx-0 align-items-center">
                                             <div class="col">
+
+                                                <input class="form-control" accept="image/*" type="file" id="cardid" capture onchange="loadPhoto(event)">
                                                 <!--                                                    <video id="camera" autoplay width="320" height="240" controls></video>-->
                                                 <!--                                                    <button id="capture-btn">Capture Photo</button>-->
 
                                                 <!--                                                    <canvas id="photo" width="320" height="240"></canvas>-->
 <!--                                                <button id="grabFrame">Grab Frame</button>-->
 
-                                                <div class="select">
-                                                    <label for="videoSource">{% trans "Video source:" %} </label><select id="videoSource"></select>
-                                                </div>
-                                                <input class="hidden" id="zoom" type="range" step="20">
-                                                <video autoplay playsinline class="hidden mt-3 mb-3" width="100%" id="videostream"></video>
-<!--                                                <img id="captureimg" width="240" height="240">-->
-                                                <canvas class="hidden" id="capturedimage"></canvas>
-                                                <input class="hidden" id="datalink1">
-                                                <input class="hidden" id="datalink2">
-                                                <button id="takePhoto" style="float: right;">{% trans "Take Photo"%}</button>
+<!--                                                <div class="select">-->
+<!--                                                    <label for="videoSource">{% trans "Video source:" %} </label><select id="videoSource"></select>-->
+<!--                                                </div>-->
+<!--                                                <input class="hidden" id="zoom" type="range" step="20">-->
+<!--                                                <video autoplay playsinline class="hidden mt-3 mb-3" width="100%" id="videostream"></video>-->
+<!--&lt;!&ndash;                                                <img id="captureimg" width="240" height="240">&ndash;&gt;-->
+<!--                                                <canvas class="hidden" id="capturedimage"></canvas>-->
+<!--                                                <input class="hidden" id="datalink1">-->
+<!--                                                <input class="hidden" id="datalink2">-->
+<!--                                                <button id="takePhoto" style="float: right;">{% trans "Take Photo"%}</button>-->
                                             </div>
                                         </div>
 
@@ -139,7 +141,8 @@
             </div>
 
             <div class="card-footer bg-none d-flex p-3">
-
+                <button type="button" id="IdVerification" class="btn btn-success btn-sm">{% trans "Upload" %} <i class="icon-paperplane ml-2"></i></button>
+                <input class="hidden" id="datalink">
                 <div id="alert-box"></div>
 
             </div>
@@ -237,6 +240,18 @@
 <script>
     var loadFile = function(event) {
         var output = document.getElementById('captureimg');
+        var datalink = document.getElementById('datalink');
+        datalink.value = "1";
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+            URL.revokeObjectURL(output.src) // free memory
+        }
+    };
+
+     var loadPhoto = function(event) {
+        var output = document.getElementById('captureimg');
+        var datalink = document.getElementById('datalink');
+        datalink.value = "2";
         output.src = URL.createObjectURL(event.target.files[0]);
         output.onload = function() {
             URL.revokeObjectURL(output.src) // free memory
@@ -248,8 +263,16 @@
     $("#IdVerification").click(function () {
             let url = 'https://idme.ma/idme.apis/idverify/';
             const formData = new FormData();
-            // var fileName = $("#idcard").val();
-            var fileName = $("#captureimg").attr('src');
+            var datalink = $("#datalink").val();
+            console.log("datalink: ", datalink);
+
+            if (datalink=="1"){
+                var fileName = $("#idcard").val();
+            }else if (datalink=="2") {
+                var fileName = $("#cardid").val();
+            }
+
+            // var fileName = $("#captureimg").attr('src');
             console.log(fileName);
             if (fileName) {
                 formData.append('file', $('#idcard')[0].files[0]);
