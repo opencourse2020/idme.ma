@@ -40,7 +40,8 @@ var img = document.querySelector('img#captureimg');
 var video = document.querySelector('video#videostream');
 var videoSelect = document.querySelector('select#videoSource');
 var zoomInput = document.querySelector('input#zoom');
-var datalink = document.querySelector('input#datalink');
+var datalink1 = document.querySelector('input#datalink1');
+var datalink2 = document.querySelector('input#datalink1');
 
 // grabFrameButton.onclick = grabFrame;
 takePhotoButton.onclick = takePhoto;
@@ -123,7 +124,7 @@ function grabFrame() {
     canvas.width = imageBitmap.width;
     canvas.height = imageBitmap.height;
     canvas.getContext('2d').drawImage(imageBitmap, 0, 0);
-    datalink.value = canvas.toDataURL('image/jpg');
+    datalink1.value = canvas.toDataURL('image/jpg');
     // canvas.classList.remove('hidden');
   }).catch(function(error) {
     console.log('grabFrame() error: ', error);
@@ -139,10 +140,12 @@ function setZoom() {
 // Get a Blob from the currently selected camera source and
 // display this with an img element.
 function takePhoto() {
+  grabFrame;
   imageCapture.takePhoto().then(function(blob) {
     console.log('Took photo:', blob);
     img.classList.remove('hidden');
     img.src = URL.createObjectURL(blob);
+    datalink2.value = URL.createObjectURL(blob);
   }).catch(function(error) {
     console.log('takePhoto() error: ', error);
   });
