@@ -35,9 +35,9 @@ var mediaStream;
 var grabFrameButton = document.querySelector('button#grabFrame');
 var takePhotoButton = document.querySelector('button#takePhoto');
 
-var canvas = document.querySelector('canvas');
-var img = document.querySelector('img');
-var video = document.querySelector('video');
+var canvas = document.querySelector('canvas#capturedimage');
+var img = document.querySelector('img#captureimg');
+var video = document.querySelector('video#videostream');
 var videoSelect = document.querySelector('select#videoSource');
 var zoomInput = document.querySelector('input#zoom');
 
