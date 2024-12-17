@@ -44,7 +44,7 @@ var datalink1 = document.querySelector('input#datalink1');
 var datalink2 = document.querySelector('input#datalink1');
 
 // grabFrameButton.onclick = grabFrame;
-takePhotoButton.onclick = takePhoto;
+takePhotoButton.onclick = grabFrame;
 videoSelect.onchange = getStream;
 zoomInput.oninput = setZoom;
 
