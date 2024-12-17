@@ -110,19 +110,7 @@
                         <div class="card-arrow-bottom-right"></div>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-body">
 
-
-                    </div>
-                    <div class="card-arrow">
-                        <div class="card-arrow-top-left"></div>
-                        <div class="card-arrow-top-right"></div>
-                        <div class="card-arrow-bottom-left"></div>
-                        <div class="card-arrow-bottom-right"></div>
-                    </div>
-
-                </div>
             </div>
             <div class="card-footer bg-none d-flex p-3">
 
@@ -284,6 +272,9 @@ const video = document.getElementById('camera');
 const canvas = document.getElementById('photo');
 const captureBtn = document.getElementById('capture-btn');
 const context = canvas.getContext('2d');
+const downloadLink = document.createElement('a');
+downloadLink.innerText = 'Download Photo';
+document.body.appendChild(downloadLink);
 
 // Request access to the user's camera
 navigator.mediaDevices.getUserMedia({ video: true })
@@ -302,9 +293,13 @@ captureBtn.addEventListener('click', () => {
 
     // Draw the current frame from the video onto the canvas
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
+    const dataURL = canvas.toDataURL('image/jpg');
     // Show the captured image on the canvas
-    canvas.style.display = 'block';
+    // canvas.style.display = 'block';
+    // Set the download link
+    downloadLink.href = dataURL;
+    downloadLink.download = 'captured-photo.png';
+    downloadLink.style.display = 'block';
 });
 </script>
 {% endblock js %}
