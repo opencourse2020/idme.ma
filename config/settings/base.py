@@ -78,7 +78,7 @@ INSTALLED_APPS = [
     # "captcha",
     'corsheaders',
     # "idme.profiles.apps.ProfilesConfig",
-    "idme.api.apps.CoeanalyticsConfig",
+    "idme.api.apps.IdmeConfig",
     # "api.chat.apps.ChatConfig",
 
 
