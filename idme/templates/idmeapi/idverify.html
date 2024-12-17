@@ -40,103 +40,128 @@
 
             <div class="card-body">
 
-                        <div class="card mb3">
-                            <div class="card-body">
-                                <div class="row gx-0 align-items-center">
-                                    <div class="col-md-4">
-                                        <img src="https://via.placeholder.com/480x360/c9d2e3/212837" alt="" class="card-img rounded-0" id="card-img">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body d-block">
-                                            <h5 class="card-title">{% trans "Card Information" %}</h5>
-                                            <div id="alert-id"></div>
-                                            <div id="alert-name"></div>
-                                            <div id="alert-address"></div>
-                                            <div id="alert-dob"></div>
-                                            <div id="alert-expire"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-arrow">
-                                    <div class="card-arrow-top-left"></div>
-                                    <div class="card-arrow-top-right"></div>
-                                    <div class="card-arrow-bottom-left"></div>
-                                    <div class="card-arrow-bottom-right"></div>
+                <div class="card mb3">
+                    <div class="card-body">
+                        <div class="row gx-0 align-items-center">
+                            <div class="col-md-4">
+                                <img src="https://via.placeholder.com/480x360/c9d2e3/212837" alt="" class="card-img rounded-0" id="card-img">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body d-block">
+                                    <h5 class="card-title">{% trans "Card Information" %}</h5>
+                                    <div id="alert-id"></div>
+                                    <div id="alert-name"></div>
+                                    <div id="alert-address"></div>
+                                    <div id="alert-dob"></div>
+                                    <div id="alert-expire"></div>
                                 </div>
                             </div>
                         </div>
+                        <div class="card-arrow">
+                            <div class="card-arrow-top-left"></div>
+                            <div class="card-arrow-top-right"></div>
+                            <div class="card-arrow-bottom-left"></div>
+                            <div class="card-arrow-bottom-right"></div>
+                        </div>
+                    </div>
+                </div>
                 <div class="card mb3">
-                            <div class="card-body">
-                            <div class="accordion" id="accordionExample">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="headingOne">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
-                                            {% trans "Load an Image" %}
-                                        </button>
-                                    </h2>
-                                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
+                    <div class="card-body">
+                        <div class="accordion" id="accordionExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                        {% trans "Load an Image" %}
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
 
 
-                                            <form action="" enctype="multipart/form-data">
-                                                {% csrf_token %}
-                                                <div class="form-group row mb-3">
-                                                    <!--                                                        <label for="idcard" class="col-sm-2 col-form-label">{% trans "Upload Your ID" %}</label>-->
-                                                    <div class="col-sm-10">
-                                                        <input class="form-control" accept="image/*" type="file" id="idcard" onchange="loadFile(event)">
-                                                    </div>
-                                                </div>
-                                                <button type="button" id="IdVerification" class="btn btn-success btn-sm">{% trans "Upload" %} <i class="icon-paperplane ml-2"></i></button>
-                                            </form>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="headingTwo">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
-                                            {% trans "Take a Picture" %}
-                                        </button>
-                                    </h2>
-                                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <h5 class="card-title">Access Camera and Capture Photo</h5>
-                                            <div class="row gx-0 align-items-center">
-                                                <div class="col">
-                                                    <!--                                                    <video id="camera" autoplay width="320" height="240" controls></video>-->
-                                                    <!--                                                    <button id="capture-btn">Capture Photo</button>-->
-
-                                                    <!--                                                    <canvas id="photo" width="320" height="240"></canvas>-->
-                                                    <button id="grabFrame">Grab Frame</button>
-                                                    <button id="takePhoto">Take Photo</button>
-                                                    <div class="select">
-                                                        <label for="videoSource">Video source: </label><select id="videoSource"></select>
-                                                    </div>
-                                                    <input class="hidden" id="zoom" type="range" step="20">
-                                                    <video autoplay playsinline class="hidden" width="480" height="360" id="videostream"></video>
-                                                    <img id="captureimg" width="240" height="240">
-                                                    <canvas class="hidden" id="capturedimage"></canvas>
+                                        <form action="" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            <div class="form-group row mb-3">
+                                                <!--                                                        <label for="idcard" class="col-sm-2 col-form-label">{% trans "Upload Your ID" %}</label>-->
+                                                <div class="col-sm-10">
+                                                    <input class="form-control" accept="image/*" type="file" id="idcard" onchange="loadFile(event)">
                                                 </div>
                                             </div>
+                                            <button type="button" id="IdVerification" class="btn btn-success btn-sm">{% trans "Upload" %} <i class="icon-paperplane ml-2"></i></button>
+                                        </form>
 
-                                        </div>
                                     </div>
                                 </div>
                             </div>
-                                <div class="card-arrow">
-                                    <div class="card-arrow-top-left"></div>
-                                    <div class="card-arrow-top-right"></div>
-                                    <div class="card-arrow-bottom-left"></div>
-                                    <div class="card-arrow-bottom-right"></div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                        {% trans "Take a Picture" %}
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <h5 class="card-title">Access Camera and Capture Photo</h5>
+                                        <div class="row gx-0 align-items-center">
+                                            <div class="col">
+                                                <!--                                                    <video id="camera" autoplay width="320" height="240" controls></video>-->
+                                                <!--                                                    <button id="capture-btn">Capture Photo</button>-->
+
+                                                <!--                                                    <canvas id="photo" width="320" height="240"></canvas>-->
+                                                <button id="grabFrame">Grab Frame</button>
+                                                <button id="takePhoto">Take Photo</button>
+                                                <div class="select">
+                                                    <label for="videoSource">Video source: </label><select id="videoSource"></select>
+                                                </div>
+                                                <input class="hidden" id="zoom" type="range" step="20">
+                                                <video autoplay playsinline class="hidden" width="480" height="360" id="videostream"></video>
+                                                <img id="captureimg" width="240" height="240">
+                                                <canvas class="hidden" id="capturedimage"></canvas>
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
-                </div>
-
                         </div>
 
-                <div class="card-footer bg-none d-flex p-3">
+                    </div>
+                    <div class="card-arrow">
+                            <div class="card-arrow-top-left"></div>
+                            <div class="card-arrow-top-right"></div>
+                            <div class="card-arrow-bottom-left"></div>
+                            <div class="card-arrow-bottom-right"></div>
+                        </div>
+                </div>
 
-                    <div id="alert-box"></div>
+            </div>
+
+            <div class="card-footer bg-none d-flex p-3">
+
+                <div id="alert-box"></div>
+
+            </div>
+            <div class="card-arrow">
+                <div class="card-arrow-top-left"></div>
+                <div class="card-arrow-top-right"></div>
+                <div class="card-arrow-bottom-left"></div>
+                <div class="card-arrow-bottom-right"></div>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+</div>
+</div>
+<!-- BEGIN #modalPosItem -->
+<div class="modal modal-pos fade" id="modalPosItem">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content border-0">
+            <div class="card">
+                <div class="card-body p-0">
 
                 </div>
                 <div class="card-arrow">
@@ -145,185 +170,161 @@
                     <div class="card-arrow-bottom-left"></div>
                     <div class="card-arrow-bottom-right"></div>
                 </div>
-
             </div>
-
-
-
-
         </div>
-
     </div>
 </div>
-    <!-- BEGIN #modalPosItem -->
-    <div class="modal modal-pos fade" id="modalPosItem">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content border-0">
-                <div class="card">
-                    <div class="card-body p-0">
-
-                    </div>
-                    <div class="card-arrow">
-                        <div class="card-arrow-top-left"></div>
-                        <div class="card-arrow-top-right"></div>
-                        <div class="card-arrow-bottom-left"></div>
-                        <div class="card-arrow-bottom-right"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- END #modalPosItem -->
-    {% endblock content_body %}
+<!-- END #modalPosItem -->
+{% endblock content_body %}
 
 
-    {% block js %}
-    {{ block.super }}
+{% block js %}
+{{ block.super }}
 
-    <!-- ================== BEGIN page-js ================== -->
-    <script src={% static "assets/plugins/jquery/distro/jquery.min.js" %}></script>
-    <script src={% static "js/camera.js" %}></script>
-    <!-- ================== END page-js ================== -->
+<!-- ================== BEGIN page-js ================== -->
+<script src={% static "assets/plugins/jquery/distro/jquery.min.js" %}></script>
+<script src={% static "js/camera.js" %}></script>
+<!-- ================== END page-js ================== -->
 
 
-    <script>
-        function getfilename(fullpath){
-            var filename = fullPath.replace(/^.*[\\/]/, '')
-            return filename
+<script>
+    function getfilename(fullpath){
+        var filename = fullPath.replace(/^.*[\\/]/, '')
+        return filename
+    }
+</script>
+
+
+<script>
+
+    function IdVerification() {
+
+        const documentname = document.getElementById('idcard').files[0];
+        documentname.onchange = () => {
+            const selectedFile = documentname.files[0];
+
         }
-    </script>
-
-
-    <script>
-
-        function IdVerification() {
-
-            const documentname = document.getElementById('idcard').files[0];
-            documentname.onchange = () => {
-                const selectedFile = documentname.files[0];
-
-            }
-            const formData = new FormData();
-            // const keyword = document.getElementById('keyword').value;
-            {#var userid = document.getElementById('userid').value;#}
-            // let useridx = userid.toString();
-            // console.log(useridx);
-            // formData.append('keyword',keyword );
-            formData.append('file', documentname);
-            {#formData.append('user', userid);#}
-            const options = {
-                method: 'POST',
-                headers: {
-                    "Authorization": "sha256=6dSN3Al3gwgFr+eiXOU2dPWX/hTqmCY/zkK9OZykT4g="
-                },
-                body: formData
-            };
-            console.log(formData);
-            fetch( 'https://idme.ma/idme.apis/idverify/', options )
-                .then( response => response.json() )
-                .then( data => $("#alert-box").html(`<div class="alert alert-success"         role="alert">
+        const formData = new FormData();
+        // const keyword = document.getElementById('keyword').value;
+        {#var userid = document.getElementById('userid').value;#}
+        // let useridx = userid.toString();
+        // console.log(useridx);
+        // formData.append('keyword',keyword );
+        formData.append('file', documentname);
+        {#formData.append('user', userid);#}
+        const options = {
+            method: 'POST',
+            headers: {
+                "Authorization": "sha256=6dSN3Al3gwgFr+eiXOU2dPWX/hTqmCY/zkK9OZykT4g="
+            },
+            body: formData
+        };
+        console.log(formData);
+        fetch( 'https://idme.ma/idme.apis/idverify/', options )
+            .then( response => response.json() )
+            .then( data => $("#alert-box").html(`<div class="alert alert-success"         role="alert">
                        ${data}
                         </div>`))
-                .catch(error => console.log(error));
+            .catch(error => console.log(error));
 
 
-        };
+    };
 
-    </script>
-    <script>
-        var loadFile = function(event) {
-            var output = document.getElementById('card-img');
-            output.src = URL.createObjectURL(event.target.files[0]);
-            output.onload = function() {
-                URL.revokeObjectURL(output.src) // free memory
-            }
-        };
-    </script>
+</script>
+<script>
+    var loadFile = function(event) {
+        var output = document.getElementById('card-img');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+            URL.revokeObjectURL(output.src) // free memory
+        }
+    };
+</script>
 
-    <script>
-        $("#IdVerification").click(function () {
-                let url = 'https://idme.ma/idme.apis/idverify/';
-                const formData = new FormData();
-                var fileName = $("#idcard").val();
-                if (fileName) {
-                    formData.append('file', $('#idcard')[0].files[0]);
-                    $.ajax({
-                        type: 'POST',
-                        url: url,
-                        data: formData,
-                        processData: false,
-                        contentType: false,
-                        headers: {'X-CSRFToken': $('input[name=csrfmiddlewaretoken]').val()},
-                        success: function (data) {
-                            if (data) {
-                                var result = data;
-                                var id = result.id;
-                                var name = result.name;
-                                var address = result.address;
-                                var dob = result.dob;
-                                var expire = result.expire;
+<script>
+    $("#IdVerification").click(function () {
+            let url = 'https://idme.ma/idme.apis/idverify/';
+            const formData = new FormData();
+            var fileName = $("#idcard").val();
+            if (fileName) {
+                formData.append('file', $('#idcard')[0].files[0]);
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    headers: {'X-CSRFToken': $('input[name=csrfmiddlewaretoken]').val()},
+                    success: function (data) {
+                        if (data) {
+                            var result = data;
+                            var id = result.id;
+                            var name = result.name;
+                            var address = result.address;
+                            var dob = result.dob;
+                            var expire = result.expire;
 
-                                $("#alert-id").html(`<div class="alert alert-light p-0"         role="alert">
+                            $("#alert-id").html(`<div class="alert alert-light p-0"         role="alert">
                            ${id}
                             </div>`);
-                                $("#alert-name").html(`<div class="alert alert-light p-0"         role="alert">
+                            $("#alert-name").html(`<div class="alert alert-light p-0"         role="alert">
                            ${name}
                             </div>`);
-                                $("#alert-address").html(`<div class="alert alert-light p-0"         role="alert">
+                            $("#alert-address").html(`<div class="alert alert-light p-0"         role="alert">
                            ${address}
                             </div>`);
-                                $("#alert-dob").html(`<div class="alert alert-light p-0"         role="alert">
+                            $("#alert-dob").html(`<div class="alert alert-light p-0"         role="alert">
                            ${dob}
                             </div>`);
-                                $("#alert-expire").html(`<div class="alert alert-light p-0"         role="alert">
+                            $("#alert-expire").html(`<div class="alert alert-light p-0"         role="alert">
                            ${expire}
                             </div>`);
-                            }
                         }
-                    })
-                }else{
-                    $("#alert-box").html(`<div class="alert alert-danger p-0"         role="alert">
+                    }
+                })
+            }else{
+                $("#alert-box").html(`<div class="alert alert-danger p-0"         role="alert">
                            File missing!!)
                             </div>`);
-                }
             }
-        );
-    </script>
-    <!--<script>-->
-    <!--    // Access the DOM elements-->
-    <!--const video = document.getElementById('camera');-->
-    <!--const canvas = document.getElementById('photo');-->
-    <!--const captureBtn = document.getElementById('capture-btn');-->
-    <!--const context = canvas.getContext('2d');-->
-    <!--const downloadLink = document.createElement('a');-->
-    <!--downloadLink.innerText = 'Download Photo';-->
-    <!--document.body.appendChild(downloadLink);-->
+        }
+    );
+</script>
+<!--<script>-->
+<!--    // Access the DOM elements-->
+<!--const video = document.getElementById('camera');-->
+<!--const canvas = document.getElementById('photo');-->
+<!--const captureBtn = document.getElementById('capture-btn');-->
+<!--const context = canvas.getContext('2d');-->
+<!--const downloadLink = document.createElement('a');-->
+<!--downloadLink.innerText = 'Download Photo';-->
+<!--document.body.appendChild(downloadLink);-->
 
-    <!--// Request access to the user's camera-->
-    <!--navigator.mediaDevices.getUserMedia({ video: true })-->
-    <!--    .then((stream) => {-->
-    <!--        video.srcObject = stream;-->
-    <!--    })-->
-    <!--    .catch((error) => {-->
-    <!--        console.error("Error accessing the camera: ", error);-->
-    <!--    });-->
+<!--// Request access to the user's camera-->
+<!--navigator.mediaDevices.getUserMedia({ video: true })-->
+<!--    .then((stream) => {-->
+<!--        video.srcObject = stream;-->
+<!--    })-->
+<!--    .catch((error) => {-->
+<!--        console.error("Error accessing the camera: ", error);-->
+<!--    });-->
 
-    <!--// Capture photo on button click-->
-    <!--captureBtn.addEventListener('click', () => {-->
-    <!--    // Set canvas dimensions to match video size-->
-    <!--    canvas.width = video.videoWidth * 0.30;-->
-    <!--    canvas.height = video.videoHeight * 0.30;-->
+<!--// Capture photo on button click-->
+<!--captureBtn.addEventListener('click', () => {-->
+<!--    // Set canvas dimensions to match video size-->
+<!--    canvas.width = video.videoWidth * 0.30;-->
+<!--    canvas.height = video.videoHeight * 0.30;-->
 
-    <!--    // Draw the current frame from the video onto the canvas-->
-    <!--    context.drawImage(video, 0, 0, canvas.width, canvas.height);-->
-    <!--    const dataURL = canvas.toDataURL('image/jpg');-->
-    <!--    // Show the captured image on the canvas-->
-    <!--    // canvas.style.display = 'block';-->
-    <!--    // Set the download link-->
-    <!--    downloadLink.href = dataURL;-->
-    <!--    downloadLink.download = 'captured-photo.png';-->
-    <!--    downloadLink.style.display = 'block';-->
-    <!--});-->
-    <!--</script>-->
-    {% endblock js %}
+<!--    // Draw the current frame from the video onto the canvas-->
+<!--    context.drawImage(video, 0, 0, canvas.width, canvas.height);-->
+<!--    const dataURL = canvas.toDataURL('image/jpg');-->
+<!--    // Show the captured image on the canvas-->
+<!--    // canvas.style.display = 'block';-->
+<!--    // Set the download link-->
+<!--    downloadLink.href = dataURL;-->
+<!--    downloadLink.download = 'captured-photo.png';-->
+<!--    downloadLink.style.display = 'block';-->
+<!--});-->
+<!--</script>-->
+{% endblock js %}
 
