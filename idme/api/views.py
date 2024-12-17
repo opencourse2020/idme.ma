@@ -41,7 +41,7 @@ from .tools import verifySignature
 class IDVerifyView(TemplateView):
     # model = models.IDVerify
     # form_class = forms.IDVerifyCreateForm
-    template_name = "coeanalytics/idverify.html"
+    template_name = "idmeapi/idverify.html"
     # success_url = reverse_lazy("coeanalytics:analytictypes:list")
 
 

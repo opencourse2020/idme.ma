@@ -229,7 +229,7 @@
             body: formData
         };
 		console.log(formData);
-        fetch( 'https://coelink.com/coeanalytics/idverify/', options )
+        fetch( 'https://idme.ma/idme.apis/idverify/', options )
             .then( response => response.json() )
             .then( data => $("#alert-box").html(`<div class="alert alert-success"         role="alert">
                        ${data}
@@ -252,7 +252,7 @@
 
 <script>
 $("#IdVerification").click(function () {
-    let url = 'https://coelink.com/coeanalytics/idverify/';
+    let url = 'https://idme.ma/idme.apis/idverify/';
     const formData = new FormData();
     var fileName = $("#idcard").val();
     if (fileName) {
