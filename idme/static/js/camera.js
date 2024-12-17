@@ -41,7 +41,7 @@ var video = document.querySelector('video#videostream');
 var videoSelect = document.querySelector('select#videoSource');
 var zoomInput = document.querySelector('input#zoom');
 
-grabFrameButton.onclick = grabFrame;
+// grabFrameButton.onclick = grabFrame;
 takePhotoButton.onclick = takePhoto;
 videoSelect.onchange = getStream;
 zoomInput.oninput = setZoom;
