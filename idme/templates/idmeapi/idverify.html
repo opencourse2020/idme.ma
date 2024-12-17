@@ -23,6 +23,7 @@
 {#    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.2/css/responsive.bootstrap5.min.css" />#}
             <link rel="stylesheet" type="text/css" href={% static "assets/plugins/bootstrap-table/dist/bootstrap-table.min.css" %} >
 {#    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.22.4/dist/bootstrap-table.min.css">#}
+<link href={% static "assets/plugins/blueimp-file-upload/css/jquery.fileupload.css" %} rel="stylesheet">
 
 
 {% endblock css %}
@@ -129,7 +130,71 @@
 
             </div>
 
+        <!-- BEGIN #jQueryFileUpload -->
+								<div id="jQueryFileUpload" class="mb-5">
+									<h4>jQuery file upload</h4>
+									<p>File Upload widget with multiple file selection, drag&drop support, progress bars, validation and preview images, audio and video for jQuery. Please read the <a href="https://blueimp.github.io/jQuery-File-Upload/" target="_blank">official documentation</a> for the full list of options.</p>
+									<form id="fileupload" action="//jquery-file-upload.appspot.com/" name="file_upload_form" method="POST" enctype="multipart/form-data">
+										<div class="card">
+											<div class="card-body pb-2">
+												<div class="fileupload-buttonbar mb-2">
+													<div class="d-block d-lg-flex align-items-center">
+														<span class="btn btn-outline-theme fileinput-button me-2 mb-1">
+															<i class="fa fa-fw fa-plus"></i>
+															<span>Add files...</span>
+															<input type="file" name="files[]" multiple>
+														</span>
+														<button type="submit" class="btn btn-outline-default me-2 mb-1 start">
+															<i class="fa fa-fw fa-upload"></i>
+															<span>Start upload</span>
+														</button>
+														<button type="reset" class="btn btn-outline-default me-2 mb-1 cancel">
+															<i class="fa fa-fw fa-ban"></i>
+															<span>Cancel upload</span>
+														</button>
+<!--														<button type="button" class="btn btn-outline-default me-2 mb-1 delete">-->
+<!--															<i class="fa fa-fw fa-trash"></i>-->
+<!--															<span>Delete</span>-->
+<!--														</button>-->
+<!--														<div class="form-check ms-2 mb-1">-->
+<!--															<input type="checkbox" id="toggle-delete" class="form-check-input toggle">-->
+<!--															<label for="toggle-delete" class="form-check-label">Select Files</label>-->
+<!--														</div>-->
+													</div>
+												</div>
+												<div id="error-msg"></div>
+											</div>
+											<div class="table-responsive text-nowrap">
+												<table class="table table-card mb-0 fs-13px">
+													<thead>
+														<tr class="fs-12px">
+															<th class="pt-2 pb-2 w-25">PREVIEW</th>
+															<th class="pt-2 pb-2 w-25">FILENAME</th>
+															<th class="pt-2 pb-2 w-25">SIZE</th>
+															<th class="pt-2 pb-2 w-25">ACTION</th>
+														</tr>
+													</thead>
+													<tbody class="files">
+														<tr class="empty-row">
+															<td colspan="4" class="text-center p-3">
+																<div class="text-inverse text-opacity-30 mb-2"><i class="fa fa-file-archive fa-3x"></i></div>
+																No file uploaded
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+											<div class="card-arrow">
+												<div class="card-arrow-top-left"></div>
+												<div class="card-arrow-top-right"></div>
+												<div class="card-arrow-bottom-left"></div>
+												<div class="card-arrow-bottom-right"></div>
+											</div>
 
+										</div>
+									</form>
+								</div>
+								<!-- END #jQueryFileUpload -->
 
 
 
@@ -186,7 +251,20 @@
 {#    <script src="https://cdn.datatables.net/responsive/3.0.2/js/responsive.bootstrap5.min.js"></script>#}
     	<script src={% static "assets/plugins/bootstrap-table/dist/bootstrap-table.min.js"%}></script>
 {#    <script src="https://unpkg.com/bootstrap-table@1.22.4/dist/bootstrap-table.min.js"></script>#}
-
+<script src={% static "assets/plugins/blueimp-file-upload/js/vendor/jquery.ui.widget.js" %}></script>
+	<script src={% static "assets/plugins/blueimp-tmpl/js/tmpl.min.js" %}></script>
+	<script src={% static "assets/plugins/blueimp-load-image/js/load-image.all.min.js" %}></script>
+	<script src={% static "assets/plugins/blueimp-canvas-to-blob/js/canvas-to-blob.min.js" %}></script>
+	<script src={% static "assets/plugins/blueimp-gallery/js/jquery.blueimp-gallery.min.js" %}></script>
+<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.iframe-transport.js" %}></script>
+	<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.fileupload.js"%}></script>
+	<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.fileupload-process.js"%}></script>
+	<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.fileupload-image.js"%}></script>
+	<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.fileupload-audio.js"%}></script>
+	<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.fileupload-video.js"%}></script>
+	<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.fileupload-validate.js"%}></script>
+	<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.fileupload-ui.js"%}></script>
+    <script src={% static "assets/js/demo/form-plugins.demo.js"%}></script>
     <!-- ================== END page-js ================== -->
 
 
