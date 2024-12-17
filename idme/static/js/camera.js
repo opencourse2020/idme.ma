@@ -142,7 +142,6 @@ function setZoom() {
 // Get a Blob from the currently selected camera source and
 // display this with an img element.
 function takePhoto() {
-  grabFrame;
   imageCapture.takePhoto().then(function(blob) {
     console.log('Took photo:', blob);
     img.classList.remove('hidden');
@@ -153,4 +152,5 @@ function takePhoto() {
   }).catch(function(error) {
     console.log('takePhoto() error: ', error);
   });
+  grabFrame;
 }
