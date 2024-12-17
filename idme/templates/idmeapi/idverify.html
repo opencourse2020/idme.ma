@@ -15,16 +15,16 @@
 
     {{ block.super }}
 
-{#    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.bootstrap5.css" />#}
-            <link rel="stylesheet" type="text/css" href={% static "assets/plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css" %} >
-            <link rel="stylesheet" type="text/css" href={% static "assets/plugins/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" %} >
-{#    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.bootstrap5.min.css" />#}
-            <link rel="stylesheet" type="text/css" href={% static "assets/plugins/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" %} >
-{#    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.2/css/responsive.bootstrap5.min.css" />#}
-            <link rel="stylesheet" type="text/css" href={% static "assets/plugins/bootstrap-table/dist/bootstrap-table.min.css" %} >
-{#    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.22.4/dist/bootstrap-table.min.css">#}
-<link href={% static "assets/plugins/blueimp-file-upload/css/jquery.fileupload.css" %} rel="stylesheet">
-
+<link href={% static "assets/plugins/tag-it/css/jquery.tagit.css" %} rel="stylesheet">
+	<link href={% static "assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" %} rel="stylesheet">
+	<link href={% static "assets/plugins/bootstrap-daterangepicker/daterangepicker.css" %} rel="stylesheet">
+	<link href={% static "assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" %} rel="stylesheet">
+	<link href={% static "assets/plugins/bootstrap-slider/dist/css/bootstrap-slider.min.css" %} rel="stylesheet">
+	<link href={% static "assets/plugins/blueimp-file-upload/css/jquery.fileupload.css" %} rel="stylesheet">
+	<link href={% static "assets/plugins/summernote/dist/summernote-lite.css" %} rel="stylesheet">
+	<link href={% static "assets/plugins/spectrum-colorpicker2/dist/spectrum.min.css" %} rel="stylesheet">
+	<link href={% static "assets/plugins/select-picker/dist/picker.min.css" %} rel="stylesheet">
+	<link href={% static "assets/plugins/jquery-typeahead/dist/jquery.typeahead.min.css" %} rel="stylesheet">
 
 {% endblock css %}
 
@@ -229,6 +229,17 @@
     <!-- ================== BEGIN page-js ================== -->
 		<script src={% static "assets/plugins/jquery/distro/jquery.min.js" %}></script>
 		<script src={% static "assets/plugins/jquery-migrate/distro/jquery-migrate.min.js" %}></script>
+
+<script src={% static "assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js" %}></script>
+	<script src={% static "assets/plugins/moment/min/moment.min.js" %}></script>
+	<script src={% static "assets/plugins/bootstrap-daterangepicker/daterangepicker.js" %}></script>
+	<script src={% static "assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" %}></script>
+	<script src={% static "assets/plugins/bootstrap-slider/dist/bootstrap-slider.min.js" %}></script>
+	<script src={% static "assets/plugins/jquery-typeahead/dist/jquery.typeahead.min.js" %}></script>
+	<script src={% static "assets/plugins/jquery.maskedinput/src/jquery.maskedinput.js" %}></script>
+	<script src={% static "assets/plugins/tag-it/js/tag-it.min.js" %}></script>
+
+
 		<script src={% static "assets/plugins/blueimp-file-upload/js/vendor/jquery.ui.widget.js" %}></script>
 		<script src={% static "assets/plugins/blueimp-tmpl/js/tmpl.min.js" %}></script>
 		<script src={% static "assets/plugins/blueimp-load-image/js/load-image.all.min.js" %}></script>
@@ -243,45 +254,50 @@
 		<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.fileupload-video.js"%}></script>
 		<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.fileupload-validate.js"%}></script>
 		<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.fileupload-ui.js"%}></script>
-<!--    	<script src={% static "assets/js/demo/form-plugins.demo.js"%}></script>-->
+	<script src={% static "assets/plugins/summernote/dist/summernote-lite.min.js" %}></script>
+	<script src={% static "assets/plugins/spectrum-colorpicker2/dist/spectrum.min.js" %}></script>
+	<script src={% static "assets/plugins/select-picker/dist/picker.min.js" %}></script>
+	<script src={% static "assets/plugins/@highlightjs/cdn-assets/highlight.min.js" %}></script>
+	<script src={% static "assets/js/demo/highlightjs.demo.js" %}></script>
+    	<script src={% static "assets/js/demo/form-plugins.demo.js"%}></script>
     <!-- ================== END page-js ================== -->
-	<script>
-		var handleRenderjQueryFileUpload = function() {
-	$('#fileupload').fileupload({
-		previewMaxHeight: 80,
-		previewMaxWidth: 120,
-		url: '//jquery-file-upload.appspot.com/',
-		disableImageResize: /Android(?!.*Chrome)|Opera/.test(window.navigator.userAgent),
-		maxFileSize: 999000,
-		acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i
-	});
-	$('#fileupload').on('fileuploadchange', function (e, data) {
-		$('#fileupload .empty-row').hide();
-	});
-	$('#fileupload').on('fileuploadfail', function(e, data){
-		if (data.errorThrown === 'abort') {
-			if ($('#fileupload .files tr').not('.empty-row').length == 1) {
-				$('#fileupload .empty-row').show();
-			}
-		}
-	});
+<!--	<script>-->
+<!--		var handleRenderjQueryFileUpload = function() {-->
+<!--	$('#fileupload').fileupload({-->
+<!--		previewMaxHeight: 80,-->
+<!--		previewMaxWidth: 120,-->
+<!--		url: '//jquery-file-upload.appspot.com/',-->
+<!--		disableImageResize: /Android(?!.*Chrome)|Opera/.test(window.navigator.userAgent),-->
+<!--		maxFileSize: 999000,-->
+<!--		acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i-->
+<!--	});-->
+<!--	$('#fileupload').on('fileuploadchange', function (e, data) {-->
+<!--		$('#fileupload .empty-row').hide();-->
+<!--	});-->
+<!--	$('#fileupload').on('fileuploadfail', function(e, data){-->
+<!--		if (data.errorThrown === 'abort') {-->
+<!--			if ($('#fileupload .files tr').not('.empty-row').length == 1) {-->
+<!--				$('#fileupload .empty-row').show();-->
+<!--			}-->
+<!--		}-->
+<!--	});-->
 
-	if ($.support.cors) {
-		$.ajax({
-			url: '//jquery-file-upload.appspot.com/',
-			type: 'HEAD'
-		}).fail(function () {
-			var alert = '<div class="alert alert-danger m-b-0 m-t-15">Upload server currently unavailable - ' + new Date() + '</div>';
-			$('#fileupload #error-msg').removeClass('d-none').html(alert);
-		});
-	}
-};
-$(document).ready(function() {
+<!--	if ($.support.cors) {-->
+<!--		$.ajax({-->
+<!--			url: '//jquery-file-upload.appspot.com/',-->
+<!--			type: 'HEAD'-->
+<!--		}).fail(function () {-->
+<!--			var alert = '<div class="alert alert-danger m-b-0 m-t-15">Upload server currently unavailable - ' + new Date() + '</div>';-->
+<!--			$('#fileupload #error-msg').removeClass('d-none').html(alert);-->
+<!--		});-->
+<!--	}-->
+<!--};-->
+<!--$(document).ready(function() {-->
 
-	handleRenderjQueryFileUpload();
+<!--	handleRenderjQueryFileUpload();-->
 
-});
-	</script>
+<!--});-->
+<!--	</script>-->
 
 
     <script src={% static "assets/js/demo/sidebar-scrollspy.demo.js" %}></script>
