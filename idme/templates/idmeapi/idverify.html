@@ -227,52 +227,26 @@
     {{ block.super }}
 
     <!-- ================== BEGIN page-js ================== -->
-    {#	<script src="/static/assets/plugins/@highlightjs/cdn-assets/highlight.min.js"></script>#}
-{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>#}
-{#    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.min.js"></script>#}
-        <script src={% static "assets/plugins/datatables.net/js/dataTables.min.js" %}></script>
-    	<script src={% static "assets/plugins/datatables.net-bs5/js/dataTables.bootstrap5.min.js" %}></script>
-{#    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.bootstrap5.min.js"></script>#}
-{#    <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.min.js"></script>#}
-    	<script src={% static "assets/plugins/datatables.net-buttons/js/dataTables.buttons.min.js" %}></script>
-        <script src={% static "assets/plugins/datatables.net-buttons/js/buttons.colVis.min.js" %}></script>
-{#    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.colVis.min.js"></script>#}
-{#    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.flash.min.js"></script>#}
-    	<script src={% static "assets/plugins/datatables.net-buttons/js/buttons.flash.min.js" %}></script>
-    	<script src={% static "assets/plugins/datatables.net-buttons/js/buttons.html5.min.js" %}></script>
-{#    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>#}
-{#    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.colVis.min.js"></script>#}
-    	<script src={% static "assets/plugins/datatables.net-buttons/js/buttons.print.min.js" %}></script>
-{#    <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script>#}
-    	<script src={% static "assets/plugins/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js" %}></script>
-    	<script src={% static "assets/plugins/datatables.net-responsive/js/dataTables.responsive.min.js" %}></script>
-        <script src={% static "assets/plugins/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js" %}></script>
-{#    <script src="https://cdn.datatables.net/responsive/3.0.2/js/dataTables.responsive.min.js"></script>#}
-{#    <script src="https://cdn.datatables.net/responsive/3.0.2/js/responsive.bootstrap5.min.js"></script>#}
-    	<script src={% static "assets/plugins/bootstrap-table/dist/bootstrap-table.min.js"%}></script>
-{#    <script src="https://unpkg.com/bootstrap-table@1.22.4/dist/bootstrap-table.min.js"></script>#}
-<script src={% static "assets/plugins/blueimp-file-upload/js/vendor/jquery.ui.widget.js" %}></script>
-	<script src={% static "assets/plugins/blueimp-tmpl/js/tmpl.min.js" %}></script>
-	<script src={% static "assets/plugins/blueimp-load-image/js/load-image.all.min.js" %}></script>
-	<script src={% static "assets/plugins/blueimp-canvas-to-blob/js/canvas-to-blob.min.js" %}></script>
-	<script src={% static "assets/plugins/blueimp-gallery/js/jquery.blueimp-gallery.min.js" %}></script>
-<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.iframe-transport.js" %}></script>
-	<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.fileupload.js"%}></script>
-	<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.fileupload-process.js"%}></script>
-	<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.fileupload-image.js"%}></script>
-	<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.fileupload-audio.js"%}></script>
-	<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.fileupload-video.js"%}></script>
-	<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.fileupload-validate.js"%}></script>
-	<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.fileupload-ui.js"%}></script>
-    <script src={% static "assets/js/demo/form-plugins.demo.js"%}></script>
+		<script src={% static "assets/plugins/jquery-migrate/dist/jquery-migrate.min.js" %}></script>
+		<script src={% static "assets/plugins/blueimp-file-upload/js/vendor/jquery.ui.widget.js" %}></script>
+		<script src={% static "assets/plugins/blueimp-tmpl/js/tmpl.min.js" %}></script>
+		<script src={% static "assets/plugins/blueimp-load-image/js/load-image.all.min.js" %}></script>
+		<script src={% static "assets/plugins/blueimp-canvas-to-blob/js/canvas-to-blob.min.js" %}></script>
+		<script src={% static "assets/plugins/blueimp-gallery/js/jquery.blueimp-gallery.min.js" %}></script>
+		<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.iframe-transport.js" %}></script>
+		<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.fileupload.js"%}></script>
+		<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.fileupload-process.js"%}></script>
+		<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.fileupload-image.js"%}></script>
+		<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.fileupload-audio.js"%}></script>
+		<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.fileupload-video.js"%}></script>
+		<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.fileupload-validate.js"%}></script>
+		<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.fileupload-ui.js"%}></script>
+    	<script src={% static "assets/js/demo/form-plugins.demo.js"%}></script>
     <!-- ================== END page-js ================== -->
 
 
-    <script src={% static "assets/js/demo/highlightjs.demo.js" %}></script>
 
-    <script src={% static "assets/js/demo/table-plugins.analysistype.js" %}></script>
     <script src={% static "assets/js/demo/sidebar-scrollspy.demo.js" %}></script>
-    {#    <script src={% static "assets/js/demo/datatables_responsive.js" %}></script>#}
 
     <script>
         function getfilename(fullpath){
