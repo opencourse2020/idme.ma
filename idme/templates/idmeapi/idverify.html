@@ -249,7 +249,7 @@
             let url = 'https://idme.ma/idme.apis/idverify/';
             const formData = new FormData();
             // var fileName = $("#idcard").val();
-            var fileName = $("#captureimg").src;
+            var fileName = $("#captureimg").attr('src');
             console.log(fileName);
             if (fileName) {
                 formData.append('file', $('#idcard')[0].files[0]);
