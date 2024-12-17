@@ -215,7 +215,7 @@ $(document).ready(function() {
 	handleRenderTimepicker();
 	handleRenderColorpicker();
 	handleRenderTypeahead();
-	handleRenderTagsInput();
+	// handleRenderTagsInput();
 	handleRenderBootstrapSlider();
 	handleRenderMaskedInput();
 	handleRenderSummernote();
