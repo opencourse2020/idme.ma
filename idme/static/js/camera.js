@@ -40,6 +40,7 @@ var img = document.querySelector('img#captureimg');
 var video = document.querySelector('video#videostream');
 var videoSelect = document.querySelector('select#videoSource');
 var zoomInput = document.querySelector('input#zoom');
+var datalink = document.querySelector('input#datalink');
 
 // grabFrameButton.onclick = grabFrame;
 takePhotoButton.onclick = takePhoto;
@@ -122,7 +123,8 @@ function grabFrame() {
     canvas.width = imageBitmap.width;
     canvas.height = imageBitmap.height;
     canvas.getContext('2d').drawImage(imageBitmap, 0, 0);
-    canvas.classList.remove('hidden');
+    datalink.value = canvas.toDataURL('image/jpg');
+    // canvas.classList.remove('hidden');
   }).catch(function(error) {
     console.log('grabFrame() error: ', error);
   });
