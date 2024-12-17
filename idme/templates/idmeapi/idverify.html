@@ -82,7 +82,7 @@
 												<div class="form-group row mb-3">
 													<label for="idcard" class="col-sm-2 col-form-label">{% trans "Upload Your ID" %}</label>
 													<div class="col-sm-10">
-<!--														<input class="form-control" accept="image/*" type="file" id="idcard" onchange="loadFile(event)">-->
+														<input class="form-control" accept="image/*" type="file" id="idcard" onchange="loadFile(event)">
 													</div>
 												</div>
 {#												<div class="form-group row mb-3">#}
@@ -131,104 +131,7 @@
 
             </div>
 
-        <!-- BEGIN #jQueryFileUpload -->
-								<div id="jQueryFileUpload" class="mb-5">
-									<h4>jQuery file upload</h4>
-									<p>File Upload widget with multiple file selection, drag&drop support, progress bars, validation and preview images, audio and video for jQuery. Please read the <a href="https://blueimp.github.io/jQuery-File-Upload/" target="_blank">official documentation</a> for the full list of options.</p>
-									<form id="fileupload" action="//jquery-file-upload.appspot.com/" name="file_upload_form" method="POST" enctype="multipart/form-data">
-										<div class="card">
-											<div class="card-body pb-2">
-												<div class="fileupload-buttonbar mb-2">
-													<div class="d-block d-lg-flex align-items-center">
-														<span class="btn btn-outline-theme fileinput-button me-2 mb-1">
-															<i class="fa fa-fw fa-plus"></i>
-															<span>Add files...</span>
-															<input type="file" name="files[]" multiple>
-														</span>
-														<button type="submit" class="btn btn-outline-default me-2 mb-1 start">
-															<i class="fa fa-fw fa-upload"></i>
-															<span>Start upload</span>
-														</button>
-														<button type="reset" class="btn btn-outline-default me-2 mb-1 cancel">
-															<i class="fa fa-fw fa-ban"></i>
-															<span>Cancel upload</span>
-														</button>
-														<button type="button" class="btn btn-outline-default me-2 mb-1 delete">
-															<i class="fa fa-fw fa-trash"></i>
-															<span>Delete</span>
-														</button>
-														<div class="form-check ms-2 mb-1">
-															<input type="checkbox" id="toggle-delete" class="form-check-input toggle">
-															<label for="toggle-delete" class="form-check-label">Select Files</label>
-														</div>
-													</div>
-												</div>
-												<div id="error-msg"></div>
-											</div>
-											<div class="table-responsive text-nowrap">
-												<table class="table table-card mb-0 fs-13px">
-													<thead>
-														<tr class="fs-12px">
-															<th class="pt-2 pb-2 w-25">PREVIEW</th>
-															<th class="pt-2 pb-2 w-25">FILENAME</th>
-															<th class="pt-2 pb-2 w-25">SIZE</th>
-															<th class="pt-2 pb-2 w-25">ACTION</th>
-														</tr>
-													</thead>
-													<tbody class="files">
-														<tr class="empty-row">
-															<td colspan="4" class="text-center p-3">
-																<div class="text-inverse text-opacity-30 mb-2"><i class="fa fa-file-archive fa-3x"></i></div>
-																No file uploaded
-															</td>
-														</tr>
-													</tbody>
-												</table>
-											</div>
-											<div class="card-arrow">
-												<div class="card-arrow-top-left"></div>
-												<div class="card-arrow-top-right"></div>
-												<div class="card-arrow-bottom-left"></div>
-												<div class="card-arrow-bottom-right"></div>
-											</div>
 
-										</div>
-									</form>
-								</div>
-								<!-- END #jQueryFileUpload -->
-<!-- BEGIN #jQueryTagIt -->
-								<div id="jQueryTagIt" class="mb-5">
-									<h4>jQuery Tag It</h4>
-									<p>jQuery Tag It is a jQuery plugin providing a Simple and configurable tag editing widget with autocomplete support. Please read the <a href="http://aehlke.github.io/tag-it/" target="_blank">official documentation</a> for the full list of options.</p>
-									<div class="card">
-										<div class="card-body">
-											<form>
-												<div class="mb-2">
-													<label class="form-label">Default <span class="text-danger">*</span></label>
-													<ul id="jquery-tagit" class="tagit form-control">
-														<li>fancy</li>
-														<li>new</li>
-														<li>tag</li>
-														<li>demo</li>
-													</ul>
-												</div>
-												<p class="form-text mb-0">
-													You may enter the text (c++, java, php, javascript, ruby, python) for autocomplete preview
-												</p>
-											</form>
-										</div>
-										<div class="card-arrow">
-											<div class="card-arrow-top-left"></div>
-											<div class="card-arrow-top-right"></div>
-											<div class="card-arrow-bottom-left"></div>
-											<div class="card-arrow-bottom-right"></div>
-										</div>
-										<div class="hljs-container">
-											<pre><code class="xml" data-url="assets/data/form-plugins/code-6.json"></code></pre>
-										</div>
-									</div>
-								</div>
-								<!-- END #jQueryTagIt -->
 
 
         </div>
@@ -260,80 +163,10 @@
     {{ block.super }}
 
     <!-- ================== BEGIN page-js ================== -->
-<!--		<script src={% static "assets/plugins/jquery/distro/jquery.min.js" %}></script>-->
-		<script src={% static "assets/plugins/jquery-migrate/distro/jquery-migrate.min.js" %}></script>
+		<script src={% static "assets/plugins/jquery/distro/jquery.min.js" %}></script>
 
-<script src={% static "assets/plugins/bootstrap-datepicker/distro/js/bootstrap-datepicker.min.js" %}></script>
-	<script src={% static "assets/plugins/moment/min/moment.min.js" %}></script>
-	<script src={% static "assets/plugins/bootstrap-daterangepicker/daterangepicker.js" %}></script>
-	<script src={% static "assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" %}></script>
-	<script src={% static "assets/plugins/bootstrap-slider/distro/bootstrap-slider.min.js" %}></script>
-	<script src={% static "assets/plugins/jquery-typeahead/distro/jquery.typeahead.min.js" %}></script>
-	<script src={% static "assets/plugins/jquery.maskedinput/src/jquery.maskedinput.js" %}></script>
-	<script src={% static "assets/plugins/tag-it/js/tag-it.min.js" %}></script>
-
-
-		<script src={% static "assets/plugins/blueimp-file-upload/js/vendor/jquery.ui.widget.js" %}></script>
-		<script src={% static "assets/plugins/blueimp-tmpl/js/tmpl.min.js" %}></script>
-		<script src={% static "assets/plugins/blueimp-load-image/js/load-image.all.min.js" %}></script>
-		<script src={% static "assets/plugins/blueimp-load-image/js/load-image.js" %}></script>
-		<script src={% static "assets/plugins/blueimp-canvas-to-blob/js/canvas-to-blob.min.js" %}></script>
-		<script src={% static "assets/plugins/blueimp-gallery/js/jquery.blueimp-gallery.min.js" %}></script>
-		<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.iframe-transport.js" %}></script>
-		<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.fileupload.js"%}></script>
-		<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.fileupload-process.js"%}></script>
-		<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.fileupload-image.js"%}></script>
-		<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.fileupload-audio.js"%}></script>
-		<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.fileupload-video.js"%}></script>
-		<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.fileupload-validate.js"%}></script>
-		<script src={% static "assets/plugins/blueimp-file-upload/js/jquery.fileupload-ui.js"%}></script>
-	<script src={% static "assets/plugins/summernote/distro/summernote-lite.min.js" %}></script>
-	<script src={% static "assets/plugins/spectrum-colorpicker2/distro/spectrum.min.js" %}></script>
-	<script src={% static "assets/plugins/select-picker/distro/picker.min.js" %}></script>
-	<script src={% static "assets/plugins/@highlightjs/cdn-assets/highlight.min.js" %}></script>
-<!--	<script src={% static "assets/js/demo/highlightjs.demo.js" %}></script>-->
-    	<script src={% static "assets/js/demo/form-plugins.demo.js"%}></script>
     <!-- ================== END page-js ================== -->
-<!--	<script>-->
-<!--		var handleRenderjQueryFileUpload = function() {-->
-<!--	$('#fileupload').fileupload({-->
-<!--		previewMaxHeight: 80,-->
-<!--		previewMaxWidth: 120,-->
-<!--		url: '//jquery-file-upload.appspot.com/',-->
-<!--		disableImageResize: /Android(?!.*Chrome)|Opera/.test(window.navigator.userAgent),-->
-<!--		maxFileSize: 999000,-->
-<!--		acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i-->
-<!--	});-->
-<!--	$('#fileupload').on('fileuploadchange', function (e, data) {-->
-<!--		$('#fileupload .empty-row').hide();-->
-<!--	});-->
-<!--	$('#fileupload').on('fileuploadfail', function(e, data){-->
-<!--		if (data.errorThrown === 'abort') {-->
-<!--			if ($('#fileupload .files tr').not('.empty-row').length == 1) {-->
-<!--				$('#fileupload .empty-row').show();-->
-<!--			}-->
-<!--		}-->
-<!--	});-->
 
-<!--	if ($.support.cors) {-->
-<!--		$.ajax({-->
-<!--			url: '//jquery-file-upload.appspot.com/',-->
-<!--			type: 'HEAD'-->
-<!--		}).fail(function () {-->
-<!--			var alert = '<div class="alert alert-danger m-b-0 m-t-15">Upload server currently unavailable - ' + new Date() + '</div>';-->
-<!--			$('#fileupload #error-msg').removeClass('d-none').html(alert);-->
-<!--		});-->
-<!--	}-->
-<!--};-->
-<!--$(document).ready(function() {-->
-
-<!--	handleRenderjQueryFileUpload();-->
-
-<!--});-->
-<!--	</script>-->
-
-
-    <script src={% static "assets/js/demo/sidebar-scrollspy.demo.js" %}></script>
 
     <script>
         function getfilename(fullpath){
