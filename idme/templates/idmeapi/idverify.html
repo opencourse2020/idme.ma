@@ -141,7 +141,7 @@
             </div>
 
             <div class="card-footer bg-none d-flex p-3">
-                <button type="button" id="IdVerification" class="btn btn-success btn-sm">{% trans "Upload" %} <i class="icon-paperplane ml-2"></i></button>
+                <button type="button" id="IdVerification" class="btn btn-success btn-sm" style="float: right;">{% trans "Upload" %} <i class="fas fa-lg fa-fw fa-upload ml-2"></i></button>
                 <input class="hidden" id="datalink">
                 <div id="alert-box"></div>
 
@@ -264,7 +264,6 @@
             let url = 'https://idme.ma/idme.apis/idverify/';
             const formData = new FormData();
             var datalink = $("#datalink").val();
-            console.log("datalink: ", datalink);
 
             if (datalink=="1"){
                 var fileName = $("#idcard").val();
@@ -275,7 +274,6 @@
             }
 
             // var fileName = $("#captureimg").attr('src');
-            console.log(fileName);
             if (fileName) {
                 formData.append('file', file);
                 $.ajax({
