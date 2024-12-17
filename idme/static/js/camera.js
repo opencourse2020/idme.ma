@@ -125,6 +125,8 @@ function grabFrame() {
     canvas.height = imageBitmap.height;
     canvas.getContext('2d').drawImage(imageBitmap, 0, 0);
     datalink1.value = canvas.toDataURL('image/jpg');
+    console.log("canvas url");
+    console.log(canvas.toDataURL('image/jpg'));
     // canvas.classList.remove('hidden');
   }).catch(function(error) {
     console.log('grabFrame() error: ', error);
@@ -145,6 +147,8 @@ function takePhoto() {
     console.log('Took photo:', blob);
     img.classList.remove('hidden');
     img.src = URL.createObjectURL(blob);
+    console.log("URL create url");
+    console.log(URL.createObjectURL(blob));
     datalink2.value = URL.createObjectURL(blob);
   }).catch(function(error) {
     console.log('takePhoto() error: ', error);
