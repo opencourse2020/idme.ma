@@ -293,8 +293,8 @@ navigator.mediaDevices.getUserMedia({ video: true })
 // Capture photo on button click
 captureBtn.addEventListener('click', () => {
     // Set canvas dimensions to match video size
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
+    canvas.width = video.videoWidth/3;
+    canvas.height = video.videoHeight/3;
 
     // Draw the current frame from the video onto the canvas
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
