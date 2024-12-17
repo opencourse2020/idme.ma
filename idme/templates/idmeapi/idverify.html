@@ -275,41 +275,41 @@
         }
     );
 </script>
-<script>
-    // Access the DOM elements
-const video = document.getElementById('camera');
-const canvas = document.getElementById('photo');
-const captureBtn = document.getElementById('capture-btn');
-const context = canvas.getContext('2d');
-const downloadLink = document.createElement('a');
-downloadLink.innerText = 'Download Photo';
-document.body.appendChild(downloadLink);
+<!--<script>-->
+<!--    // Access the DOM elements-->
+<!--const video = document.getElementById('camera');-->
+<!--const canvas = document.getElementById('photo');-->
+<!--const captureBtn = document.getElementById('capture-btn');-->
+<!--const context = canvas.getContext('2d');-->
+<!--const downloadLink = document.createElement('a');-->
+<!--downloadLink.innerText = 'Download Photo';-->
+<!--document.body.appendChild(downloadLink);-->
 
-// Request access to the user's camera
-navigator.mediaDevices.getUserMedia({ video: true })
-    .then((stream) => {
-        video.srcObject = stream;
-    })
-    .catch((error) => {
-        console.error("Error accessing the camera: ", error);
-    });
+<!--// Request access to the user's camera-->
+<!--navigator.mediaDevices.getUserMedia({ video: true })-->
+<!--    .then((stream) => {-->
+<!--        video.srcObject = stream;-->
+<!--    })-->
+<!--    .catch((error) => {-->
+<!--        console.error("Error accessing the camera: ", error);-->
+<!--    });-->
 
-// Capture photo on button click
-captureBtn.addEventListener('click', () => {
-    // Set canvas dimensions to match video size
-    canvas.width = video.videoWidth * 0.30;
-    canvas.height = video.videoHeight * 0.30;
+<!--// Capture photo on button click-->
+<!--captureBtn.addEventListener('click', () => {-->
+<!--    // Set canvas dimensions to match video size-->
+<!--    canvas.width = video.videoWidth * 0.30;-->
+<!--    canvas.height = video.videoHeight * 0.30;-->
 
-    // Draw the current frame from the video onto the canvas
-    context.drawImage(video, 0, 0, canvas.width, canvas.height);
-    const dataURL = canvas.toDataURL('image/jpg');
-    // Show the captured image on the canvas
-    // canvas.style.display = 'block';
-    // Set the download link
-    downloadLink.href = dataURL;
-    downloadLink.download = 'captured-photo.png';
-    downloadLink.style.display = 'block';
-});
-</script>
+<!--    // Draw the current frame from the video onto the canvas-->
+<!--    context.drawImage(video, 0, 0, canvas.width, canvas.height);-->
+<!--    const dataURL = canvas.toDataURL('image/jpg');-->
+<!--    // Show the captured image on the canvas-->
+<!--    // canvas.style.display = 'block';-->
+<!--    // Set the download link-->
+<!--    downloadLink.href = dataURL;-->
+<!--    downloadLink.download = 'captured-photo.png';-->
+<!--    downloadLink.style.display = 'block';-->
+<!--});-->
+<!--</script>-->
 {% endblock js %}
 
