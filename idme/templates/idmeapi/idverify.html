@@ -64,6 +64,18 @@
                                                     <div id="alert-expire"></div>
                                                 </div>
                                             </div>
+                                            <div class="col">
+                                                <form action="" enctype="multipart/form-data">
+                                                    {% csrf_token %}
+                                                    <div class="form-group row mb-3">
+                                                        <label for="idcard" class="col-sm-2 col-form-label">{% trans "Upload Your ID" %}</label>
+                                                        <div class="col-sm-10">
+                                                            <input class="form-control" accept="image/*" type="file" id="idcard" onchange="loadFile(event)">
+                                                        </div>
+                                                    </div>
+
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -96,16 +108,7 @@
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <form action="" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <div class="form-group row mb-3">
-                                <label for="idcard" class="col-sm-2 col-form-label">{% trans "Upload Your ID" %}</label>
-                                <div class="col-sm-10">
-                                    <input class="form-control" accept="image/*" type="file" id="idcard" onchange="loadFile(event)">
-                                </div>
-                            </div>
-                            <button type="button" id="IdVerification" class="btn btn-primary">{% trans "Upload" %} <i class="icon-paperplane ml-2"></i></button>
-                        </form>
+
 
                     </div>
                     <div class="card-arrow">
@@ -118,7 +121,7 @@
                 </div>
             </div>
             <div class="card-footer bg-none d-flex p-3">
-
+                <button type="button" id="IdVerification" class="btn btn-success btn-sm">{% trans "Upload" %} <i class="icon-paperplane ml-2"></i></button>
                 <div id="alert-box"></div>
 
             </div>
