@@ -268,14 +268,16 @@
 
             if (datalink=="1"){
                 var fileName = $("#idcard").val();
+                var file = $('#idcard')[0].files[0]
             }else if (datalink=="2") {
                 var fileName = $("#cardid").val();
+                var file = $('#cardid')[0].files[0]
             }
 
             // var fileName = $("#captureimg").attr('src');
             console.log(fileName);
             if (fileName) {
-                formData.append('file', $('#idcard')[0].files[0]);
+                formData.append('file', file);
                 $.ajax({
                     type: 'POST',
                     url: url,
