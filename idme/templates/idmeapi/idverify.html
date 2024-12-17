@@ -277,7 +277,7 @@
 <script>
     // Access the DOM elements
 const video = document.getElementById('camera');
-const canvas = document.getElementById('card-img');
+const canvas = document.getElementById('photo');
 const captureBtn = document.getElementById('capture-btn');
 const context = canvas.getContext('2d');
 
@@ -297,8 +297,7 @@ captureBtn.addEventListener('click', () => {
     canvas.height = video.videoHeight;
 
     // Draw the current frame from the video onto the canvas
-    context.drawImage(video, 0, 0);
-    // context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
     // Show the captured image on the canvas
     canvas.style.display = 'block';
