@@ -37,7 +37,7 @@ urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
     # path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
     # path("", RedirectView.as_view(pattern_name="coeanalytics:sdashboard")),
-    # path("accounts/", include("allauth.urls")),
+    path("accounts/", include("allauth.urls")),
     # path("accounts/profile/", ProfileView.as_view()),
     path("idme.apis/", include("idme.api.urls", namespace="idme.apis")),
     # path("profiles/", include("coelinks.profiles.urls", namespace="profiles")),
