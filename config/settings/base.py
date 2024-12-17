@@ -183,7 +183,7 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = str(BASE_DIR("media"))
 
 # Project adjustments
-AUTH_USER_MODEL = "profiles.User"
+# AUTH_USER_MODEL = "profiles.User"
 admins_data = env.tuple(
     "DJANGO_ADMINS", default="Open Course <syndicma2020@gmail.com>"
 )
