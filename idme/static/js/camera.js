@@ -44,7 +44,7 @@ var datalink1 = document.querySelector('input#datalink1');
 var datalink2 = document.querySelector('input#datalink1');
 
 // grabFrameButton.onclick = grabFrame;
-takePhotoButton.onclick = grabFrame;
+takePhotoButton.onclick = takePhoto;
 videoSelect.onchange = getStream;
 zoomInput.oninput = setZoom;
 
@@ -152,5 +152,4 @@ function takePhoto() {
   }).catch(function(error) {
     console.log('takePhoto() error: ', error);
   });
-  grabFrame;
 }
