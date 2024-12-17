@@ -22,10 +22,8 @@ from django.db import transaction
 from guardian.shortcuts import assign_perm
 from guardian.mixins import LoginRequiredMixin
 from django.views.decorators.csrf import csrf_exempt
-from .pmf.pmf_analysis import GrowthAccounting, Cohorts
 from . import models, forms
-from .mixins import EnterprisePermissionRequiredMixin, JsonFormMixin, FormsetMixin
-from coelinks.profiles.models import Enterprise
+from .mixins import JsonFormMixin
 from django.conf import settings
 # Data analytics librairies
 import json
