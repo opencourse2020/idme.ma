@@ -1,6 +1,5 @@
 from django.db import models
 from .formatChecker import ContentTypeRestrictedFileField
-from coelinks.profiles.models import User, Admin, Regular, Enterprise
 from django.utils.translation import gettext_lazy as _
 from . import managers
 import os
