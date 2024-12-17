@@ -39,7 +39,7 @@ urlpatterns = [
     # path("", RedirectView.as_view(pattern_name="coeanalytics:sdashboard")),
     # path("accounts/", include("allauth.urls")),
     # path("accounts/profile/", ProfileView.as_view()),
-    path("idme.apis/", include("idme.api.urls", namespace="chat")),
+    path("idme.apis/", include("idme.api.urls", namespace="idme.apis")),
     # path("profiles/", include("coelinks.profiles.urls", namespace="profiles")),
     path("jsi18n/", JavaScriptCatalog.as_view(), name="javascript-catalog"),
     path("i18n/", include("django.conf.urls.i18n")),
