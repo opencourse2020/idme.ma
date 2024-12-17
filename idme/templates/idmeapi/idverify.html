@@ -14,7 +14,7 @@
 {% block css %}
 
 {{ block.super }}
-
+<link rel="stylesheet" href={% static "css/camera.css" %}>
 
 
 {% endblock css %}
@@ -91,10 +91,16 @@
                                             <h5 class="card-title">Access Camera and Capture Photo</h5>
                                             <div class="row gx-0 align-items-center">
                                                 <div class="col">
-                                                    <video id="camera" autoplay width="320" height="240" controls></video>
-                                                    <button id="capture-btn">Capture Photo</button>
+<!--                                                    <video id="camera" autoplay width="320" height="240" controls></video>-->
+<!--                                                    <button id="capture-btn">Capture Photo</button>-->
 
-                                                    <canvas id="photo" width="320" height="240"></canvas>
+<!--                                                    <canvas id="photo" width="320" height="240"></canvas>-->
+                                                        <button id="grabFrame">Grab Frame</button>
+                                                      <button id="takePhoto">Take Photo</button>
+                                                      <div class="select">
+                                                        <label for="videoSource">Video source: </label><select id="videoSource"></select>
+                                                      </div>
+                                                      <input class="hidden" id="zoom" type="range" step="20">
                                                 </div>
                                             </div>
 
@@ -159,7 +165,7 @@
 
 <!-- ================== BEGIN page-js ================== -->
 <script src={% static "assets/plugins/jquery/distro/jquery.min.js" %}></script>
-
+<script src={% static "js/camera.js" %}></script>
 <!-- ================== END page-js ================== -->
 
 
