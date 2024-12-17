@@ -5,112 +5,144 @@
 
 {% block head_title %}
 
-    <title>{% trans "ID Verify" %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content={% trans "Analytic Tools for Startups and Existing Companies" %}>
-    <meta name="author" content="">
+<title>{% trans "ID Verify" %}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content={% trans "Analytic Tools for Startups and Existing Companies" %}>
+<meta name="author" content="">
 {% endblock %}
 
 {% block css %}
 
-    {{ block.super }}
+{{ block.super }}
 
 
 
 {% endblock css %}
 
 {% block content_head %}
-    <ul class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">{% trans "Home" %}</a></li>
-        <li class="breadcrumb-item active">{% trans "ID Verify" %}</li>
-    </ul>
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">{% trans "Home" %}</a></li>
+    <li class="breadcrumb-item active">{% trans "ID Verify" %}</li>
+</ul>
 
-    <h1 class="page-header">
-        {% trans "ID Verification" %}
-    </h1>
+<h1 class="page-header">
+    {% trans "ID Verification" %}
+</h1>
 {% endblock content_head %}
 {% block content_body %}
-    <div class="row gx-4">
-        <div class="col-lg-8">
-            <div class="card mb-4">
-                <div class="card-header d-flex align-items-center bg-inverse bg-opacity-10 fw-400">
-                    {% trans "Details" %}
+<div class="row gx-4">
+    <div class="col-lg-8">
+        <div class="card mb-4">
+            <div class="card-header d-flex align-items-center bg-inverse bg-opacity-10 fw-400">
+                {% trans "Details" %}
 
-                </div>
+            </div>
 
-                <div class="card-body">
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <div class="row gx-0 align-items-center">
-                                <div class="col-md-4">
-                                    <img src="https://via.placeholder.com/480x360/c9d2e3/212837" alt="" class="card-img rounded-0" id="card-img">
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="card-body d-block">
-                                        <h5 class="card-title">{% trans "Card Information" %}</h5>
-                                        <div id="alert-id"></div>
-                                        <div id="alert-name"></div>
-                                        <div id="alert-address"></div>
-                                        <div id="alert-dob"></div>
-                                        <div id="alert-expire"></div>
-{#                                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>#}
-{#                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>#}
+            <div class="card-body">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="accordion" id="accordionExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                        Accordion Item #1
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <div class="row gx-0 align-items-center">
+                                            <div class="col-md-4">
+                                                <img src="https://via.placeholder.com/480x360/c9d2e3/212837" alt="" class="card-img rounded-0" id="card-img">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body d-block">
+                                                    <h5 class="card-title">{% trans "Card Information" %}</h5>
+                                                    <div id="alert-id"></div>
+                                                    <div id="alert-name"></div>
+                                                    <div id="alert-address"></div>
+                                                    <div id="alert-dob"></div>
+                                                    <div id="alert-expire"></div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                            Accordion Item #2
+                                        </button>
+                                    </h2>
+                                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <h1>Access Camera and Capture Photo</h1>
+
+                                            <video id="camera" autoplay></video>
+                                            <button id="capture-btn">Capture Photo</button>
+
+                                            <canvas id="photo"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
                         </div>
-	                        <div class="card-arrow">
-											<div class="card-arrow-top-left"></div>
-											<div class="card-arrow-top-right"></div>
-											<div class="card-arrow-bottom-left"></div>
-											<div class="card-arrow-bottom-right"></div>
-										</div>
                     </div>
-                    <div class="card">
-										<div class="card-body">
-											<form action="" enctype="multipart/form-data">
-                                                {% csrf_token %}
-												<div class="form-group row mb-3">
-													<label for="idcard" class="col-sm-2 col-form-label">{% trans "Upload Your ID" %}</label>
-													<div class="col-sm-10">
-														<input class="form-control" accept="image/*" type="file" id="idcard" onchange="loadFile(event)">
-													</div>
-												</div>
-{#												<div class="form-group row mb-3">#}
-{#													<label for="idcin" class="col-sm-2 col-form-label">{% trans "CIN" %}</label>#}
-{#													<div class="col-sm-10">#}
-{#														<input class="form-control" type="text" id="idcin" readonly>#}
-{#													</div>#}
-{#												</div>#}
-{#                                                <div class="form-group row mb-3">#}
-{#													<label for="iddob" class="col-sm-2 col-form-label">{% trans "DOB" %}</label>#}
-{#													<div class="col-sm-10">#}
-{#														<input class="form-control" type="text" id="iddob" readonly>#}
-{#													</div>#}
-{#												</div>#}
-{#                                                <div class="form-group row mb-3">#}
-{#													<label for="idexpire" class="col-sm-2 col-form-label">{% trans "Expiration Date" %}</label>#}
-{#													<div class="col-sm-10">#}
-{#														<input class="form-control" type="text" id="idexpire" readonly>#}
-{#													</div>#}
-{#												</div>#}
-{#                                                <button type="submit" class="btn btn-primary">{% trans "Upload" %} <i class="icon-paperplane ml-2"></i></button>#}
-                                                <button type="button" id="IdVerification" class="btn btn-primary">{% trans "Upload" %} <i class="icon-paperplane ml-2"></i></button>
-											</form>
-
-										</div>
-										<div class="card-arrow">
-											<div class="card-arrow-top-left"></div>
-											<div class="card-arrow-top-right"></div>
-											<div class="card-arrow-bottom-left"></div>
-											<div class="card-arrow-bottom-right"></div>
-										</div>
-
-									</div>
+                    <div class="card-arrow">
+                        <div class="card-arrow-top-left"></div>
+                        <div class="card-arrow-top-right"></div>
+                        <div class="card-arrow-bottom-left"></div>
+                        <div class="card-arrow-bottom-right"></div>
+                    </div>
                 </div>
-                <div class="card-footer bg-none d-flex p-3">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group row mb-3">
+                                <label for="idcard" class="col-sm-2 col-form-label">{% trans "Upload Your ID" %}</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" accept="image/*" type="file" id="idcard" onchange="loadFile(event)">
+                                </div>
+                            </div>
+                            <button type="button" id="IdVerification" class="btn btn-primary">{% trans "Upload" %} <i class="icon-paperplane ml-2"></i></button>
+                        </form>
 
-                    <div id="alert-box"></div>
+                    </div>
+                    <div class="card-arrow">
+                        <div class="card-arrow-top-left"></div>
+                        <div class="card-arrow-top-right"></div>
+                        <div class="card-arrow-bottom-left"></div>
+                        <div class="card-arrow-bottom-right"></div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="card-footer bg-none d-flex p-3">
+
+                <div id="alert-box"></div>
+
+            </div>
+            <div class="card-arrow">
+                <div class="card-arrow-top-left"></div>
+                <div class="card-arrow-top-right"></div>
+                <div class="card-arrow-bottom-left"></div>
+                <div class="card-arrow-bottom-right"></div>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+</div>
+<!-- BEGIN #modalPosItem -->
+<div class="modal modal-pos fade" id="modalPosItem">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content border-0">
+            <div class="card">
+                <div class="card-body p-0">
 
                 </div>
                 <div class="card-arrow">
@@ -119,52 +151,29 @@
                     <div class="card-arrow-bottom-left"></div>
                     <div class="card-arrow-bottom-right"></div>
                 </div>
-
             </div>
-
-
-
-
         </div>
-
     </div>
-    <!-- BEGIN #modalPosItem -->
-	<div class="modal modal-pos fade" id="modalPosItem">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content border-0">
-				<div class="card">
-					<div class="card-body p-0">
-
-					</div>
-					<div class="card-arrow">
-						<div class="card-arrow-top-left"></div>
-						<div class="card-arrow-top-right"></div>
-						<div class="card-arrow-bottom-left"></div>
-						<div class="card-arrow-bottom-right"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- END #modalPosItem -->
+</div>
+<!-- END #modalPosItem -->
 {% endblock content_body %}
 
 
 {% block js %}
-    {{ block.super }}
+{{ block.super }}
 
-    <!-- ================== BEGIN page-js ================== -->
-		<script src={% static "assets/plugins/jquery/distro/jquery.min.js" %}></script>
+<!-- ================== BEGIN page-js ================== -->
+<script src={% static "assets/plugins/jquery/distro/jquery.min.js" %}></script>
 
-    <!-- ================== END page-js ================== -->
+<!-- ================== END page-js ================== -->
 
 
-    <script>
-        function getfilename(fullpath){
-            var filename = fullPath.replace(/^.*[\\/]/, '')
-            return filename
-        }
-    </script>
+<script>
+    function getfilename(fullpath){
+        var filename = fullPath.replace(/^.*[\\/]/, '')
+        return filename
+    }
+</script>
 
 
 <script>
@@ -172,26 +181,26 @@
     function IdVerification() {
 
         const documentname = document.getElementById('idcard').files[0];
-            documentname.onchange = () => {
-                const selectedFile = documentname.files[0];
+        documentname.onchange = () => {
+            const selectedFile = documentname.files[0];
 
-                }
+        }
         const formData = new FormData();
         // const keyword = document.getElementById('keyword').value;
-		{#var userid = document.getElementById('userid').value;#}
-		// let useridx = userid.toString();
-		// console.log(useridx);
+        {#var userid = document.getElementById('userid').value;#}
+        // let useridx = userid.toString();
+        // console.log(useridx);
         // formData.append('keyword',keyword );
         formData.append('file', documentname);
-		{#formData.append('user', userid);#}
+        {#formData.append('user', userid);#}
         const options = {
             method: 'POST',
             headers: {
-				"Authorization": "sha256=6dSN3Al3gwgFr+eiXOU2dPWX/hTqmCY/zkK9OZykT4g="
+                "Authorization": "sha256=6dSN3Al3gwgFr+eiXOU2dPWX/hTqmCY/zkK9OZykT4g="
             },
             body: formData
         };
-		console.log(formData);
+        console.log(formData);
         fetch( 'https://idme.ma/idme.apis/idverify/', options )
             .then( response => response.json() )
             .then( data => $("#alert-box").html(`<div class="alert alert-success"         role="alert">
@@ -204,63 +213,92 @@
 
 </script>
 <script>
-  var loadFile = function(event) {
-    var output = document.getElementById('card-img');
-    output.src = URL.createObjectURL(event.target.files[0]);
-    output.onload = function() {
-      URL.revokeObjectURL(output.src) // free memory
-    }
-  };
+    var loadFile = function(event) {
+        var output = document.getElementById('card-img');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+            URL.revokeObjectURL(output.src) // free memory
+        }
+    };
 </script>
 
 <script>
-$("#IdVerification").click(function () {
-    let url = 'https://idme.ma/idme.apis/idverify/';
-    const formData = new FormData();
-    var fileName = $("#idcard").val();
-    if (fileName) {
-        formData.append('file', $('#idcard')[0].files[0]);
-        $.ajax({
-            type: 'POST',
-            url: url,
-            data: formData,
-            processData: false,
-            contentType: false,
-            headers: {'X-CSRFToken': $('input[name=csrfmiddlewaretoken]').val()},
-            success: function (data) {
-                if (data) {
-                    var result = data;
-                    var id = result.id;
-                    var name = result.name;
-                    var address = result.address;
-                    var dob = result.dob;
-                    var expire = result.expire;
+    $("#IdVerification").click(function () {
+            let url = 'https://idme.ma/idme.apis/idverify/';
+            const formData = new FormData();
+            var fileName = $("#idcard").val();
+            if (fileName) {
+                formData.append('file', $('#idcard')[0].files[0]);
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    headers: {'X-CSRFToken': $('input[name=csrfmiddlewaretoken]').val()},
+                    success: function (data) {
+                        if (data) {
+                            var result = data;
+                            var id = result.id;
+                            var name = result.name;
+                            var address = result.address;
+                            var dob = result.dob;
+                            var expire = result.expire;
 
-                    $("#alert-id").html(`<div class="alert alert-light p-0"         role="alert">
+                            $("#alert-id").html(`<div class="alert alert-light p-0"         role="alert">
                            ${id}
                             </div>`);
-                    $("#alert-name").html(`<div class="alert alert-light p-0"         role="alert">
+                            $("#alert-name").html(`<div class="alert alert-light p-0"         role="alert">
                            ${name}
                             </div>`);
-                    $("#alert-address").html(`<div class="alert alert-light p-0"         role="alert">
+                            $("#alert-address").html(`<div class="alert alert-light p-0"         role="alert">
                            ${address}
                             </div>`);
-                    $("#alert-dob").html(`<div class="alert alert-light p-0"         role="alert">
+                            $("#alert-dob").html(`<div class="alert alert-light p-0"         role="alert">
                            ${dob}
                             </div>`);
-                    $("#alert-expire").html(`<div class="alert alert-light p-0"         role="alert">
+                            $("#alert-expire").html(`<div class="alert alert-light p-0"         role="alert">
                            ${expire}
                             </div>`);
-                }
-            }
-        })
-    }else{
-        $("#alert-box").html(`<div class="alert alert-danger p-0"         role="alert">
+                        }
+                    }
+                })
+            }else{
+                $("#alert-box").html(`<div class="alert alert-danger p-0"         role="alert">
                            File missing!!)
                             </div>`);
-    }
-}
-);
+            }
+        }
+    );
+</script>
+<script>
+    // Access the DOM elements
+const video = document.getElementById('camera');
+const canvas = document.getElementById('photo');
+const captureBtn = document.getElementById('capture-btn');
+const context = canvas.getContext('2d');
+
+// Request access to the user's camera
+navigator.mediaDevices.getUserMedia({ video: true })
+    .then((stream) => {
+        video.srcObject = stream;
+    })
+    .catch((error) => {
+        console.error("Error accessing the camera: ", error);
+    });
+
+// Capture photo on button click
+captureBtn.addEventListener('click', () => {
+    // Set canvas dimensions to match video size
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    // Draw the current frame from the video onto the canvas
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    // Show the captured image on the canvas
+    canvas.style.display = 'block';
+});
 </script>
 {% endblock js %}
 
