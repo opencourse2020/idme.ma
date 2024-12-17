@@ -73,7 +73,7 @@
                                                             <input class="form-control" accept="image/*" type="file" id="idcard" onchange="loadFile(event)">
                                                         </div>
                                                     </div>
-
+                                                        <button type="button" id="IdVerification" class="btn btn-success btn-sm">{% trans "Upload" %} <i class="icon-paperplane ml-2"></i></button>
                                                 </form>
                                             </div>
                                         </div>
@@ -89,11 +89,15 @@
                                     <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
                                             <h5 class="card-title">Access Camera and Capture Photo</h5>
+                                            <div class="row gx-0 align-items-center">
+                                                <div class="col">
+                                                    <video id="camera" autoplay width="320" height="240" controls></video>
+                                                    <button id="capture-btn">Capture Photo</button>
 
-                                            <video id="camera" autoplay width="320" height="240" controls></video>
-                                            <button id="capture-btn">Capture Photo</button>
+                                                    <canvas id="photo" width="320" height="240"></canvas>
+                                                </div>
+                                            </div>
 
-                                            <canvas id="photo" width="320" height="240"></canvas>
                                         </div>
                                     </div>
                                 </div>
@@ -121,7 +125,7 @@
                 </div>
             </div>
             <div class="card-footer bg-none d-flex p-3">
-                <button type="button" id="IdVerification" class="btn btn-success btn-sm">{% trans "Upload" %} <i class="icon-paperplane ml-2"></i></button>
+
                 <div id="alert-box"></div>
 
             </div>
