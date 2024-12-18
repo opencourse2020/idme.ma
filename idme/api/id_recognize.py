@@ -225,6 +225,7 @@ def idrecognize(client, side):
         )
 
     elif side == 2:
+        print("prompt 2")
         prompt = (
             "Please extract and parse the text from the ID card image. "
             "Ensure the extracted information is formatted for database entry with the following fields: "
