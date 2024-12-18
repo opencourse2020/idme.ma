@@ -66,7 +66,11 @@ class FileUpdateView(CreateView, JsonFormMixin):
     result = idrecognize(str(client), side)
     if result:
         if side == 1:
-            identification = result.get("Identity").strip()
+            identification = result.get("Identity")
+            if identification:
+                identification.strip()
+            else:
+                identification = result.get("Driver's License Number")
             name = result.get("Name")
             city = result.get("City of Birth")
             dob = result.get("Date of Birth (DOB)")
