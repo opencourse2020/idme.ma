@@ -140,6 +140,12 @@
                                             </div>
 
                                         </div>
+                                        <div class="card-footer bg-none p-3">
+                                            <button type="button" id="IdVerification" class="btn btn-success btn-sm" style="float: right;">{% trans "Upload" %} <i class="fas fa-lg fa-fw fa-upload ml-2"></i></button>
+                                            <input class="hidden" id="datalink">
+                                            <div id="alert-box"></div>
+
+                                        </div>
                                         <div class="card-arrow">
                                             <div class="card-arrow-top-left"></div>
                                             <div class="card-arrow-top-right"></div>
@@ -228,22 +234,6 @@
                                                                 <div class="col">
 
                                                                     <input class="form-control" accept="image/*" type="file" id="cardidb" capture onchange="loadPhoto(event)">
-                                                                    <!--                                                    <video id="camera" autoplay width="320" height="240" controls></video>-->
-                                                                    <!--                                                    <button id="capture-btn">Capture Photo</button>-->
-
-                                                                    <!--                                                    <canvas id="photo" width="320" height="240"></canvas>-->
-                                                                    <!--                                                <button id="grabFrame">Grab Frame</button>-->
-
-                                                                    <!--                                                <div class="select">-->
-                                                                    <!--                                                    <label for="videoSource">{% trans "Video source:" %} </label><select id="videoSource"></select>-->
-                                                                    <!--                                                </div>-->
-                                                                    <!--                                                <input class="hidden" id="zoom" type="range" step="20">-->
-                                                                    <!--                                                <video autoplay playsinline class="hidden mt-3 mb-3" width="100%" id="videostream"></video>-->
-                                                                    <!--&lt;!&ndash;                                                <img id="captureimg" width="240" height="240">&ndash;&gt;-->
-                                                                    <!--                                                <canvas class="hidden" id="capturedimage"></canvas>-->
-                                                                    <!--                                                <input class="hidden" id="datalink1">-->
-                                                                    <!--                                                <input class="hidden" id="datalink2">-->
-                                                                    <!--                                                <button id="takePhoto" style="float: right;">{% trans "Take Photo"%}</button>-->
                                                                 </div>
                                                             </div>
 
@@ -254,9 +244,9 @@
 
                                         </div>
                                         <div class="card-footer bg-none p-3">
-                                            <button type="button" id="IdVerification" class="btn btn-success btn-sm" style="float: right;">{% trans "Upload" %} <i class="fas fa-lg fa-fw fa-upload ml-2"></i></button>
-                                            <input class="hidden" id="datalink">
-                                            <div id="alert-box"></div>
+                                            <button type="button" id="IdVerificationb" class="btn btn-success btn-sm" style="float: right;">{% trans "Verify" %} <i class="fas fa-lg fa-fw fa-upload ml-2"></i></button>
+                                            <input class="hidden" id="datalinkb">
+                                            <div id="alert-boxb"></div>
 
                                         </div>
                                         <div class="card-arrow">
