@@ -57,38 +57,42 @@ class FileUpdateView(CreateView, JsonFormMixin):
     # if file_serializer.is_valid():
     print("Step 1")
     filename = request.FILES['file']
+    side = int(request.post.get('side'))
     client = 1
     obj, created = models.IDVerify.objects.update_or_create(
         client_num=client, defaults={'idcard': filename})
     print(filename.name)
 
-    result = idrecognize(str(client))
+    result = idrecognize(str(client), side)
     print(result)
     if result:
-        name = result.get("Name")
-        print("Name:", name)
-        address = result.get("Address")
-        print("Address:", address)
-        dob = result.get("Date of Birth (DOB)")
-        # if dob_text.find("-"):
-        #     dob_text = dob_text.replace("-", "/")
-        # print(dob_text)
-        # dob = datetime.strptime(dob_text, '%m/%d/%y').strftime('%m/%d/%Y')
-        print("DOB:", dob)
-        expiry_date = result.get("Expiration Date (EXP)")
+        if side == 1:
+            name = result.get("Name")
+            city = result.get("City of Birth")
+            dob = result.get("Date of Birth (DOB)")
+            expiry_date = result.get("Expiration Date (EXP)")
+            obj, created = models.IDVerify.objects.update_or_create(
+                client_num=1,
+                defaults={'name': name, 'birth_city': city, 'dob': dob,
+                          'expiry_date': expiry_date}
+            )
+            result = {'name': name, 'city': city, 'dob': dob, 'expire': expiry_date}
+        elif side == 2:
+            identification = result.get("Identity")
+            address = result.get("Address")
+            gender = result.get("Gender")
+            obj, created = models.IDVerify.objects.update_or_create(
+                client_num=1,
+                defaults={'user_id': identification, 'address': address, 'gender': gender}
+            )
+            result = {'id': identification, 'address': address, 'gender': gender}
         # if expiry_date_text.find("-"):
         #     expiry_date_text = expiry_date_text.replace("-", "/")
         # print(expiry_date_text)
         # expiry_date = datetime.strptime(expiry_date_text, '%m/%d/%y').strftime('%m/%d/%Y')
-        print("expire:", expiry_date)
-        license_number = result.get("Driver's License Number")
-        print("user_id:", license_number)
-
-        obj, created = models.IDVerify.objects.update_or_create(
-            client_num=1,
-            defaults={'user_id': license_number, 'name': name, 'address': address, 'dob': dob, 'expiry_date': expiry_date}
-        )
-        result = {'id': license_number, 'name': name, 'address': address, 'dob': dob, 'expire': expiry_date}
+        # print("expire:", expiry_date)
+        # license_number = result.get("Driver's License Number")
+        # print("user_id:", license_number)
 
     data = result
 

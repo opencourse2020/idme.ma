@@ -427,6 +427,7 @@
             // var fileName = $("#captureimg").attr('src');
         if (fileName) {
             formData.append('file', file);
+            formData.append('side', "1");
             $.ajax({
                 type: 'POST',
                 url: url,
@@ -439,7 +440,7 @@
                         var result = data;
                         var id = result.id;
                         var name = result.name;
-                        var address = result.address;
+                        var city = result.city;
                         var dob = result.dob;
                         var expire = result.expire;
                         $("#loadingstate").hide();
@@ -451,7 +452,7 @@
                            ${name}
                             </div>`);
                         $("#alert-birthcity").html(`<div class="alert alert-light p-0"         role="alert">
-                           ${address}
+                           ${city}
                             </div>`);
                         $("#alert-dob").html(`<div class="alert alert-light p-0"         role="alert">
                            ${dob}
@@ -461,7 +462,7 @@
                             </div>`);
                         // $("#alert-id").show();
                         $("#alert-name").show();
-                        $("#alert-address").show();
+                        $("#alert-birthcity").show();
                         $("#alert-dob").show();
                         $("#alert-expire").show();
                     }
@@ -498,6 +499,7 @@
             // var fileName = $("#captureimg").attr('src');
         if (fileName) {
             formData.append('file', file);
+            formData.append('side', "2");
             $.ajax({
                 type: 'POST',
                 url: url,

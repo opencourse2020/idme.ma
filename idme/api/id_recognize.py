@@ -202,32 +202,42 @@ def process_card_id(file_path, generative_ai, prompt):
 
 
 # @print_progress
-def idrecognize(client):
+def idrecognize(client, side):
     media_path = Path(media_folder + "/id_cards/user_" + client)
+    result = None
     print(media_path)
-    prompt = (
-        "Please extract and parse the text from the ID card image. "
-        "Ensure the extracted information is formatted for database entry with the following fields: "
-        "Name, Address, Date of Birth (DOB), Expiration Date (EXP), and any other relevant details. "
-        "Provide the output in a structured JSON format without any backticks. "
-        "Example format: "
-        "{"
-        "\"Name\": \"John Doe\", "
-        "\"Address\": \"123 Main St, Any town, USA\", "
-        "\"Date of Birth (DOB)\": \"01/01/1970\", "
-        "\"Expiration Date (EXP)\": \"01/01/2030\", "
-        "\"Driver's License Number\": \"D1234567\", "
-        "\"Class\": \"C\", "
-        "\"Sex\": \"M\", "
-        "\"Height\": \"6'-0\"\", "
-        "\"Weight\": \"180 lb\", "
-        "\"Eyes\": \"BLU\", "
-        "\"Restrictions\": \"NONE\", "
-        "\"Endorsements\": \"NONE\", "
-        "\"Issue Date\": \"01/01/2020\", "
-        "\"Donor\": \"Yes\""
-        "}"
-    )
+    if side == 1:
+
+        prompt = (
+            "Please extract and parse the text from the ID card image. "
+            "Ensure the extracted information is formatted for database entry with the following fields: "
+            "Name, City of Birth, Date of Birth (DOB), Expiration Date (EXP) "
+            "Provide the output in a structured JSON format without any backticks. "
+            "Example format: "
+            "{"
+            "\"Name\": \"John Doe\", "
+            "\"City of Birth\": \"Casablanca\", "
+            "\"Date of Birth (DOB)\": \"01/01/1970\", "
+            "\"Expiration Date (EXP)\": \"01/01/2030\", "
+            "\"Driver's License Number\": \"D1234567\""
+            
+            "}"
+        )
+
+    elif side == 2:
+        prompt = (
+            "Please extract and parse the text from the ID card image. "
+            "Ensure the extracted information is formatted for database entry with the following fields: "
+            "Address, ID Number, Gender. "
+            "Provide the output in a structured JSON format without any backticks. "
+            "Example format: "
+            "{"
+            "\"Identity\": \"C356899\", "
+            "\"Address\": \"123 Main St, Any town, USA\", "
+            "\"Gender\": \"M\""
+            "}"
+        )
+
     # print("Step 0")
     generative_ai = GenerativeAI("gemini-1.5-flash")
     # print("Step 1")

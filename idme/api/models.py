@@ -13,10 +13,16 @@ def document_directory_path(instance, filename):
 
 
 class IDVerify(models.Model):
+    categories = (
+        ('M', _("Male")),
+        ('F', _("Female")),
+    )
     client_num = models.IntegerField()
     user_id = models.CharField(max_length=20, null=True, blank=True)
     name = models.CharField(max_length=100, null=True, blank=True)
     address = models.CharField(max_length=100, null=True, blank=True)
+    birth_city = models.CharField(max_length=100, null=True, blank=True)
+    gender = models.CharField(max_length=1, choices=categories, default="M")
     dob = models.CharField(max_length=30, null=True, blank=True)
     expiry_date = models.CharField(max_length=30, null=True, blank=True)
     idcard = ContentTypeRestrictedFileField(upload_to=document_directory_path,
