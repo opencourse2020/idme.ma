@@ -213,7 +213,7 @@
                                                                 <div class="form-group row mb-3">
                                                                     <!--                                                        <label for="idcard" class="col-sm-2 col-form-label">{% trans "Upload Your ID" %}</label>-->
                                                                     <div class="col-sm-10">
-                                                                        <input class="form-control" accept="image/*" type="file" id="idcardb" onchange="loadFile(event)">
+                                                                        <input class="form-control" accept="image/*" type="file" id="idcardb" onchange="loadFileb(event)">
                                                                     </div>
                                                                 </div>
 
@@ -234,7 +234,7 @@
                                                             <div class="row gx-0 align-items-center">
                                                                 <div class="col">
 
-                                                                    <input class="form-control" accept="image/*" type="file" id="cardidb" capture onchange="loadPhoto(event)">
+                                                                    <input class="form-control" accept="image/*" type="file" id="cardidb" capture onchange="loadPhotob(event)">
                                                                 </div>
                                                             </div>
 
@@ -369,6 +369,7 @@
     var loadPhoto = function(event) {
         var output = document.getElementById('captureimg');
         var datalink = document.getElementById('datalink');
+        var alertmsg = document.getElementById('alert-box');
         datalink.value = "2";
         alertmsg.style.display = "none";
         output.src = URL.createObjectURL(event.target.files[0]);
@@ -389,9 +390,10 @@
         }
     };
 
-    var loadPhoto = function(event) {
-        var output = document.getElementById('captureimg');
-        var datalink = document.getElementById('datalink');
+    var loadPhotob = function(event) {
+        var output = document.getElementById('captureimgb');
+        var datalink = document.getElementById('datalinkb');
+        var alertmsg = document.getElementById('alert-boxb');
         datalink.value = "2";
         alertmsg.style.display = "none";
         output.src = URL.createObjectURL(event.target.files[0]);
