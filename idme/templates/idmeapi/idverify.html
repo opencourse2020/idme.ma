@@ -172,11 +172,11 @@
 
                                                               </div>
                                                             </div>
-                                                            <label for="alert-idb" id="lablel_id">{% trans "ID:"%}</label>
+                                                            <label for="alert-idb" id="lablel_idb" style="display: none">{% trans "ID:"%}</label>
                                                             <div id="alert-idb"></div>
-                                                            <label for="alert-address" id="label_address" >{% trans "Address:"%}</label>
+                                                            <label for="alert-address" id="label_address" style="display: none">{% trans "Address:"%}</label>
                                                             <div id="alert-address"></div>
-                                                            <label for="alert-gender" id="label_gender" >{% trans "Gender:"%}</label>
+                                                            <label for="alert-gender" id="label_gender" style="display: none">{% trans "Gender:"%}</label>
                                                             <div id="alert-gender"></div>
 
                                                         </div>
@@ -487,6 +487,10 @@
         $("#alert-idb").hide();
         $("#alert-address").hide();
         $("#alert-gender").hide();
+        $("#label_idb").hide();
+        $("#label_address").hide();
+        $("#label_gender").hide();
+
         $("#loadingstateb").show();
 
         let url = 'https://idme.ma/idme.apis/idverify/';
@@ -532,7 +536,9 @@
                         $("#alert-gender").html(`<div class="alert alert-light p-0"         role="alert">
                            ${gender}
                             </div>`);
-
+                        $("#label_idb").show();
+                        $("#label_address").show();
+                        $("#label_gender").show();
                         $("#alert-idb").show();
                         $("#alert-address").show();
                         $("#alert-gender").show();
