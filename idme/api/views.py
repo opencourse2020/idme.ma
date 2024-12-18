@@ -43,7 +43,9 @@ class IDVerifyView(TemplateView):
     # form_class = forms.IDVerifyCreateForm
     template_name = "idmeapi/idverify.html"
     # success_url = reverse_lazy("coeanalytics:analytictypes:list")
-
+    def get_context_data(self, **kwargs):
+        kwargs["clientid"] = self.kwargs.get("client_id")
+        return super(IDVerifyView, self).get_context_data(**kwargs)
 
 class FileUpdateView(CreateView, JsonFormMixin):
   # parser_classes = (MultiPartParser, FormParser)
@@ -58,33 +60,30 @@ class FileUpdateView(CreateView, JsonFormMixin):
     print("Step 1")
     filename = request.FILES['file']
     side = int(request.POST.get("side"))
-    client = 1
+    client = int(request.POST.get("cid"))
     obj, created = models.IDVerify.objects.update_or_create(
         client_num=client, defaults={'idcard': filename})
-    print(filename.name)
-    print("side:", side)
     result = idrecognize(str(client), side)
-    print(result)
     if result:
         if side == 1:
-            identification = result.get("Identity")
+            identification = result.get("Identity").strip()
             name = result.get("Name")
             city = result.get("City of Birth")
             dob = result.get("Date of Birth (DOB)")
             expiry_date = result.get("Expiration Date (EXP)")
             obj, created = models.IDVerify.objects.update_or_create(
-                client_num=1,
-                defaults={'user_id': identification, 'name': name, 'birth_city': city, 'dob': dob,
-                          'expiry_date': expiry_date}
+                user_id=identification,
+                defaults={'name': name, 'birth_city': city, 'dob': dob,
+                          'expiry_date': expiry_date, 'client_num': client}
             )
             result = {'id': identification, 'name': name, 'city': city, 'dob': dob, 'expire': expiry_date}
         elif side == 2:
-            identification = result.get("Identity")
+            identification = result.get("Identity").strip()
             address = result.get("Address")
             gender = result.get("Gender")
             obj, created = models.IDVerify.objects.update_or_create(
-                client_num=1,
-                defaults={'address': address, 'gender': gender}
+                user_id=identification,
+                defaults={'address': address, 'gender': gender, 'client_num': client}
             )
             result = {'id': identification, 'address': address, 'gender': gender}
         # if expiry_date_text.find("-"):

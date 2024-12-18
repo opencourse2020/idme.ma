@@ -240,6 +240,7 @@
                                                     <div id="collapseTwob" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
                                                         <div class="accordion-body">
                                                             <h5 class="card-title">{% trans "Capture Photo With Camera"%}</h5>
+                                                            <input class="hidden" id="ci-x-photo" value="{{clientid}}">
                                                             <div class="row gx-0 align-items-center">
                                                                 <div class="col">
 
@@ -431,6 +432,7 @@
         let url = 'https://idme.ma/idme.apis/idverify/';
         const formData = new FormData();
         var datalink = $("#datalink").val();
+        let cid = $("#ci-x-photo").val();
 
         if (datalink=="1"){
             var fileName = $("#idcard").val();
@@ -444,6 +446,7 @@
         if (fileName) {
             formData.append('file', file);
             formData.append('side', "1");
+            formData.append('cid', cid);
             $.ajax({
                 type: 'POST',
                 url: url,
@@ -512,6 +515,7 @@
         let url = 'https://idme.ma/idme.apis/idverify/';
         const formData = new FormData();
         var datalink = $("#datalinkb").val();
+        let cid = $("#ci-x-photo").val();
 
         if (datalink=="1"){
             var fileName = $("#idcardb").val();
@@ -525,6 +529,7 @@
         if (fileName) {
             formData.append('file', file);
             formData.append('side', "2");
+            formData.append('cid', cid);
             $.ajax({
                 type: 'POST',
                 url: url,
