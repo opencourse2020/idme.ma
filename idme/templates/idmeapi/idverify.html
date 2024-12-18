@@ -253,6 +253,12 @@
                                             </div>
 
                                         </div>
+                                        <div class="card-footer bg-none p-3">
+                                            <button type="button" id="IdVerification" class="btn btn-success btn-sm" style="float: right;">{% trans "Upload" %} <i class="fas fa-lg fa-fw fa-upload ml-2"></i></button>
+                                            <input class="hidden" id="datalink">
+                                            <div id="alert-box"></div>
+
+                                        </div>
                                         <div class="card-arrow">
                                             <div class="card-arrow-top-left"></div>
                                             <div class="card-arrow-top-right"></div>
@@ -279,13 +285,8 @@
 
 
             </div>
-            <div class="card-footer bg-none p-3">
-                    <button type="button" id="IdVerification" class="btn btn-success btn-sm" style="float: right;">{% trans "Upload" %} <i class="fas fa-lg fa-fw fa-upload ml-2"></i></button>
-                    <input class="hidden" id="datalink">
-                    <div id="alert-box"></div>
 
-                </div>
-<div class="card-arrow">
+                <div class="card-arrow">
                     <div class="card-arrow-top-left"></div>
                     <div class="card-arrow-top-right"></div>
                     <div class="card-arrow-bottom-left"></div>
@@ -410,66 +411,66 @@
         $("#alert-expire").hide();
         $("#loadingstate").show();
 
-            let url = 'https://idme.ma/idme.apis/idverify/';
-            const formData = new FormData();
-            var datalink = $("#datalink").val();
+        let url = 'https://idme.ma/idme.apis/idverify/';
+        const formData = new FormData();
+        var datalink = $("#datalink").val();
 
-            if (datalink=="1"){
-                var fileName = $("#idcard").val();
-                var file = $('#idcard')[0].files[0]
-            }else if (datalink=="2") {
-                var fileName = $("#cardid").val();
-                var file = $('#cardid')[0].files[0]
-            }
+        if (datalink=="1"){
+            var fileName = $("#idcard").val();
+            var file = $('#idcard')[0].files[0]
+        }else if (datalink=="2") {
+            var fileName = $("#cardid").val();
+            var file = $('#cardid')[0].files[0]
+        }
 
             // var fileName = $("#captureimg").attr('src');
-            if (fileName) {
-                formData.append('file', file);
-                $.ajax({
-                    type: 'POST',
-                    url: url,
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    headers: {'X-CSRFToken': $('input[name=csrfmiddlewaretoken]').val()},
-                    success: function (data) {
-                        if (data) {
-                            var result = data;
-                            var id = result.id;
-                            var name = result.name;
-                            var address = result.address;
-                            var dob = result.dob;
-                            var expire = result.expire;
-                            $("#loadingstate").hide();
+        if (fileName) {
+            formData.append('file', file);
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: formData,
+                processData: false,
+                contentType: false,
+                headers: {'X-CSRFToken': $('input[name=csrfmiddlewaretoken]').val()},
+                success: function (data) {
+                    if (data) {
+                        var result = data;
+                        var id = result.id;
+                        var name = result.name;
+                        var address = result.address;
+                        var dob = result.dob;
+                        var expire = result.expire;
+                        $("#loadingstate").hide();
 
-                            $("#alert-id").html(`<div class="alert alert-light p-0"         role="alert">
+                        $("#alert-id").html(`<div class="alert alert-light p-0"         role="alert">
                            ${id}
                             </div>`);
-                            $("#alert-name").html(`<div class="alert alert-light p-0"         role="alert">
+                        $("#alert-name").html(`<div class="alert alert-light p-0"         role="alert">
                            ${name}
                             </div>`);
-                            $("#alert-address").html(`<div class="alert alert-light p-0"         role="alert">
+                        $("#alert-address").html(`<div class="alert alert-light p-0"         role="alert">
                            ${address}
                             </div>`);
-                            $("#alert-dob").html(`<div class="alert alert-light p-0"         role="alert">
+                        $("#alert-dob").html(`<div class="alert alert-light p-0"         role="alert">
                            ${dob}
                             </div>`);
-                            $("#alert-expire").html(`<div class="alert alert-light p-0"         role="alert">
+                        $("#alert-expire").html(`<div class="alert alert-light p-0"         role="alert">
                            ${expire}
                             </div>`);
-                            $("#alert-id").show();
-                            $("#alert-name").show();
-                            $("#alert-address").show();
-                            $("#alert-dob").show();
-                            $("#alert-expire").show();
-                        }
+                        $("#alert-id").show();
+                        $("#alert-name").show();
+                        $("#alert-address").show();
+                        $("#alert-dob").show();
+                        $("#alert-expire").show();
                     }
-                })
-            }else{
-                $("#alert-box").html(`<div class="alert alert-danger p-0"         role="alert">
-                           File missing!!)
-                            </div>`);
-            }
+                }
+            })
+                    }else{
+                        $("#alert-box").html(`<div class="alert alert-danger p-0"         role="alert">
+                                   File missing!!)
+                                    </div>`);
+                    }
         }
     );
 </script>
