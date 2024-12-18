@@ -57,7 +57,7 @@ class FileUpdateView(CreateView, JsonFormMixin):
     # if file_serializer.is_valid():
     print("Step 1")
     filename = request.FILES['file']
-    side = int(request.post.get('side'))
+    side = int(request.POST.get("side"))
     client = 1
     obj, created = models.IDVerify.objects.update_or_create(
         client_num=client, defaults={'idcard': filename})
