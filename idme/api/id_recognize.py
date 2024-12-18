@@ -244,7 +244,7 @@ def idrecognize(client, side):
     generative_ai = GenerativeAI("gemini-1.5-flash")
     # print("Step 1")
     # for file_path in glob.glob(media_path, recursive=True):
-    for file_path in media_path.glob("*.jpg"):
+    for file_path in media_path.glob("*.*"):
         print(file_path.name)
         result = process_card_id(file_path, generative_ai, prompt)
     return result
