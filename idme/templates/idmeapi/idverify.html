@@ -403,11 +403,11 @@
     $("#IdVerification").click(function () {
 
             //clear existing data
-        $("#alert-id").html(`<div class="alert alert-light p-0" role="alert"></div>`);
-        $("#alert-name").html(`<div class="alert alert-light p-0" role="alert"></div>`);
-        $("#alert-address").html(`<div class="alert alert-light p-0"role="alert"></div>`);
-        $("#alert-dob").html(`<div class="alert alert-light p-0" role="alert"></div>`);
-        $("#alert-expire").html(`<div class="alert alert-light p-0" role="alert"></div>`);
+        $("#alert-id").hide();
+        $("#alert-name").hide();
+        $("#alert-address").hide();
+        $("#alert-dob").hide();
+        $("#alert-expire").hide();
         $("#loadingstate").show();
 
             let url = 'https://idme.ma/idme.apis/idverify/';
@@ -441,6 +441,7 @@
                             var dob = result.dob;
                             var expire = result.expire;
                             $("#loadingstate").hide();
+
                             $("#alert-id").html(`<div class="alert alert-light p-0"         role="alert">
                            ${id}
                             </div>`);
@@ -456,6 +457,11 @@
                             $("#alert-expire").html(`<div class="alert alert-light p-0"         role="alert">
                            ${expire}
                             </div>`);
+                            $("#alert-id").show();
+                            $("#alert-name").show();
+                            $("#alert-address").show();
+                            $("#alert-dob").show();
+                            $("#alert-expire").show();
                         }
                     }
                 })
