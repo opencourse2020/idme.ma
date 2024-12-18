@@ -66,9 +66,13 @@
 
                                                               </div>
                                                             </div>
+                                                            <label for="alert-name" id="label_name" style="display: none">{% trans "Name:"%}</label>
                                                             <div id="alert-name"></div>
+                                                            <label for="alert-birthcity" id="label_birthcity" style="display: none">{% trans "City of Birth:"%}</label>
                                                             <div id="alert-birthcity"></div>
+                                                            <label for="alert-dob" id="label_dob" style="display: none">{% trans "Name:"%}</label>
                                                             <div id="alert-dob"></div>
+                                                            <label for="alert-expire" id="label_expire" style="display: none">{% trans "Name:"%}</label>
                                                             <div id="alert-expire"></div>
 
                                                         </div>
@@ -415,6 +419,10 @@
         $("#alert-birthcity").hide();
         $("#alert-dob").hide();
         $("#alert-expire").hide();
+        $("#label_name").hide();
+        $("#label_birthcity").hide();
+        $("#label_dob").hide();
+        $("#label_expire").hide();
         $("#loadingstate").show();
 
         let url = 'https://idme.ma/idme.apis/idverify/';
@@ -470,6 +478,10 @@
                         $("#alert-birthcity").show();
                         $("#alert-dob").show();
                         $("#alert-expire").show();
+                        $("#label_name").show();
+                        $("#label_birthcity").show();
+                        $("#label_dob").show();
+                        $("#label_expire").show();
                     }
                 }
             })
