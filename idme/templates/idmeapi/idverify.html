@@ -66,6 +66,8 @@
 
                                                               </div>
                                                             </div>
+                                                            <label for="alert-id" id="label_id" style="display: none">{% trans "ID:"%}</label>
+                                                            <div id="alert-id"></div>
                                                             <label for="alert-name" id="label_name" style="display: none">{% trans "Name:"%}</label>
                                                             <div id="alert-name"></div>
                                                             <label for="alert-birthcity" id="label_birthcity" style="display: none">{% trans "City of Birth:"%}</label>
@@ -419,6 +421,7 @@
         $("#alert-birthcity").hide();
         $("#alert-dob").hide();
         $("#alert-expire").hide();
+        $("#label_id").hide();
         $("#label_name").hide();
         $("#label_birthcity").hide();
         $("#label_dob").hide();
@@ -458,9 +461,9 @@
                         var expire = result.expire;
                         $("#loadingstate").hide();
 
-                        // $("#alert-id").html(`<div class="alert alert-light p-0"         role="alert">
-                        //    ${id}
-                        //     </div>`);
+                        $("#alert-id").html(`<div class="alert alert-light p-0"         role="alert">
+                           ${id}
+                            </div>`);
                         $("#alert-name").html(`<div class="alert alert-light p-0"         role="alert">
                            ${name}
                             </div>`);
@@ -473,11 +476,12 @@
                         $("#alert-expire").html(`<div class="alert alert-light p-0"         role="alert">
                            ${expire}
                             </div>`);
-                        // $("#alert-id").show();
+                        $("#alert-id").show();
                         $("#alert-name").show();
                         $("#alert-birthcity").show();
                         $("#alert-dob").show();
                         $("#alert-expire").show();
+                        $("#label_id").show();
                         $("#label_name").show();
                         $("#label_birthcity").show();
                         $("#label_dob").show();

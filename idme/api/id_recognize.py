@@ -215,6 +215,7 @@ def idrecognize(client, side):
             "Provide the output in a structured JSON format without any backticks. "
             "Example format: "
             "{"
+            "\"Identity\": \"C356899\", "
             "\"Name\": \"John Doe\", "
             "\"City of Birth\": \"Casablanca\", "
             "\"Date of Birth (DOB)\": \"01/01/1970\", "

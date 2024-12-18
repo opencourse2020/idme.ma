@@ -67,23 +67,24 @@ class FileUpdateView(CreateView, JsonFormMixin):
     print(result)
     if result:
         if side == 1:
+            identification = result.get("Identity")
             name = result.get("Name")
             city = result.get("City of Birth")
             dob = result.get("Date of Birth (DOB)")
             expiry_date = result.get("Expiration Date (EXP)")
             obj, created = models.IDVerify.objects.update_or_create(
                 client_num=1,
-                defaults={'name': name, 'birth_city': city, 'dob': dob,
+                defaults={'user_id': identification, 'name': name, 'birth_city': city, 'dob': dob,
                           'expiry_date': expiry_date}
             )
-            result = {'name': name, 'city': city, 'dob': dob, 'expire': expiry_date}
+            result = {'id': identification, 'name': name, 'city': city, 'dob': dob, 'expire': expiry_date}
         elif side == 2:
             identification = result.get("Identity")
             address = result.get("Address")
             gender = result.get("Gender")
             obj, created = models.IDVerify.objects.update_or_create(
                 client_num=1,
-                defaults={'user_id': identification, 'address': address, 'gender': gender}
+                defaults={'address': address, 'gender': gender}
             )
             result = {'id': identification, 'address': address, 'gender': gender}
         # if expiry_date_text.find("-"):
