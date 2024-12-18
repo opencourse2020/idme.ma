@@ -512,7 +512,7 @@
                 success: function (data) {
                     if (data) {
                         var result = data;
-                        var id = result.id;
+                        var id = result.user_id;
                         var address = result.address;
                         var gender = result.gender;
                         $("#loadingstateb").hide();
@@ -520,17 +520,17 @@
                         // $("#alert-id").html(`<div class="alert alert-light p-0"         role="alert">
                         //    ${id}
                         //     </div>`);
-                        $("#alert-name").html(`<div class="alert alert-light p-0"         role="alert">
+                        $("#alert-idb").html(`<div class="alert alert-light p-0"         role="alert">
                            ${id}
                             </div>`);
-                        $("#alert-birthcity").html(`<div class="alert alert-light p-0"         role="alert">
+                        $("#alert-address").html(`<div class="alert alert-light p-0"         role="alert">
                            ${address}
                             </div>`);
-                        $("#alert-dob").html(`<div class="alert alert-light p-0"         role="alert">
+                        $("#alert-gender").html(`<div class="alert alert-light p-0"         role="alert">
                            ${gender}
                             </div>`);
 
-                        $("#alert-id").show();
+                        $("#alert-idb").show();
                         $("#alert-address").show();
                         $("#alert-gender").show();
                     }
