@@ -39,141 +39,269 @@
             </div>
 
             <div class="card-body">
+                <div class="row">
+                    <div class="col-xl-6">
+                        <div class="card">
+                            <ul class="nav nav-tabs pt-3 px-3">
+                                <li class="nav-item me-1"><a href="#homeWithCard" class="nav-link active" data-bs-toggle="tab">Home</a></li>
+                                <li class="nav-item me-1"><a href="#profileWithCard" class="nav-link" data-bs-toggle="tab">Profile</a></li>
+                            </ul>
+                            <div class="tab-content p-4">
+                                <!-- BEGIN tab-pane -->
+                                <div class="tab-pane fade show active" id="homeWithCard">
+                                    <div class="card mb3">
+                                        <div class="card-body">
+                                            <div class="row gx-0 align-items-center">
+                                                <div class="col-md-4">
+                                                    <img src="{% static 'pictures/id-front_s.jpg'%}" id="captureimg" alt="" class="card-img rounded-0">
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="card ms-2">
+                                                        <div class="card-header">
+                                                            {% trans "Card Information" %}
+                                                        </div>
+                                                        <div class="card-body d-block">
 
-                <div class="card mb3">
-                    <div class="card-body">
-                        <div class="row gx-0 align-items-center">
-                            <div class="col-md-4">
-                                <img src="{% static 'pictures/id-front_s.jpg'%}" id="captureimg" alt="" class="card-img rounded-0">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card ms-2">
-                                    <div class="card-header">
-                                        {% trans "Card Information" %}
+                                                            <div id="alert-id"></div>
+                                                            <div id="alert-name"></div>
+                                                            <div id="alert-address"></div>
+                                                            <div id="alert-dob"></div>
+                                                            <div id="alert-expire"></div>
+
+                                                        </div>
+                                                        <div class="card-arrow">
+                                                            <div class="card-arrow-top-left"></div>
+                                                            <div class="card-arrow-top-right"></div>
+                                                            <div class="card-arrow-bottom-left"></div>
+                                                            <div class="card-arrow-bottom-right"></div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="card-arrow">
+                                                <div class="card-arrow-top-left"></div>
+                                                <div class="card-arrow-top-right"></div>
+                                                <div class="card-arrow-bottom-left"></div>
+                                                <div class="card-arrow-bottom-right"></div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="card-body d-block">
-
-                                    <div id="alert-id"></div>
-                                    <div id="alert-name"></div>
-                                    <div id="alert-address"></div>
-                                    <div id="alert-dob"></div>
-                                    <div id="alert-expire"></div>
-
-                                </div>
-                                    <div class="card-arrow">
-                                        <div class="card-arrow-top-left"></div>
-                                        <div class="card-arrow-top-right"></div>
-                                        <div class="card-arrow-bottom-left"></div>
-                                        <div class="card-arrow-bottom-right"></div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="card-arrow">
-                            <div class="card-arrow-top-left"></div>
-                            <div class="card-arrow-top-right"></div>
-                            <div class="card-arrow-bottom-left"></div>
-                            <div class="card-arrow-bottom-right"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mb3">
-                    <div class="card-body">
-                        <div class="accordion" id="accordionExample">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingOne">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
-                                        {% trans "Load an Existing Image" %}
-                                    </button>
-                                </h2>
-                                <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
+                                    <div class="card mb3">
+                                        <div class="card-body">
+                                            <div class="accordion" id="accordionExample">
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header" id="headingOne">
+                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                                            {% trans "Load an Existing Image" %}
+                                                        </button>
+                                                    </h2>
+                                                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                                                        <div class="accordion-body">
 
 
-                                        <form action="" enctype="multipart/form-data">
-                                            {% csrf_token %}
-                                            <div class="form-group row mb-3">
-                                                <!--                                                        <label for="idcard" class="col-sm-2 col-form-label">{% trans "Upload Your ID" %}</label>-->
-                                                <div class="col-sm-10">
-                                                    <input class="form-control" accept="image/*" type="file" id="idcard" onchange="loadFile(event)">
+                                                            <form action="" enctype="multipart/form-data">
+                                                                {% csrf_token %}
+                                                                <div class="form-group row mb-3">
+                                                                    <!--                                                        <label for="idcard" class="col-sm-2 col-form-label">{% trans "Upload Your ID" %}</label>-->
+                                                                    <div class="col-sm-10">
+                                                                        <input class="form-control" accept="image/*" type="file" id="idcard" onchange="loadFile(event)">
+                                                                    </div>
+                                                                </div>
+
+                                                            </form>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header" id="headingTwo">
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                                            {% trans "Take a Picture of Your ID" %}
+                                                        </button>
+                                                    </h2>
+                                                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                                        <div class="accordion-body">
+                                                            <h5 class="card-title">{% trans "Capture Photo With Camera"%}</h5>
+                                                            <div class="row gx-0 align-items-center">
+                                                                <div class="col">
+
+                                                                    <input class="form-control" accept="image/*" type="file" id="cardid" capture onchange="loadPhoto(event)">
+                                                                    <!--                                                    <video id="camera" autoplay width="320" height="240" controls></video>-->
+                                                                    <!--                                                    <button id="capture-btn">Capture Photo</button>-->
+
+                                                                    <!--                                                    <canvas id="photo" width="320" height="240"></canvas>-->
+                                                                    <!--                                                <button id="grabFrame">Grab Frame</button>-->
+
+                                                                    <!--                                                <div class="select">-->
+                                                                    <!--                                                    <label for="videoSource">{% trans "Video source:" %} </label><select id="videoSource"></select>-->
+                                                                    <!--                                                </div>-->
+                                                                    <!--                                                <input class="hidden" id="zoom" type="range" step="20">-->
+                                                                    <!--                                                <video autoplay playsinline class="hidden mt-3 mb-3" width="100%" id="videostream"></video>-->
+                                                                    <!--&lt;!&ndash;                                                <img id="captureimg" width="240" height="240">&ndash;&gt;-->
+                                                                    <!--                                                <canvas class="hidden" id="capturedimage"></canvas>-->
+                                                                    <!--                                                <input class="hidden" id="datalink1">-->
+                                                                    <!--                                                <input class="hidden" id="datalink2">-->
+                                                                    <!--                                                <button id="takePhoto" style="float: right;">{% trans "Take Photo"%}</button>-->
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
 
-                                        </form>
-
+                                        </div>
+                                        <div class="card-arrow">
+                                            <div class="card-arrow-top-left"></div>
+                                            <div class="card-arrow-top-right"></div>
+                                            <div class="card-arrow-bottom-left"></div>
+                                            <div class="card-arrow-bottom-right"></div>
+                                        </div>
                                     </div>
+
                                 </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingTwo">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
-                                        {% trans "Take a Picture of Your ID" %}
-                                    </button>
-                                </h2>
-                                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        <h5 class="card-title">{% trans "Capture Photo With Camera"%}</h5>
-                                        <div class="row gx-0 align-items-center">
-                                            <div class="col">
+                                <div class="tab-pane fade" id="profileWithCard">
+                                    <div class="card mb3">
+                                        <div class="card-body">
+                                            <div class="row gx-0 align-items-center">
+                                                <div class="col-md-4">
+                                                    <img src="{% static 'pictures/id-back_s.jpg'%}" id="captureimgb" alt="" class="card-imgb rounded-0">
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="card ms-2">
+                                                        <div class="card-header">
+                                                            {% trans "Card Information" %}
+                                                        </div>
+                                                        <div class="card-body d-block">
 
-                                                <input class="form-control" accept="image/*" type="file" id="cardid" capture onchange="loadPhoto(event)">
-                                                <!--                                                    <video id="camera" autoplay width="320" height="240" controls></video>-->
-                                                <!--                                                    <button id="capture-btn">Capture Photo</button>-->
+                                                            <div id="alert-idb"></div>
+                                                            <div id="alert-nameb"></div>
+                                                            <div id="alert-addressb"></div>
+                                                            <div id="alert-dobb"></div>
+                                                            <div id="alert-expireb"></div>
 
-                                                <!--                                                    <canvas id="photo" width="320" height="240"></canvas>-->
-<!--                                                <button id="grabFrame">Grab Frame</button>-->
+                                                        </div>
+                                                        <div class="card-arrow">
+                                                            <div class="card-arrow-top-left"></div>
+                                                            <div class="card-arrow-top-right"></div>
+                                                            <div class="card-arrow-bottom-left"></div>
+                                                            <div class="card-arrow-bottom-right"></div>
+                                                        </div>
+                                                    </div>
 
-<!--                                                <div class="select">-->
-<!--                                                    <label for="videoSource">{% trans "Video source:" %} </label><select id="videoSource"></select>-->
-<!--                                                </div>-->
-<!--                                                <input class="hidden" id="zoom" type="range" step="20">-->
-<!--                                                <video autoplay playsinline class="hidden mt-3 mb-3" width="100%" id="videostream"></video>-->
-<!--&lt;!&ndash;                                                <img id="captureimg" width="240" height="240">&ndash;&gt;-->
-<!--                                                <canvas class="hidden" id="capturedimage"></canvas>-->
-<!--                                                <input class="hidden" id="datalink1">-->
-<!--                                                <input class="hidden" id="datalink2">-->
-<!--                                                <button id="takePhoto" style="float: right;">{% trans "Take Photo"%}</button>-->
+                                                </div>
+                                            </div>
+                                            <div class="card-arrow">
+                                                <div class="card-arrow-top-left"></div>
+                                                <div class="card-arrow-top-right"></div>
+                                                <div class="card-arrow-bottom-left"></div>
+                                                <div class="card-arrow-bottom-right"></div>
                                             </div>
                                         </div>
-
                                     </div>
+                                    <div class="card mb3">
+                                        <div class="card-body">
+                                            <div class="accordion" id="accordionExampleb">
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header" id="headingOneb">
+                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                                            {% trans "Load an Existing Image" %}
+                                                        </button>
+                                                    </h2>
+                                                    <div id="collapseOneb" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                                                        <div class="accordion-body">
+
+
+                                                            <form action="" enctype="multipart/form-data">
+                                                                {% csrf_token %}
+                                                                <div class="form-group row mb-3">
+                                                                    <!--                                                        <label for="idcard" class="col-sm-2 col-form-label">{% trans "Upload Your ID" %}</label>-->
+                                                                    <div class="col-sm-10">
+                                                                        <input class="form-control" accept="image/*" type="file" id="idcardb" onchange="loadFile(event)">
+                                                                    </div>
+                                                                </div>
+
+                                                            </form>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header" id="headingTwob">
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                                            {% trans "Take a Picture of Your ID" %}
+                                                        </button>
+                                                    </h2>
+                                                    <div id="collapseTwob" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                                        <div class="accordion-body">
+                                                            <h5 class="card-title">{% trans "Capture Photo With Camera"%}</h5>
+                                                            <div class="row gx-0 align-items-center">
+                                                                <div class="col">
+
+                                                                    <input class="form-control" accept="image/*" type="file" id="cardidb" capture onchange="loadPhoto(event)">
+                                                                    <!--                                                    <video id="camera" autoplay width="320" height="240" controls></video>-->
+                                                                    <!--                                                    <button id="capture-btn">Capture Photo</button>-->
+
+                                                                    <!--                                                    <canvas id="photo" width="320" height="240"></canvas>-->
+                                                                    <!--                                                <button id="grabFrame">Grab Frame</button>-->
+
+                                                                    <!--                                                <div class="select">-->
+                                                                    <!--                                                    <label for="videoSource">{% trans "Video source:" %} </label><select id="videoSource"></select>-->
+                                                                    <!--                                                </div>-->
+                                                                    <!--                                                <input class="hidden" id="zoom" type="range" step="20">-->
+                                                                    <!--                                                <video autoplay playsinline class="hidden mt-3 mb-3" width="100%" id="videostream"></video>-->
+                                                                    <!--&lt;!&ndash;                                                <img id="captureimg" width="240" height="240">&ndash;&gt;-->
+                                                                    <!--                                                <canvas class="hidden" id="capturedimage"></canvas>-->
+                                                                    <!--                                                <input class="hidden" id="datalink1">-->
+                                                                    <!--                                                <input class="hidden" id="datalink2">-->
+                                                                    <!--                                                <button id="takePhoto" style="float: right;">{% trans "Take Photo"%}</button>-->
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="card-arrow">
+                                            <div class="card-arrow-top-left"></div>
+                                            <div class="card-arrow-top-right"></div>
+                                            <div class="card-arrow-bottom-left"></div>
+                                            <div class="card-arrow-bottom-right"></div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
-
+                        <!--                here-->
                     </div>
-                    <div class="card-arrow">
-                            <div class="card-arrow-top-left"></div>
-                            <div class="card-arrow-top-right"></div>
-                            <div class="card-arrow-bottom-left"></div>
-                            <div class="card-arrow-bottom-right"></div>
-                        </div>
+
+                </div>
+
+                <div class="card-footer bg-none p-3">
+                    <button type="button" id="IdVerification" class="btn btn-success btn-sm" style="float: right;">{% trans "Upload" %} <i class="fas fa-lg fa-fw fa-upload ml-2"></i></button>
+                    <input class="hidden" id="datalink">
+                    <div id="alert-box"></div>
+
+                </div>
+                <div class="card-arrow">
+                    <div class="card-arrow-top-left"></div>
+                    <div class="card-arrow-top-right"></div>
+                    <div class="card-arrow-bottom-left"></div>
+                    <div class="card-arrow-bottom-right"></div>
                 </div>
 
             </div>
 
-            <div class="card-footer bg-none p-3">
-                <button type="button" id="IdVerification" class="btn btn-success btn-sm" style="float: right;">{% trans "Upload" %} <i class="fas fa-lg fa-fw fa-upload ml-2"></i></button>
-                <input class="hidden" id="datalink">
-                <div id="alert-box"></div>
 
-            </div>
-            <div class="card-arrow">
-                <div class="card-arrow-top-left"></div>
-                <div class="card-arrow-top-right"></div>
-                <div class="card-arrow-bottom-left"></div>
-                <div class="card-arrow-bottom-right"></div>
-            </div>
+
 
         </div>
 
-
-
-
     </div>
-
-</div>
 </div>
 <!-- BEGIN #modalPosItem -->
 <div class="modal modal-pos fade" id="modalPosItem">
@@ -261,7 +389,7 @@
         }
     };
 
-     var loadPhoto = function(event) {
+    var loadPhoto = function(event) {
         var output = document.getElementById('captureimg');
         var datalink = document.getElementById('datalink');
         datalink.value = "2";
