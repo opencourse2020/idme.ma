@@ -67,7 +67,7 @@ class ProfilesUpdateView(LoginRequiredMixin, UpdateView):
     #     return super().form_valid(form)
     def get_context_data(self, **kwargs):
 
-        kwargs["title"] = _("Your Personal Info")
+        kwargs["title"] = _("Personal Info")
 
         return super().get_context_data(**kwargs)
 
