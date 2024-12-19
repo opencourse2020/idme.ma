@@ -39,7 +39,7 @@
 						<button type="submit" class="btn btn-outline-theme btn-lg d-block w-100 fw-500 mb-3">{% trans 'Sign In' %}</button>
 					</div>
                     <div class="text-center text-inverse text-opacity-50">
-						{% trans "Don't have an account yet?" %} <a href="page_register.html">{% trans 'Sign Up' %}</a>.
+						{% trans "Don't have an account yet?" %} <a href="{% url 'account_signup' %}">{% trans 'Sign Up' %}</a>.
 					</div>
 				</form>
 			</div>
