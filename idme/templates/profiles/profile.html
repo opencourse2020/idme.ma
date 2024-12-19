@@ -41,8 +41,6 @@
               <div class="card mb-5">
 
                 <div class="card-body">
-                  <div class="d-flex align-items-center flex-column mb-4">
-                    <div class="d-flex align-items-center flex-column">
                       <div class="card">
                           <div class="card-body pt-4 pb-4">
                           {% if user.picture %}
@@ -53,6 +51,10 @@
                             </div>
                           <div class="card-footer">
                               <div class="h5 mb-0">{{ user.first_name }} {{ user.last_name }}</div>
+                              <div class="text-muted">
+                                <i data-cs-icon="pin" class="me-1"></i>
+                                <span class="align-middle">{{ user.profile.city }}, {{ user.profile.country }}</span>
+                              </div>
                           </div>
                           <div class="card-arrow">
                             <div class="card-arrow-top-left"></div>
@@ -62,27 +64,11 @@
                         </div>
                       </div>
 
-{#                      <div class="text-muted">#}
-{#                          {% if user.parent %}#}
-{#                            <span class="d-block opacity-75">{% trans "Parent" %}</span>#}
-{#                        {% elif user.student%}#}
-{#                            <span class="d-block opacity-75">{% trans "Student" %}</span>#}
-{#                        {% elif user.professor%}#}
-{#                            <span class="d-block opacity-75">{% trans "Professor" %}</span>#}
-{#                        {% elif user.serviceprovider%}#}
-{#                            <span class="d-block opacity-75">{% trans "Service Provider" %}</span>#}
-{#                        {% elif user.institutadmin%}#}
-{#                            <span class="d-block opacity-75">{% trans "Institut Admin" %}</span>#}
-{##}
-{#                        {% endif %}#}
-{#                      </div>#}
-                      <div class="text-muted">
-                        <i data-cs-icon="pin" class="me-1"></i>
-                        <span class="align-middle">{{ user.profile.city }}, {{ user.profile.country }}</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="nav flex-column" role="tablist">
+
+
+
+                  <div class="card">
+                          <div class="card-body pt-4 pb-4">
                     <a class="nav-link active px-0 border-bottom border-separator-light"  href="{% url 'profiles:userinfo' user.pk %}" >
                       <i data-cs-icon="user" class="me-2" data-cs-size="17"></i>
                       <span class="align-middle">{% trans "User Information" %}</span>
@@ -114,6 +100,8 @@
 
 
                   </div>
+                  </div>
+                    </div>
                 </div>
                   <div class="card-arrow">
                     <div class="card-arrow-top-left"></div>
