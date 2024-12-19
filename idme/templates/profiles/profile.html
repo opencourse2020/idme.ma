@@ -43,14 +43,20 @@
                 <div class="card-body">
                   <div class="d-flex align-items-center flex-column mb-4">
                     <div class="d-flex align-items-center flex-column">
-                      <div class="sw-13 position-relative mb-3">
-
+                      <div class="card p-2">
+                          <div class="card-body">
                           {% if user.picture %}
                             <img class="img-fluid" src="{{ user.picture.url }}" style="border-radius: 50%;" alt="">
                                 {% else %}
                                 <img class="img-fluid" style="border-radius: 50%; src={% static "pictures/user_placeholder.png" %} width="170" height="170" alt="">
                             {% endif %}
-
+                            </div>
+                          <div class="card-arrow">
+                            <div class="card-arrow-top-left"></div>
+                            <div class="card-arrow-top-right"></div>
+                            <div class="card-arrow-bottom-left"></div>
+                            <div class="card-arrow-bottom-right"></div>
+                        </div>
                       </div>
                       <div class="h5 mb-0">{{ user.first_name }} {{ user.last_name }}</div>
 {#                      <div class="text-muted">#}
