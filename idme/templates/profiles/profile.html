@@ -2,8 +2,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% load i18n %}
-
-{% block head_title %}
+    <meta charset="utf-8">
   <h1 class="mb-0 pb-0 display-4" id="title">{% trans "Profile Overview" %}</h1>
     <nav class="breadcrumb-container d-inline-block" aria-label="breadcrumb">
         <ul class="breadcrumb pt-0">
@@ -12,13 +11,9 @@
 
         </ul>
     </nav>
-{% endblock %}
 
-{% block css %}
-
-{{ block.super }}
-
-{% endblock css %}
+<link href={% static "assets/css/vendor.min.css" %} rel="stylesheet">
+<link href={% static "assets/css/app.min.css" %} rel="stylesheet">
 
 {% block content_head %}
 <ul class="breadcrumb">
