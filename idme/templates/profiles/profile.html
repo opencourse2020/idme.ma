@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-{% load i18n %}
-{% load crispy_forms_tags %}
 {% load static %}
+{% load crispy_forms_tags %}
+{% load i18n %}
 
 {% block head_title %}
   <h1 class="mb-0 pb-0 display-4" id="title">{% trans "Profile Overview" %}</h1>
@@ -13,11 +13,10 @@
         </ul>
     </nav>
 {% endblock head_title %}
+
 {% block css %}
 
 {{ block.super }}
-<!--<link rel="stylesheet" href={% static "css/camera.css" %}>-->
-
 
 {% endblock css %}
 
