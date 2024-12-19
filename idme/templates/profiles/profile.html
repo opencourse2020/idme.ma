@@ -46,9 +46,9 @@
                       <div class="sw-13 position-relative mb-3">
 
                           {% if user.picture %}
-                            <img class="img-fluid rounded-xl" src="{{ user.picture.url }}"  alt="">
+                            <img class="img-fluid" src="{{ user.picture.url }}" style="border-radius: 50%;" alt="">
                                 {% else %}
-                                <img class="img-fluid rounded-xl" src={% static "pictures/user_placeholder.png" %} width="170" height="170" alt="">
+                                <img class="img-fluid" style="border-radius: 50%; src={% static "pictures/user_placeholder.png" %} width="170" height="170" alt="">
                             {% endif %}
 
                       </div>
