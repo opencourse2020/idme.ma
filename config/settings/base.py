@@ -204,8 +204,8 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 ACCOUNT_EMAIL_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_VERIFICATION = "optional"
-ACCOUNT_FORMS = {"signup": "coelinks.profiles.forms.ProfileCreateForm", "login": "coelinks.profiles.forms.SignInForm",
-                 'reset_password': 'coelinks.profiles.forms.MyResetPasswordForm'}
+ACCOUNT_FORMS = {"signup": "idme.profiles.forms.ProfileCreateForm", "login": "idme.profiles.forms.SignInForm",
+                 'reset_password': 'idme.profiles.forms.MyResetPasswordForm'}
 LOGIN_REDIRECT_URL = "profiles:dispatch_login"
 
 ACCOUNT_LOGOUT_REDIRECT_URL = "account_login"
