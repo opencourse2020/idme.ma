@@ -39,7 +39,7 @@ from obfuskey import Obfuskey, alphabets
 # Create your views here.
 
 # Set the lenght of the hash key
-obfuscator = Obfuskey(alphabets.BASE36, key_length=14)
+obfuscator = Obfuskey(alphabets.BASE36, key_length=18)
 
 class IDVerifyView(TemplateView):
     # model = models.IDVerify
@@ -48,10 +48,10 @@ class IDVerifyView(TemplateView):
     # success_url = reverse_lazy("coeanalytics:analytictypes:list")
     def get_context_data(self, **kwargs):
         # clientid = int(self.kwargs.get("client_id"))
-        clientid = "{:06d}".format(int(self.kwargs.get("client_id")))
-        user_id = "{:06d}".format(dt.now().hour*10000+dt.now().minute*100+dt.now().second)
-
-        client_user_id = obfuscator.get_value("{}XX{}".format(user_id, clientid))
+        user_id = "{:06d}".format(int(self.kwargs.get("user_id")))
+        clientid = "{:06d}".format(dt.now().hour*10000+dt.now().minute*100+dt.now().second)
+        sec = "{:02d}".format(dt.now().second)
+        client_user_id = obfuscator.get_value("{}XX{}XX{}".format(user_id, clientid, sec))
         kwargs["clientid"] = client_user_id
         return super(IDVerifyView, self).get_context_data(**kwargs)
 
@@ -68,12 +68,12 @@ class FileUpdateView(CreateView, JsonFormMixin):
     print("Step 1")
     filename = request.FILES['file']
     side = int(request.POST.get("side"))
-    client_user_id = int(request.POST.get("cid"))
-    clientuser = obfuscator.get_key(client_user_id)
+    client_user_id = request.POST.get("cid")
+    clientuser = obfuscator.get_key(int(client_user_id))
     client = int(clientuser.split("XX")[1])
-
+    print(client)
     obj, created = models.IDVerify.objects.update_or_create(
-        client_num=client, defaults={'idcard': filename})
+        client_user=client_user_id, defaults={'client_num': client, 'idcard': filename})
     result = idrecognize(str(client), side)
     if result:
         if side == 1:
@@ -87,8 +87,8 @@ class FileUpdateView(CreateView, JsonFormMixin):
             dob = result.get("Date of Birth (DOB)")
             expiry_date = result.get("Expiration Date (EXP)")
             obj, created = models.IDVerify.objects.update_or_create(
-                user_id=identification,
-                defaults={'name': name, 'birth_city': city, 'dob': dob,
+                client_user=client_user_id,
+                defaults={'user_id': identification, 'name': name, 'birth_city': city, 'dob': dob,
                           'expiry_date': expiry_date, 'client_num': client}
             )
             result = {'id': identification, 'name': name, 'city': city, 'dob': dob, 'expire': expiry_date}
@@ -97,7 +97,7 @@ class FileUpdateView(CreateView, JsonFormMixin):
             address = result.get("Address")
             gender = result.get("Gender")
             obj, created = models.IDVerify.objects.update_or_create(
-                user_id=identification,
+                client_user=client_user_id,
                 defaults={'address': address, 'gender': gender, 'client_num': client}
             )
             result = {'id': identification, 'address': address, 'gender': gender}

@@ -2,6 +2,7 @@ from django.db import models
 from .formatChecker import ContentTypeRestrictedFileField
 from django.utils.translation import gettext_lazy as _
 from . import managers
+from django.utils import timezone
 import os
 
 # Create your models here.
@@ -19,6 +20,7 @@ class IDVerify(models.Model):
     )
     client_num = models.IntegerField()
     user_id = models.CharField(max_length=20, null=True, blank=True)
+    client_user = models.CharField(max_length=18, null=True, blank=True)
     name = models.CharField(max_length=100, null=True, blank=True)
     address = models.CharField(max_length=100, null=True, blank=True)
     birth_city = models.CharField(max_length=100, null=True, blank=True)
@@ -28,6 +30,8 @@ class IDVerify(models.Model):
     idcard = ContentTypeRestrictedFileField(upload_to=document_directory_path,
                                              content_types=['image/bmp', 'image/gif', 'image/jpeg', 'image/png', ],
                                              max_upload_size=52428800, blank=True, null=True)
+    verification_created_date = models.DateTimeField(auto_now_add=True)
+    verification_modified_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return str(self.user_id)
