@@ -14,7 +14,7 @@ from rest_framework.views import APIView
 from rest_framework.parsers import MultiPartParser, FormParser, FileUploadParser
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import FileSerializer
+
 from django.urls import reverse_lazy
 from django.shortcuts import render
 from django.utils.translation import gettext_lazy as _
@@ -24,6 +24,8 @@ from guardian.mixins import LoginRequiredMixin
 from django.views.decorators.csrf import csrf_exempt
 from . import models, forms
 from .mixins import JsonFormMixin
+from .serializers import FileSerializer
+from idme.profiles.models import Admin, User, Regular, Enterprise
 from django.conf import settings
 # Data analytics librairies
 import json
@@ -48,6 +50,7 @@ class IDVerifyView(TemplateView):
     # success_url = reverse_lazy("coeanalytics:analytictypes:list")
     def get_context_data(self, **kwargs):
         # clientid = int(self.kwargs.get("client_id"))
+        clientid = int(self.request.user.id)
         user_id = "{:06d}".format(int(self.kwargs.get("user_id")))
         clientid = "{:06d}".format(dt.now().hour*10000+dt.now().minute*100+dt.now().second)
         sec = "{:02d}".format(dt.now().second)

@@ -3,7 +3,7 @@
 {% load crispy_forms_tags %}
 {% load static %}
 
-{% block page_title %}
+{% block head_title %}
   <h1 class="mb-0 pb-0 display-4" id="title">{% trans "Profile Overview" %}</h1>
     <nav class="breadcrumb-container d-inline-block" aria-label="breadcrumb">
         <ul class="breadcrumb pt-0">
@@ -12,9 +12,27 @@
 
         </ul>
     </nav>
-{% endblock page_title %}
+{% endblock head_title %}
+{% block css %}
 
-{% block main %}
+{{ block.super }}
+<!--<link rel="stylesheet" href={% static "css/camera.css" %}>-->
+
+
+{% endblock css %}
+
+{% block content_head %}
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">{% trans "Home" %}</a></li>
+    <li class="breadcrumb-item active">{% trans "Profile" %}</li>
+</ul>
+
+<h1 class="page-header">
+    {% trans "ID Verification" %}
+</h1>
+{% endblock content_head %}
+
+{% block content_body %}
 
     <div class="row align-items-center justify-content-center">
         <div class="col-12 col-lg-4 col-sm-6 col-md-6 col-xl-4 col-xxl-3">
@@ -30,7 +48,7 @@
                           {% if user.picture %}
                             <img class="img-fluid rounded-xl" src="{{ user.picture.url }}"  alt="">
                                 {% else %}
-                                <img class="img-fluid rounded-xl" src={% static "images/placeholder.jpg" %} width="170" height="170" alt="">
+                                <img class="img-fluid rounded-xl" src={% static "pictures/user_placeholder.png" %} width="170" height="170" alt="">
                             {% endif %}
 
                       </div>
@@ -96,13 +114,11 @@
 
 
 
-{% endblock main %}
+{% endblock content_body %}
 
-{% block create_button %}
-    {{ block.super }}
-{% endblock create_button %}
 
-{% block project_js %}
+
+{% block js %}
   {{ block.super }}
 
 <script>
@@ -110,4 +126,4 @@ function goBack() {
   window.history.back();
 }
 </script>
-{% endblock project_js %}
+{% endblock js %}
