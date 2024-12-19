@@ -29,10 +29,10 @@ from django.conf import settings
 import json
 import pandas as pd
 import matplotlib.pyplot as plt
-import datetime as dt
+import datetime
 import numpy as np
 import seaborn as sns
-from datetime import datetime
+from datetime import datetime as dt
 from .id_recognize import idrecognize
 from .tools import verifySignature
 from obfuskey import Obfuskey, alphabets
