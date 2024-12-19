@@ -51,6 +51,9 @@
                                 <img class="img-fluid" style="border-radius: 50%; src={% static "pictures/user_placeholder.png" %} width="170" height="170" alt="">
                             {% endif %}
                             </div>
+                          <div class="card-footer">
+                              <div class="h5 mb-0">{{ user.first_name }} {{ user.last_name }}</div>
+                          </div>
                           <div class="card-arrow">
                             <div class="card-arrow-top-left"></div>
                             <div class="card-arrow-top-right"></div>
@@ -58,7 +61,7 @@
                             <div class="card-arrow-bottom-right"></div>
                         </div>
                       </div>
-                      <div class="h5 mb-0">{{ user.first_name }} {{ user.last_name }}</div>
+
 {#                      <div class="text-muted">#}
 {#                          {% if user.parent %}#}
 {#                            <span class="d-block opacity-75">{% trans "Parent" %}</span>#}
