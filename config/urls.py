@@ -44,15 +44,4 @@ urlpatterns = [
     path("jsi18n/", JavaScriptCatalog.as_view(), name="javascript-catalog"),
     path("i18n/", include("django.conf.urls.i18n")),
 
-
-
-
-    # path('api/verify/', FileUpdateView.as_view(), name='verify'),
-    # path('api/testverify/', FileUpdatetestView.as_view(), name='testverify'),
-    # path('api/scan/', DocumentScanView.as_view(), name='scan'),
-    # path('api/endverify/', DocumentVerifiedView.as_view(), name='endverify'),
-    # path('api/headshotverified/', HeadshotVerifiedView.as_view(), name='headshotverified'),
-    # path('api/checkimage/', PictureVerifyView.as_view(), name='checkimage'),
-    # path('api/chat/', include('api.chatbot.urls', namespace='chat')),
-    # path("api/ocr/", include('api.ocrserver.urls', namespace='ocr')),
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
