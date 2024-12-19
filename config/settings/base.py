@@ -77,7 +77,7 @@ INSTALLED_APPS = [
     "honeypot",
     # "captcha",
     'corsheaders',
-    # "idme.profiles.apps.ProfilesConfig",
+    "idme.profiles.apps.ProfilesConfig",
     "idme.api.apps.IdmeConfig",
     # "api.chat.apps.ChatConfig",
 
@@ -117,6 +117,8 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "idme.api.context_processors.signupaccountform",
+                "idme.api.context_processors.loginaccountform",
 
             ],
 
@@ -183,7 +185,7 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = str(BASE_DIR("media"))
 
 # Project adjustments
-# AUTH_USER_MODEL = "profiles.User"
+AUTH_USER_MODEL = "profiles.User"
 admins_data = env.tuple(
     "DJANGO_ADMINS", default="Open Course <syndicma2020@gmail.com>"
 )
@@ -199,30 +201,30 @@ SITE_ID = 1
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
-# ACCOUNT_EMAIL_REQUIRED = False
-# ACCOUNT_AUTHENTICATION_METHOD = "username_email"
-# ACCOUNT_EMAIL_VERIFICATION = "optional"
-# ACCOUNT_FORMS = {"signup": "coelinks.profiles.forms.ProfileCreateForm", "login": "coelinks.profiles.forms.SignInForm",
-#                  'reset_password': 'coelinks.profiles.forms.MyResetPasswordForm'}
-# LOGIN_REDIRECT_URL = "profiles:dispatch_login"
-#
-# ACCOUNT_LOGOUT_REDIRECT_URL = "account_login"
-#
-# LOGIN_URL = "account_login"
+ACCOUNT_EMAIL_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+ACCOUNT_EMAIL_VERIFICATION = "optional"
+ACCOUNT_FORMS = {"signup": "coelinks.profiles.forms.ProfileCreateForm", "login": "coelinks.profiles.forms.SignInForm",
+                 'reset_password': 'coelinks.profiles.forms.MyResetPasswordForm'}
+LOGIN_REDIRECT_URL = "profiles:dispatch_login"
+
+ACCOUNT_LOGOUT_REDIRECT_URL = "account_login"
+
+LOGIN_URL = "account_login"
 #LOGIN_URLS = '/accounts/login/'
 
-# LOGIN_EXEMPT_URLS = (
-#     r'^admin/$',
-#     r'^accounts/logout/$',
-#     r'^accounts/login/$',
-#     r'^accounts/signup/$',
-#     r'^accounts/password/change/$',
-#     r'^accounts/password/set/$',
-#     r'^accounts/password/reset/done/$',
-#     r"^password/reset/key/(?P<uidb36>[0-9A-Za-z]+)-(?P<key>.+)/$",
-#     r'^accounts/password/reset/key/done/$',
-#     r'^accounts/password/reset/$',
-# )
+LOGIN_EXEMPT_URLS = (
+    r'^admin/$',
+    r'^accounts/logout/$',
+    r'^accounts/login/$',
+    r'^accounts/signup/$',
+    r'^accounts/password/change/$',
+    r'^accounts/password/set/$',
+    r'^accounts/password/reset/done/$',
+    r"^password/reset/key/(?P<uidb36>[0-9A-Za-z]+)-(?P<key>.+)/$",
+    r'^accounts/password/reset/key/done/$',
+    r'^accounts/password/reset/$',
+)
 
 # # trial period
 # TRIALPERIOD = 90
@@ -236,7 +238,7 @@ CSRF_COOKIE_HTTPONLY = True
 # ADMIN_URL = "admin/"
 
 # Delete on production
-ACCOUNT_LOGOUT_ON_GET = True
+# ACCOUNT_LOGOUT_ON_GET = True
 
 # CRONJOBS = [
 #     ('*/1 * * * *', 'mascaw.core.cron.scheduled_job')

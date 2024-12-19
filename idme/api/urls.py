@@ -8,5 +8,6 @@ app_name = "idmeapi"
 urlpatterns = [
     re_path("idverify/", views.FileUpdateView.as_view(), name="idverify"),
     path("verify/<int:user_id>/", views.IDVerifyView.as_view(), name="verify"),
+    path("sdashboard/", views.ConditionsView.as_view(), name="sdashboard"),
 
 ]

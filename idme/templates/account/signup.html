@@ -1,0 +1,60 @@
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+	<meta charset="utf-8">
+	<title>{% trans "Login" %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content={% trans "Analytic Tools for Startups and Existing Companies" %}>
+        <meta name="author" content="">
+	
+	<!-- ================== BEGIN core-css ================== -->
+	<link href={% static "assets/css/vendor.min.css" %} rel="stylesheet">
+    <link href={% static "assets/css/app.min.css" %} rel="stylesheet">
+	<!-- ================== END core-css ================== -->
+	
+</head>
+<body class='pace-top'>
+	<!-- BEGIN #app -->
+	<div id="app" class="app app-full-height app-without-header">
+		<!-- BEGIN register -->
+		<div class="register">
+			<!-- BEGIN register-content -->
+			<div class="register-content">
+				<form action="{% url 'account_signup' %}" method="POST" name="register_form">
+					<h1 class="text-center">{% trans "Sign Up" %}</h1>
+					<p class="text-inverse text-opacity-50 text-center">{% trans "One Username is all you need to access all the offered services." %}</p>
+					{% csrf_token %}
+                        {{ form|crispy }}
+                        {% if redirect_field_value %}
+                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                        {% endif %}
+					<div class="mb-3">
+						<button type="submit" class="btn btn-outline-theme btn-lg d-block w-100">{% trans "Sign Up" %}</button>
+					</div>
+					<div class="text-inverse text-opacity-50 text-center">
+						{% trans "Already have an account?" %} <a href="{{ login_url }}">{% trans "Sign In" %}</a>
+					</div>
+				</form>
+			</div>
+			<!-- END register-content -->
+		</div>
+		<!-- END register -->
+		
+		
+		<!-- BEGIN btn-scroll-top -->
+		<a href="#" data-toggle="scroll-to-top" class="btn-scroll-top fade"><i class="fa fa-arrow-up"></i></a>
+		<!-- END btn-scroll-top -->
+	</div>
+	<!-- END #app -->
+	
+	<!-- ================== BEGIN core-js ================== -->
+	<script src={% static "assets/js/vendor.min.js"%}></script>
+	<script src={% static "assets/js/app.min.js"%}></script>
+	<!-- ================== END core-js ================== -->
+	
+	
+</body>
+</html>

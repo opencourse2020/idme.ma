@@ -114,3 +114,7 @@ class FileUpdateView(CreateView, JsonFormMixin):
     return JsonResponse(data)
     # else:
     #     return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ConditionsView(LoginRequiredMixin, TemplateView):
+    template_name = "../templates/conditions.html"

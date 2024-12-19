@@ -32,7 +32,7 @@ class IDVerify(models.Model):
                                              max_upload_size=52428800, blank=True, null=True)
     verification_created_date = models.DateTimeField(auto_now_add=True)
     verification_modified_date = models.DateTimeField(auto_now=True)
-
+    sent = models.BooleanField(default=False)
     def __str__(self):
         return str(self.user_id)
 
