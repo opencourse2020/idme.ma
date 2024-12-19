@@ -35,8 +35,11 @@ import seaborn as sns
 from datetime import datetime
 from .id_recognize import idrecognize
 from .tools import verifySignature
+from obfuskey import Obfuskey, alphabets
 # Create your views here.
 
+# Set the lenght of the hash key
+obfuscator = Obfuskey(alphabets.BASE36, key_length=14)
 
 class IDVerifyView(TemplateView):
     # model = models.IDVerify
@@ -44,7 +47,12 @@ class IDVerifyView(TemplateView):
     template_name = "idmeapi/idverify.html"
     # success_url = reverse_lazy("coeanalytics:analytictypes:list")
     def get_context_data(self, **kwargs):
-        kwargs["clientid"] = self.kwargs.get("client_id")
+        # clientid = int(self.kwargs.get("client_id"))
+        clientid = "{:06d}".format(int(self.kwargs.get("client_id")))
+        user_id = "{:06d}".format(dt.now().hour*10000+dt.now().minute*100+dt.now().second)
+
+        client_user_id = obfuscator.get_value("{}XX{}".format(user_id, clientid))
+        kwargs["clientid"] = client_user_id
         return super(IDVerifyView, self).get_context_data(**kwargs)
 
 class FileUpdateView(CreateView, JsonFormMixin):
@@ -60,7 +68,10 @@ class FileUpdateView(CreateView, JsonFormMixin):
     print("Step 1")
     filename = request.FILES['file']
     side = int(request.POST.get("side"))
-    client = int(request.POST.get("cid"))
+    client_user_id = int(request.POST.get("cid"))
+    clientuser = obfuscator.get_key(client_user_id)
+    client = int(clientuser.split("XX")[1])
+
     obj, created = models.IDVerify.objects.update_or_create(
         client_num=client, defaults={'idcard': filename})
     result = idrecognize(str(client), side)
