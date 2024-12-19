@@ -34,86 +34,97 @@
 
 {% block content_body %}
 
-    <div class="row gx-4">
+<div class="row gx-4">
     <div class="col-lg-8">
-              <!-- Biography Start -->
+        <!-- Biography Start -->
 
-              <div class="card mb-5">
+        <div class="card mb-5">
 
-                <div class="card-body">
-                      <div class="card">
-                          <div class="card-body pt-4 pb-4">
-                          {% if user.picture %}
-                            <img class="img-fluid" src="{{ user.picture.url }}" style="border-radius: 50%;" alt="">
-                                {% else %}
-                                <img class="img-fluid" style="border-radius: 50%; src={% static "pictures/user_placeholder.png" %} width="170" height="170" alt="">
-                            {% endif %}
-                            </div>
-                          <div class="card-footer">
-                              <div class="h5 mb-0">{{ user.first_name }} {{ user.last_name }}</div>
-                              <div class="text-muted">
-                                <i data-cs-icon="pin" class="me-1"></i>
-                                <span class="align-middle">{{ user.profile.city }}, {{ user.profile.country }}</span>
-                              </div>
-                          </div>
-                          <div class="card-arrow">
-                            <div class="card-arrow-top-left"></div>
-                            <div class="card-arrow-top-right"></div>
-                            <div class="card-arrow-bottom-left"></div>
-                            <div class="card-arrow-bottom-right"></div>
+            <div class="card-body">
+                <div class="card">
+                    <div class="card-body pt-4 pb-4 text-center">
+                        {% if user.picture %}
+                        <img class="img-fluid" src="{{ user.picture.url }}" style="border-radius: 50%;" alt="">
+                        {% else %}
+                        <img class="img-fluid" style="border-radius: 50%; src={% static "pictures/user_placeholder.png" %} width="170" height="170" alt="">
+                        {% endif %}
+                    </div>
+                    <div class="card-footer">
+                        <div class="h5 mb-0">{{ user.first_name }} {{ user.last_name }}</div>
+                        <div class="text-muted">
+                            <i data-cs-icon="pin" class="me-1"></i>
+                            <span class="align-middle">{{ user.profile.city }}, {{ user.profile.country }}</span>
                         </div>
-                      </div>
-
-
-
-
-                  <div class="card">
-                          <div class="card-body pt-4 pb-4">
-                    <a class="nav-link active px-0 border-bottom border-separator-light"  href="{% url 'profiles:userinfo' user.pk %}" >
-                      <i data-cs-icon="user" class="me-2" data-cs-size="17"></i>
-                      <span class="align-middle">{% trans "User Information" %}</span>
-                    </a>
-                    <a class="nav-link px-0 border-bottom border-separator-light"  href="{% url 'profiles:editprofile' %}" >
-                      <i data-cs-icon="settings-1" class="me-2" data-cs-size="17"></i>
-                      <span class="align-middle">{% trans "Edit Profile" %}</span>
-                    </a>
-                    <a class="nav-link px-0 border-bottom border-separator-light"  href="{% url 'account_change_password' %}" >
-                      <i data-cs-icon="lock-off" class="me-2" data-cs-size="17"></i>
-                      <span class="align-middle">{% trans "Manage Password"  %}</span>
-                    </a>
-                    <a class="nav-link px-0 border-bottom border-separator-light" href="{% url "account_email" %}" >
-                      <i data-cs-icon="email" class="me-2" data-cs-size="17"></i>
-                      <span class="align-middle">{% trans "Manage Emails" %}</span>
-                    </a>
-                      <a class="nav-link px-0 border-bottom border-separator-light" href="{% url 'profiles:language' user.pk %}" >
-                      <i data-cs-icon="web" class="me-2" data-cs-size="17"></i>
-                      <span class="align-middle">{% trans "Prefered Language" %}</span>
-                    </a>
-                      <a class="nav-link px-0 border-bottom border-separator-light" href="{% url 'profiles:activate' user.pk %}" >
-                      <i data-cs-icon="eye-off" class="me-2" data-cs-size="17"></i>
-                      <span class="align-middle">{% trans "Deactivate" %}</span>
-                    </a>
-                    <a class="nav-link px-0 border-bottom border-separator-light" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">
-                      <i data-cs-icon="logout" class="me-2" data-cs-size="17"></i>
-                      <span class="align-middle">{% trans "Logout" %}</span>
-                    </a>
-
-
-                  </div>
-                  </div>
+                    </div>
+                    <div class="card-arrow">
+                        <div class="card-arrow-top-left"></div>
+                        <div class="card-arrow-top-right"></div>
+                        <div class="card-arrow-bottom-left"></div>
+                        <div class="card-arrow-bottom-right"></div>
                     </div>
                 </div>
-                  <div class="card-arrow">
-                    <div class="card-arrow-top-left"></div>
-                    <div class="card-arrow-top-right"></div>
-                    <div class="card-arrow-bottom-left"></div>
-                    <div class="card-arrow-bottom-right"></div>
-                </div>
-              </div>
-              <!-- Biography End -->
-            </div>
 
+
+
+
+                <div class="card">
+                    <div class="card-body pt-4 pb-4">
+                        <a class="nav-link active px-0 border-bottom border-separator-light"  href="{% url 'profiles:userinfo' user.pk %}" >
+                            <i data-cs-icon="user" class="me-2" data-cs-size="17"></i>
+                            <span class="align-middle">{% trans "User Information" %}</span>
+                        </a>
+                        <a class="nav-link px-0 border-bottom border-separator-light"  href="{% url 'profiles:editprofile' %}" >
+                            <i data-cs-icon="settings-1" class="me-2" data-cs-size="17"></i>
+                            <span class="align-middle">{% trans "Edit Profile" %}</span>
+                        </a>
+                        <a class="nav-link px-0 border-bottom border-separator-light"  href="{% url 'account_change_password' %}" >
+                            <i data-cs-icon="lock-off" class="me-2" data-cs-size="17"></i>
+                            <span class="align-middle">{% trans "Manage Password"  %}</span>
+                        </a>
+                        <a class="nav-link px-0 border-bottom border-separator-light" href="{% url "account_email" %}" >
+                        <i data-cs-icon="email" class="me-2" data-cs-size="17"></i>
+                        <span class="align-middle">{% trans "Manage Emails" %}</span>
+                        </a>
+                        <a class="nav-link px-0 border-bottom border-separator-light" href="{% url 'profiles:language' user.pk %}" >
+                            <i data-cs-icon="web" class="me-2" data-cs-size="17"></i>
+                            <span class="align-middle">{% trans "Prefered Language" %}</span>
+                        </a>
+                        <a class="nav-link px-0 border-bottom border-separator-light" href="{% url 'profiles:activate' user.pk %}" >
+                            <i data-cs-icon="eye-off" class="me-2" data-cs-size="17"></i>
+                            <span class="align-middle">{% trans "Deactivate" %}</span>
+                        </a>
+                        <a class="nav-link px-0 border-bottom border-separator-light" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                            <i data-cs-icon="logout" class="me-2" data-cs-size="17"></i>
+                            <span class="align-middle">{% trans "Logout" %}</span>
+                        </a>
+
+
+                    </div>
+                    <div class="card-arrow">
+                        <div class="card-arrow-top-left"></div>
+                        <div class="card-arrow-top-right"></div>
+                        <div class="card-arrow-bottom-left"></div>
+                        <div class="card-arrow-bottom-right"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-arrow">
+                        <div class="card-arrow-top-left"></div>
+                        <div class="card-arrow-top-right"></div>
+                        <div class="card-arrow-bottom-left"></div>
+                        <div class="card-arrow-bottom-right"></div>
+                    </div>
+        </div>
+        <div class="card-arrow">
+            <div class="card-arrow-top-left"></div>
+            <div class="card-arrow-top-right"></div>
+            <div class="card-arrow-bottom-left"></div>
+            <div class="card-arrow-bottom-right"></div>
+        </div>
     </div>
+    <!-- Biography End -->
+</div>
+
 
 
 
