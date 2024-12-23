@@ -12,6 +12,7 @@ enterprise_patterns = [
 urlpatterns = [
     path('verify_mfa/', views.verify_mfa, name='verify_mfa'),
     path('profilemfa/', views.ProfilesMFAView.as_view(), name='profile_mfa'),
+    path('disable-2fa/', views.disable_2fa, name='disable_2fa'),
     path("language/<int:pk>/", views.LanguageUpdateView.as_view(), name="language"),
     path("userinfo/<int:pk>/", views.ProfilesUpdateView.as_view(), name="userinfo"),
     path("activate/<int:pk>/", views.ProfileActivateView.as_view(), name="activate"),
