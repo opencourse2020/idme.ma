@@ -48,20 +48,23 @@
         <h5 class="card-title">
             {% trans "Enable 2FA with Autheticator App." %}
         </h5>
-
+        <div class="row justify-content-center"">
+            <div class="col-12">
                 <div class="card mb-2 p-5px border-warning" style="max-width: 200px;">
+
                     <div style="max-height: 200px" class="overflow-hidden z-1">
                         <img src="{{ qr_code_data_uri }}" class="card-img" alt="{{ img_path }}" style="max-width: 200px; height: 200px">
                     </div>
-                    <div class="card-arrow " style="border:  1px solid orange">
+                    <div class="card-arrow " style="border:  1px solid teal">
                         <div class="card-arrow-top-left"></div>
                         <div class="card-arrow-top-right"></div>
                         <div class="card-arrow-bottom-left"></div>
                         <div class="card-arrow-bottom-right"></div>
                     </div>
                 </div>
+                </div>
 <!--                <img src="{{ qr_code_data_uri }}" alt="{{ img_path }}" style="max-width: 200px; height: 200px">-->
-
+                <div class="col-12">
                 <form method="POST" action="{% url 'profiles:verify_mfa' %}" class="form text-center">
                     {% csrf_token %}
                     <div class="form-group text-">
@@ -73,8 +76,9 @@
                     <input type="hidden" name="user_id" value="{{ request.user.id }}">
                     <button class="btn btn-primary" type="submit">{% trans "Verify" %}</button>
                 </form>
+                </div>
 
-
+            </div>
 
         {% else %}
         <a href="{% url 'profiles:disable_2fa' %}" class="btn btn-success" disabled>
