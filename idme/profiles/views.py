@@ -294,7 +294,7 @@ def verify_mfa(request):
         user_id = request.POST.get('user_id')
         if not user_id:
             messages.error(request, 'Invalid user id. Please try again.')
-            return render(request, 'profiles/otp_verify.html', {'user_id': user_id})
+            return render(request, 'profiles/verify_otp.html', {'user_id': user_id})
 
         user = models.User.objects.get(id=user_id)
         if verify_2fa_otp(user, otp):
@@ -308,11 +308,11 @@ def verify_mfa(request):
         else:
             if request.user.is_authenticated:
                 messages.error(request, 'Invalid OTP code. Please try again.')
-                return redirect('profile')
+                return redirect('profiles:profile')
             messages.error(request, 'Invalid OTP code. Please try again.')
-            return render(request, 'profiles/otp_verify.html', {'user_id': user_id})
+            return render(request, 'profiles/verify_otp.html', {'user_id': user_id})
 
-    return render(request, 'profiles/otp_verify.html', {'user_id': user_id})
+    return render(request, 'profiles/verify_otp.html', {'user_id': user_id})
 
 
 @login_required
