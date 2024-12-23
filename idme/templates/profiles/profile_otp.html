@@ -48,9 +48,9 @@
         <h5 class="card-title">
             {% trans "Enable 2FA with Autheticator App." %}
         </h5>
-        <div class="row justify-content-center"">
+        <div class="row justify-content-center">
             <div class="col-12">
-                <div class="card mb-2 p-5px border-warning" style="max-width: 200px;">
+                <div class="card mb-2 p-5px" style="max-width: 200px;">
 
                     <div style="max-height: 200px" class="overflow-hidden z-1">
                         <img src="{{ qr_code_data_uri }}" class="card-img" alt="{{ img_path }}" style="max-width: 200px; height: 200px">
@@ -69,12 +69,12 @@
                     {% csrf_token %}
                     <div class="form-group text-">
                         <div class="mx-auto" style="width: 30%;">
-                            <input type="text" id="otp_code" name="otp_code" maxlength="6" required
-                                   class="form-control" placeholder="Enter your OTP code">
+                            <input type="text mb-2" id="otp_code" name="otp_code" maxlength="12" required
+                                   class="form-control" placeholder={% trans "Enter your OTP code" %}>
                         </div>
                     </div>
                     <input type="hidden" name="user_id" value="{{ request.user.id }}">
-                    <button class="btn btn-primary" type="submit">{% trans "Verify" %}</button>
+                    <button class="btn btn-succes" type="submit">{% trans "Verify" %}</button>
                 </form>
                 </div>
 
