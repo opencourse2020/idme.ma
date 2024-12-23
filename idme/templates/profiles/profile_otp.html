@@ -36,7 +36,7 @@
         <div class="card">
             <div class="card-header text-center">
             {% if request.user.picture %}
-                <img class="img-fluid" src="{{ request.user.picture.url }}" style="border-radius: 50%; max-width: 200px; height: 200px" alt="">
+                <img class="img-fluid" src="{{ request.user.picture.url }}" style="border-radius: 50%; max-width: 150px; height: 150px" alt="">
             {% else %}
                 <i class="fas fa-user-circle fa-5x mb-3 rounded-circle"></i>
             {% endif %}
@@ -48,8 +48,8 @@
         <h5 class="card-title">
             {% trans "Enable 2FA with Autheticator App." %}
         </h5>
-            <div class="text-center">
-                <div class="card bg-dark text-white mb-2  p-5px border-warning" style="max-width: 18rem; max-width: 250px; height: 250px">
+
+                <div class="card mb-2 p-5px border-warning" style="max-width: 18rem; max-width: 250px; height: 250px">
                     <div style="max-height: 250px" class="overflow-hidden z-1">
                         <img src="{{ qr_code_data_uri }}" class="card-img" alt="{{ img_path }}" style="max-width: 200px; height: 200px">
                     </div>
@@ -74,7 +74,7 @@
                     <button class="btn btn-primary" type="submit">{% trans "Verify" %}</button>
                 </form>
 
-                </div>
+
 
         {% else %}
         <a href="{% url 'profiles:disable_2fa' %}" class="btn btn-success" disabled>
