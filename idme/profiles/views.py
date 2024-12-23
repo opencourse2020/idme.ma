@@ -322,7 +322,7 @@ def disable_2fa(request):
         user.mfa_enabled = False
         user.save()
         messages.success(request, "Two-Factor Authentication has been disabled.")
-        return redirect('profile')
+        return redirect('profiles:profile')
     else:
         messages.info(request, "2FA is already disabled.")
     return redirect('profiles:profile')
