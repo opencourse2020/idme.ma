@@ -45,7 +45,7 @@
             Enable 2FA with Autheticator App.
         </h4>
             <div>
-                <img src="{{ qr_code }}" alt="{{ img_path }}">
+                <img src="{{ qr_code_data_uri }}" alt="{{ img_path }}">
 
                 <form method="POST" action="{% url 'profiles:verify_mfa' %}" class="form text-center">
                     {% csrf_token %}

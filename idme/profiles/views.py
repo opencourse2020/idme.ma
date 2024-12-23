@@ -280,7 +280,7 @@ class ProfilesMFAView(LoginRequiredMixin, TemplateView):
 
         buffer.seek(0)
         qr_code = base64.b64encode(buffer.getvalue()).decode("utf-8")
-        kwargs["qr_code"] = qr_code
+        # kwargs["qr_code"] = qr_code
 
         kwargs["qr_code_data_uri"] = f"data:image/png;base64,{qr_code}"
 
