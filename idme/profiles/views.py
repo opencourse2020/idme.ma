@@ -261,10 +261,10 @@ def verify_2fa_otp(user , otp ):
     return False
 
 
-class ProfilesMFAView(LoginRequiredMixin, UpdateView):
+class ProfilesMFAView(LoginRequiredMixin, TemplateView):
     template_name = "profiles/profile_otp.html"
 
-    success_url = reverse_lazy("profiles:profile")
+    # success_url = reverse_lazy("profiles:profile")
 
     def get_context_data(self, **kwargs):
         user = self.request.user
