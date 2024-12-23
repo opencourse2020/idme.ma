@@ -186,7 +186,7 @@ STATIC_ROOT = str(BASE_DIR("static"))
 MEDIA_URL = "/media/"
 MEDIA_ROOT = str(BASE_DIR("media"))
 
-ADMINS = tuple(parseaddr(email) for email in admins_data)
+# ADMINS = tuple(parseaddr(email) for email in admins_data)
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
