@@ -40,7 +40,7 @@
             {% else %}
                 <i class="fas fa-user-circle fa-5x mb-3 rounded-circle"></i>
             {% endif %}
-        <h5 class="card-title">{{ request.user.email }}</h5>
+        <h5 class="card-title text-center">{{ request.user.email }}</h5>
         <p>{% trans "Member since" %}:&nbsp;{{ request.user.date_joined }}</p>
                 </div>
             <div class="card-body text-center">
