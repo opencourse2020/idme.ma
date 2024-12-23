@@ -47,7 +47,7 @@ class User(GuardianUserMixin, AbstractUser):
     contacts_requests = models.PositiveIntegerField(default=0)
     prefered_city = models.SmallIntegerField(default=49)
     picture = ResizedImageField(size=[640, 480], upload_to=user_directory_path, blank=True, null=True)
-    mfa_secret = models.CharField(max_length=16, blank=True, null=True)
+    mfa_secret = models.CharField(max_length=32, blank=True, null=True)
     mfa_enabled = models.BooleanField(default=True)
 
     @property
