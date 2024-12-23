@@ -55,8 +55,8 @@
                     {% csrf_token %}
                     <div class="form-group text-">
                         <div class="mx-auto mb-2" style="width: 50%;">
-                            <input type="text mb-2" id="otp_code" name="otp_code" maxlength="6" required
-                                   class="form-control" placeholder={% trans "Enter your OTP code" %}>
+                            <input type="text mb-2" id="otp_code" name="otp_code" maxlength="11" required
+                                   class="form-control" pattern="\d-\d-\d-\d-\d-\d" placeholder="{% trans "Enter your OTP code" %}">
                         </div>
                     </div>
                     <input type="hidden" name="user_id" value="{{ request.user.id }}">
