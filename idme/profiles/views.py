@@ -1,6 +1,8 @@
+import io
+import base64
 from django.http import HttpResponse, JsonResponse
 from django.urls import reverse_lazy
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import (
     UpdateView,
     RedirectView,
@@ -16,17 +18,33 @@ from django.utils.translation import gettext_lazy as _
 from tablib import Dataset
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import Permission, Group
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.views.generic.detail import SingleObjectMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.hashers import make_password
 from django.contrib import messages
 from django.core.exceptions import ValidationError
+from django.contrib.auth.decorators import login_required
 from django.utils.text import slugify
 from . import forms, models
 from .mixins import (RegularRequiredMixin, AdminRequiredMixin, AdminAllowedMixing, JsonFormMixin)
+from django.contrib import messages
 from datetime import datetime, date, timedelta
 User = get_user_model()
+from allauth.account.auth_backends import AuthenticationBackend
+import pyotp
+import qrcode
+
+
+class MyAuthenticationBackend(AuthenticationBackend):
+    def authenticate(self, request, **credentials):
+        user = super().authenticate(request, **credentials)
+        if user is not None:
+            if user.mfa_enabled:
+                return user
+
+        else:
+            return None
 
 
 class ProfileActivateView(AdminRequiredMixin, UpdateView):
@@ -66,7 +84,7 @@ class ProfilesUpdateView(LoginRequiredMixin, UpdateView):
     #         raise ValidationError(_("You don't have authorization to make that change"))
     #     return super().form_valid(form)
     def get_context_data(self, **kwargs):
-
+        user = self.request.user
         kwargs["title"] = _("Personal Info")
 
         return super().get_context_data(**kwargs)
@@ -96,8 +114,9 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     def form_valid(self, form):
         context = self.get_context_data(form=form)
         formset = context["formset"]
-
+        user = self.request.user
         if formset.is_valid():
+
             response = super().form_valid(form)
             formset.instance = self.object
             formset.save()
@@ -233,163 +252,79 @@ class PrivacyView(TemplateView):
     template_name = "../templates/privacy.html"
 
 
-def user_upload(request):
+def verify_2fa_otp(user , otp ):
+    totp = pyotp.TOTP(user.mfa_secret)
+    if totp.verify(otp):
+        user.mfa_enabled = True
+        user.save()
+        return True
+    return False
 
+
+class ProfilesMFAView(LoginRequiredMixin, UpdateView):
+    template_name = "profiles/profile_otp.html"
+
+    success_url = reverse_lazy("profiles:profile")
+
+    def get_context_data(self, **kwargs):
+        user = self.request.user
+        kwargs["title"] = _("Personal Info")
+        otp_uri = pyotp.totp.TOTP(user.mfa_secret).provisioning_uri(
+            name=user.email,
+            issuer_name="NESZEN"
+        )
+
+        qr = qrcode.make(otp_uri)
+        buffer = io.BytesIO()
+        qr.save(buffer, format="PNG")
+
+        buffer.seek(0)
+        qr_code = base64.b64encode(buffer.getvalue()).decode("utf-8")
+        kwargs["qr_code"] = qr_code
+
+        kwargs["qr_code_data_uri"] = f"data:image/png;base64,{qr_code}"
+
+        return super().get_context_data(**kwargs)
+
+
+
+def verify_mfa(request):
     if request.method == 'POST':
-        # student_resource = admin.StudentResource()
-        file_format = request.POST['file-format']
-        user_type = request.POST['user_type']
-        dataset = Dataset()
-        new_users = request.FILES['myfile']
-        expire = request.session.get('resexpire')
-        if file_format == 'XLSX':
-            imported_data = dataset.load(new_users.read(), format='xlsx')
-            # print(dataset[1])
-            # result = student_resource.import_data(dataset, dry_run=True, raise_errors=True)
-            # i = 0
-            for data in imported_data:
-                # print(dataset[i][1])
-                # print(make_password(dataset[i][1]))
-                # dataset[i][1] = make_password(dataset[i][1])
-                # datax[i] = [None, data[0], data[1], None, 0, data[2], data[3], data[4], 0, 1, data[5]]
-                value = models.User(
-                    None,
-                    make_password(data[1]),
-                    None,
-                    0,
-                    data[0],
-                    data[2],
-                    data[3],
-                    data[4],
-                    0,
-                    1,
-                    data[5],
-                    None,
-                    data[6],
-                    0,
-                    49
-                    )
+        otp = request.POST.get('otp_code')
+        user_id = request.POST.get('user_id')
+        if not user_id:
+            messages.error(request, 'Invalid user id. Please try again.')
+            return render(request, 'profiles/otp_verify.html', {'user_id': user_id})
 
-                value.save()
-                permission = get_object_or_404(
-                    Permission, codename=f"access_{user_type}_pages"
-                )
+        user = models.User.objects.get(id=user_id)
+        if verify_2fa_otp(user, otp):
+            if request.user.is_authenticated:
+                messages.success(request, '2FA enabled successfully !')
+                return redirect('profile')
 
-                value.user_permissions.add(permission)
-                group_name = f"{user_type}s".capitalize()
-                group, created = Group.objects.get_or_create(name=group_name)
-                value.groups.add(group)
-                user_type_class_map = {
-                    "student": models.Student,
-                    "parent": models.Parent,
+            login(request, user)
+            messages.success(request, 'Login successful!')
+            return redirect('profile')
+        else:
+            if request.user.is_authenticated:
+                messages.error(request, 'Invalid OTP code. Please try again.')
+                return redirect('profile')
+            messages.error(request, 'Invalid OTP code. Please try again.')
+            return render(request, 'profiles/otp_verify.html', {'user_id': user_id})
 
-                }
-                user_class = user_type_class_map[user_type]
-                profile = user_class()
-                setattr(value, user_type, profile)
-                # tn = profile(date_expire=expire)
-                profile.save()
+    return render(request, 'profiles/otp_verify.html', {'user_id': user_id})
 
-                # i = i + 1
-            # result = student_resource.import_data(dataset, dry_run=True, raise_errors=True)
-        elif file_format == 'CSV':
-            imported_data = dataset.load(new_users.read().decode('utf-8'), format='csv')
-            # result = student_resource.import_data(dataset, dry_run=True, raise_errors=True)
-            # i = 0
-            for data in imported_data:
-                # dataset[i][1] = make_password(dataset[i][1])
-                # print(data[1])
-                value = models.User(
-                    None,
-                    make_password(data[1]),
-                    None,
-                    0,
-                    data[0],
-                    data[2],
-                    data[3],
-                    data[4],
-                    0,
-                    1,
-                    data[5],
-                    None,
-                    False,
-                    None,
-                    expire
-                )
-                value.save()
-                permission = get_object_or_404(
-                    Permission, codename=f"access_{user_type}_pages"
-                )
 
-                value.user_permissions.add(permission)
-                group_name = f"{user_type}s".capitalize()
-                group, created = Group.objects.get_or_create(name=group_name)
-                value.groups.add(group)
-                user_type_class_map = {
-                    "tenant": models.Tenant,
-                    "admin": models.Admin,
-                    "superadmin": models.SuperAdmin,
+@login_required
+def disable_2fa(request):
+    user = request.user
+    if user.mfa_enabled:
+        user.mfa_enabled = False
+        user.save()
+        messages.success(request, "Two-Factor Authentication has been disabled.")
+        return redirect('profile')
+    else:
+        messages.info(request, "2FA is already disabled.")
+    return redirect('profiles:profile')
 
-                }
-                user_class = user_type_class_map[user_type]
-                profile = user_class()
-                setattr(value, user_type, profile)
-                profile.save()
-                # i = i + 1
-            # result = student_resource.import_data(dataset, dry_run=True, raise_errors=True)
-        elif file_format == 'XLS':
-            imported_data = dataset.load(new_users.read(), format='xls')
-            # result = student_resource.import_data(dataset, dry_run=True, raise_errors=True)
-            # i = 0
-            for data in imported_data:
-                # dataset[i][1] = make_password(dataset[i][1])
-                # print(data[1])
-                value = models.User(
-                    None,
-                    make_password(data[1]),
-                    None,
-                    0,
-                    data[0],
-                    data[2],
-                    data[3],
-                    data[4],
-                    0,
-                    1,
-                    data[5],
-                    None,
-                    False,
-                    None,
-                    expire
-                )
-                value.save()
-                permission = get_object_or_404(
-                    Permission, codename=f"access_{user_type}_pages"
-                )
 
-                value.user_permissions.add(permission)
-                group_name = f"{user_type}s".capitalize()
-                group, created = Group.objects.get_or_create(name=group_name)
-                value.groups.add(group)
-                user_type_class_map = {
-                    "tenant": models.Tenant,
-                    "admin": models.Admin,
-                    "superadmin": models.SuperAdmin,
-
-                }
-                user_class = user_type_class_map[user_type]
-                profile = user_class()
-                setattr(value, user_type, profile)
-                profile.save()
-                # i = i + 1
-            # result = student_resource.import_data(dataset, dry_run=True, raise_errors=True)
-        # print(imported_data)
-
-        # if result.has_errors():
-        #     messages.error(request, 'Uh oh! Something went wrong...')
-        # #
-        # #     # result = person_resource.import_data(dataset, dry_run=True)  # Test the data import
-        # #
-        # else:
-        #     student_resource.import_data(dataset, dry_run=False)  # Actually import now
-
-    return render(request, 'profiles/upload_users.html')

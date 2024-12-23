@@ -87,6 +87,10 @@
                             <i data-cs-icon="eye-off" class="me-2" data-cs-size="17"></i>
                             <span class="align-middle">{% trans "Deactivate" %}</span>
                         </a>
+                        <a class="nav-link active px-0 border-bottom border-separator-light"  href="{% url 'profiles:profile_mfa'%}" >
+                            <i data-cs-icon="user" class="me-2" data-cs-size="17"></i>
+                            <span class="align-middle">{% trans "Enable 2FA with Autheticator App" %}</span>
+                        </a>
                         <a class="nav-link px-0 border-bottom border-separator-light" href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">
                             <i data-cs-icon="logout" class="me-2" data-cs-size="17"></i>
                             <span class="align-middle">{% trans "Logout" %}</span>

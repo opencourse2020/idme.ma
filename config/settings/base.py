@@ -14,6 +14,7 @@ import os
 import sys
 from email.utils import parseaddr
 from django.conf.locale.en import formats as en_formats
+from django.contrib.messages import constants as messages
 
 import environ
 from django.utils.translation import gettext_lazy as _
@@ -59,12 +60,13 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    'allauth.socialaccount.providers.apple',
-    "allauth.socialaccount.providers.facebook",
+    # 'allauth.socialaccount.providers.apple',
+    # "allauth.socialaccount.providers.facebook",
     'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.twitter',
-    'allauth.socialaccount.providers.instagram',
-    'allauth.socialaccount.providers.telegram',
+    'allauth.socialaccount.providers.github',
+    # 'allauth.socialaccount.providers.twitter',
+    # 'allauth.socialaccount.providers.instagram',
+    # 'allauth.socialaccount.providers.telegram',
     'rest_framework',
     'rest_framework_swagger',
     "modeltranslation",
@@ -184,12 +186,36 @@ STATIC_ROOT = str(BASE_DIR("static"))
 MEDIA_URL = "/media/"
 MEDIA_ROOT = str(BASE_DIR("media"))
 
+ADMINS = tuple(parseaddr(email) for email in admins_data)
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP': {
+            'client_id': '',
+            'secret': '',
+
+        },
+        'SCOPE': ['profile', 'email', ],
+        'AUTH_PARAMS': {'access_type': 'online'},
+        'METHOD': 'oauth2',
+        'VERIFIED_EMAIL': True,
+    },
+    'github': {
+        'APP': {
+            'client_id': '',
+            'secret': '',
+
+        }
+    }
+
+}
+
 # Project adjustments
 AUTH_USER_MODEL = "profiles.User"
 admins_data = env.tuple(
     "DJANGO_ADMINS", default="Open Course <syndicma2020@gmail.com>"
 )
-ADMINS = tuple(parseaddr(email) for email in admins_data)
+DOMAIN = "https://idme.ma"
 
 # Third-party syndicma settings
 AUTHENTICATION_BACKENDS = (
@@ -201,6 +227,8 @@ SITE_ID = 1
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
+SOCIALACCOUNT_LOGIN_ON_GET = True
+SOCIALACCOUNT_AUTO_SIGNUP = True
 ACCOUNT_EMAIL_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_VERIFICATION = "optional"
@@ -226,6 +254,7 @@ LOGIN_EXEMPT_URLS = (
     r'^accounts/password/reset/$',
 )
 
+WEBHOOK_ENDPOINT_SECRET = ''
 # # trial period
 # TRIALPERIOD = 90
 
@@ -256,3 +285,11 @@ DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True
 
 RECAPTCHA_REQUIRED_SCORE = 0.85
 SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
+
+MESSAGE_TAGS = {
+    messages.DEBUG: 'debug',
+    messages.INFO: 'info',
+    messages.SUCCESS: 'success',
+    messages.WARNING: 'warning',
+    messages.ERROR: 'danger',  # 'danger' corresponds to Bootstrap's alert-danger
+}
