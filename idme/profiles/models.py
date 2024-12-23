@@ -48,7 +48,7 @@ class User(GuardianUserMixin, AbstractUser):
     prefered_city = models.SmallIntegerField(default=49)
     picture = ResizedImageField(size=[640, 480], upload_to=user_directory_path, blank=True, null=True)
     mfa_secret = models.CharField(max_length=32, blank=True, null=True)
-    mfa_enabled = models.BooleanField(default=True)
+    mfa_enabled = models.BooleanField(default=False)
 
     @property
     def profile(self):
