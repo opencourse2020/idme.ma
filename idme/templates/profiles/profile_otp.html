@@ -68,8 +68,8 @@
                 <form method="POST" action="{% url 'profiles:verify_mfa' %}" class="form text-center">
                     {% csrf_token %}
                     <div class="form-group text-">
-                        <div class="mx-auto" style="width: 30%;">
-                            <input type="text mb-2" id="otp_code" name="otp_code" maxlength="12" required
+                        <div class="mx-auto mb-2" style="width: 50%;">
+                            <input type="text mb-2" id="otp_code" name="otp_code" maxlength="6" required
                                    class="form-control" placeholder={% trans "Enter your OTP code" %}>
                         </div>
                     </div>
