@@ -9,7 +9,7 @@ from django.utils.translation import gettext_lazy as _
 from allauth.account.forms import SignupForm, LoginForm, ResetPasswordForm
 from . import models
 # from captcha.fields import ReCaptchaField
-
+import pyotp
 User = get_user_model()
 
 
@@ -59,6 +59,8 @@ class ProfileCreateForm(SignupForm):
                 for perm in permissions:
                     user.user_permissions.add(perm)
                 user.is_staff = True
+            if not user.mfa_secret:
+                user.mfa_secret = pyotp.random_base32()
 
             permission = get_object_or_404(
                 Permission, codename=f"access_{user_type}_pages"
