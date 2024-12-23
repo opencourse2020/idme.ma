@@ -34,10 +34,10 @@
         <div class="row gx-4">
     <div class="col-lg-8">
 
-            <i class="fas fa-user-circle fa-5x mb-3 rounded-circle"></i>
+            <img class="img-fluid" src="{{ user.picture.url }}" style="border-radius: 50%; max-width: 200px; height: 200px" alt="">
         <h3>{{ request.user.email }}</h3>
         <p>Member since: {{ request.user.date_joined }}</p>
-        {% if not request.user.mfa_enabled %}
+        {% if request.user.mfa_enabled %}
         <h4>
             Enable 2FA with Autheticator App.
         </h4>
