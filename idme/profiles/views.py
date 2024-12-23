@@ -300,11 +300,11 @@ def verify_mfa(request):
         if verify_2fa_otp(user, otp):
             if request.user.is_authenticated:
                 messages.success(request, '2FA enabled successfully !')
-                return redirect('profile')
+                return redirect('profiles:profile')
 
             login(request, user)
             messages.success(request, 'Login successful!')
-            return redirect('profile')
+            return redirect('profiles:profile')
         else:
             if request.user.is_authenticated:
                 messages.error(request, 'Invalid OTP code. Please try again.')
