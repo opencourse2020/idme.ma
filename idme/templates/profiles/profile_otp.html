@@ -49,7 +49,7 @@
             {% trans "Enable 2FA with Autheticator App." %}
         </h5>
             <div>
-                <div class="card bg-dark text-white">
+                <div class="card bg-dark text-white mb-2">
                     <div style="max-height: 250px" class="overflow-hidden z-1">
                         <img src="{{ qr_code_data_uri }}" class="card-img" alt="{{ img_path }}">
                     </div>
@@ -60,7 +60,7 @@
                         <div class="card-arrow-bottom-right"></div>
                     </div>
                 </div>
-                <img src="{{ qr_code_data_uri }}" alt="{{ img_path }}" style="max-width: 200px; height: 200px">
+<!--                <img src="{{ qr_code_data_uri }}" alt="{{ img_path }}" style="max-width: 200px; height: 200px">-->
 
                 <form method="POST" action="{% url 'profiles:verify_mfa' %}" class="form text-center">
                     {% csrf_token %}
