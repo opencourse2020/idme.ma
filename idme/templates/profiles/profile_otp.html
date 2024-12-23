@@ -89,4 +89,13 @@ function goBack() {
   window.history.back();
 }
 </script>
+<script>
+    var regex = /^\d{1,4}(?:\.\d{0,3})?$/;
+$("#otp_code").keypress(function (e) {
+    var key = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+    if (!regex.test($("input").val() + key)) {
+        e.preventDefault ? e.preventDefault() : e.returnValue = false;
+    }
+});
+</script>
 {% endblock js %}
