@@ -40,12 +40,12 @@
             {% endif %}
         <h3>{{ request.user.email }}</h3>
         <p>Member since: {{ request.user.date_joined }}</p>
-        {% if not request.user.mfa_enabled %}
+        {% if not  request.user.mfa_enabled %}
         <h4>
             Enable 2FA with Autheticator App.
         </h4>
             <div>
-                <img src="{{ qr_code_data_uri }}" alt="{{ img_path }}">
+                <img src="{{ qr_code_data_uri }}" alt="{{ img_path }}" style="border-radius: 50%; max-width: 200px; height: 200px">
 
                 <form method="POST" action="{% url 'profiles:verify_mfa' %}" class="form text-center">
                     {% csrf_token %}
