@@ -49,11 +49,11 @@
             {% trans "Enable 2FA with Autheticator App." %}
         </h5>
 
-                <div class="card mb-2 p-5px border-warning" style="max-width: 200px; height: 200px">
-                    <div style="max-height: 250px" class="overflow-hidden z-1">
+                <div class="card mb-2 p-5px border-warning" style="max-width: 200px;">
+                    <div style="max-height: 200px" class="overflow-hidden z-1">
                         <img src="{{ qr_code_data_uri }}" class="card-img" alt="{{ img_path }}" style="max-width: 200px; height: 200px">
                     </div>
-                    <div class="card-arrow">
+                    <div class="card-arrow " style="border:  1px solid orange">
                         <div class="card-arrow-top-left"></div>
                         <div class="card-arrow-top-right"></div>
                         <div class="card-arrow-bottom-left"></div>
