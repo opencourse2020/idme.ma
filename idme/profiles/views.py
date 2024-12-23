@@ -271,7 +271,7 @@ class ProfilesMFAView(LoginRequiredMixin, TemplateView):
         kwargs["title"] = _("Personal Info")
         otp_uri = pyotp.totp.TOTP(user.mfa_secret).provisioning_uri(
             name=user.email,
-            issuer_name="NESZEN"
+            issuer_name="Idme.ma"
         )
 
         qr = qrcode.make(otp_uri)
