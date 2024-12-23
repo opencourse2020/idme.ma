@@ -49,7 +49,7 @@
             {% trans "Enable 2FA with Autheticator App." %}
         </h5>
 
-                <img src="{{ qr_code_data_uri }}" class="card-img p-1 mb-2 border border-3 border-success" alt="{{ img_path }}" style="max-width: 200px; height: 200px">
+                <img src="{{ qr_code_data_uri }}" class="card-img p-1 mb-2 border border-2 border-success" alt="{{ img_path }}" style="max-width: 200px; height: 200px">
 
                 <form method="POST" action="{% url 'profiles:verify_mfa' %}" class="form text-center">
                     {% csrf_token %}
