@@ -166,7 +166,8 @@ inputs.addEventListener("keyup", function (e) {
 
     if (key == "backspace" || key == "delete") {
         target.value = "";
-
+        otp = otpinput.value;
+        otpinput.value = otp.substring(0, otp.length-2);
         const prev = target.previousElementSibling;
         if (prev) {
             prev.focus();
