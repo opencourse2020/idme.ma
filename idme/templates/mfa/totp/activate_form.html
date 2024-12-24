@@ -180,8 +180,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //as you type jump to the next input
   // let inputs = document.querySelectorAll('.code__input');
-    const inputs = document.getElementById("inputs");
-    const inputs_elements = inputs.children;
+    let inputs = document.getElementById("inputs");
+    let inputs_elements = inputs.children;
   inputs_elements.forEach((input, index, arr) => {
     input.addEventListener('input', function (ev) {
       // arr[input]
@@ -197,8 +197,8 @@ function handlePaste(ev) {
   let paste = (ev.clipboardData || window.clipboardData).getData('text');
   paste = paste.toUpperCase();
   console.log(paste);
-  const inputs = document.getElementById("inputs");
-    const inputs_elements = inputs.children;
+  let inputs = document.getElementById("inputs");
+    let inputs_elements = inputs.children;
   // let inputs = document.querySelectorAll('.code__input');
   if (paste.length !== inputs_elements.length) return; //handle as you want
   inputs_elements.forEach((input, index) => {
