@@ -178,6 +178,7 @@ inputs.addEventListener("keyup", function (e) {
         Array.from(inputs_elements).forEach((input) => {
         otpcode = otpcode + input.value;
             });
+        otpinput.value = otpcode;
         // otpinput.value = otp.substring(0, otp.length-1);
         const prev = target.previousElementSibling;
         if (prev) {
