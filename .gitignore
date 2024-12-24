@@ -164,3 +164,4 @@ cython_debug/
 /idme/api/migrations/
 
 /venvv/
+/idme/templates/html_template.html
