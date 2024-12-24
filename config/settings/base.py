@@ -220,8 +220,9 @@ DOMAIN = "https://idme.ma"
 # Third-party syndicma settings
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
-    "allauth.account.auth_backends.AuthenticationBackend",
+    # "allauth.account.auth_backends.AuthenticationBackend",
     "guardian.backends.ObjectPermissionBackend",
+    "idme.profiles.IdmeAPIBackend.MyAuthenticationBackend"
 )
 SITE_ID = 1
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"

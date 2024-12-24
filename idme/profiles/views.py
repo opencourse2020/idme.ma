@@ -27,27 +27,15 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required
 from django.utils.text import slugify
 from . import forms, models
-from .mixins import (RegularRequiredMixin, AdminRequiredMixin, AdminAllowedMixing, JsonFormMixin)
+from .mixins import (RegularRequiredMixin, AdminRequiredMixin, AdminAllowedMixing, JsonFormMixin, CustomLoginRequiredMixin)
 from django.contrib import messages
 from datetime import datetime, date, timedelta
 User = get_user_model()
-from allauth.account.auth_backends import AuthenticationBackend
 import pyotp
 import qrcode
 
 
-class MyAuthenticationBackend(AuthenticationBackend):
-    def authenticate(self, request, **credentials):
-        user = super().authenticate(request, **credentials)
-        if user is not None:
-            if user.mfa_enabled:
-                return user
-
-        else:
-            return None
-
-
-class ProfileActivateView(AdminRequiredMixin, UpdateView):
+class ProfileActivateView(AdminRequiredMixin, CustomLoginRequiredMixin, UpdateView):
     model = User
     fields = ["is_active"]
     template_name = "profiles/activate_form.html"
@@ -69,7 +57,7 @@ class ProfileActivateView(AdminRequiredMixin, UpdateView):
         return super().get_context_data(**kwargs)
 
 
-class ProfilesUpdateView(LoginRequiredMixin, UpdateView):
+class ProfilesUpdateView(CustomLoginRequiredMixin, UpdateView):
     model = User
     fields = ["username", "first_name", "last_name", "picture"]
     template_name = "profiles/user_form.html"
@@ -90,7 +78,7 @@ class ProfilesUpdateView(LoginRequiredMixin, UpdateView):
         return super().get_context_data(**kwargs)
 
 
-class ProfileUpdateView(LoginRequiredMixin, UpdateView):
+class ProfileUpdateView(CustomLoginRequiredMixin, UpdateView):
     model = User
     fields = ["email"]
     formset_class = None
@@ -125,7 +113,7 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
             return super().form_invalid(form)
 
 
-class LanguageUpdateView(LoginRequiredMixin, UpdateView):
+class LanguageUpdateView(CustomLoginRequiredMixin, UpdateView):
     model = User
     form_class = forms.LanguageForm
     template_name = "profiles/language_form.html"
@@ -138,7 +126,7 @@ class LanguageUpdateView(LoginRequiredMixin, UpdateView):
         return super().get_context_data(**kwargs)
 
 
-class AdminUpdateView(AdminRequiredMixin, ProfileUpdateView):
+class AdminUpdateView(CustomLoginRequiredMixin, ProfileUpdateView):
     template_name = "profiles/profile_form.html"
     success_url = reverse_lazy("profiles:profile")
     formset_class = forms.AdminFormSet
@@ -156,7 +144,7 @@ class AdminUpdateView(AdminRequiredMixin, ProfileUpdateView):
     #     kwargs.update({"yearofbirth": self.request.user.professor})
     #     return kwargs
 
-class RegularUpdateView(RegularRequiredMixin, ProfileUpdateView):
+class RegularUpdateView(CustomLoginRequiredMixin, ProfileUpdateView):
     template_name = "profiles/profile_form.html"
     success_url = reverse_lazy("profiles:profile")
     formset_class = forms.RegularFormSet
@@ -168,11 +156,11 @@ class RegularUpdateView(RegularRequiredMixin, ProfileUpdateView):
         return super().get_context_data(**kwargs)
 
 
-class ProfileDetailView(LoginRequiredMixin, TemplateView):
+class ProfileDetailView(CustomLoginRequiredMixin, TemplateView):
     template_name = "profiles/profile.html"
 
 
-class ProfileView(LoginRequiredMixin, RedirectView):
+class ProfileView(CustomLoginRequiredMixin, RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         if hasattr(self.request.user, "admin"):
             return reverse_lazy("profiles:admin")
@@ -182,7 +170,7 @@ class ProfileView(LoginRequiredMixin, RedirectView):
         return super().get_redirect_url(*args, **kwargs)
 
 
-class DispatchLoginView(LoginRequiredMixin, RedirectView):
+class DispatchLoginView(CustomLoginRequiredMixin, RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         if hasattr(self.request.user, "admin"):
             return reverse_lazy("idmeapi:sdashboard")
@@ -194,7 +182,7 @@ class DispatchLoginView(LoginRequiredMixin, RedirectView):
         return super().get_redirect_url(*args, **kwargs)
 
 
-class ReviewCreateView(LoginRequiredMixin, CreateView):
+class ReviewCreateView(CustomLoginRequiredMixin, CreateView):
     form_class = forms.ReviewForm
 
     def get_success_url(self):
@@ -252,7 +240,7 @@ class PrivacyView(TemplateView):
     template_name = "../templates/privacy.html"
 
 
-def verify_2fa_otp(user , otp ):
+def verify_2fa_otp(user, otp):
     totp = pyotp.TOTP(user.mfa_secret)
     if totp.verify(otp):
         user.mfa_enabled = True
@@ -326,5 +314,3 @@ def disable_2fa(request):
     else:
         messages.info(request, "2FA is already disabled.")
     return redirect('profiles:profile')
-
-
