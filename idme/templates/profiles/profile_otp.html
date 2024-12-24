@@ -140,6 +140,7 @@ $("#otp_code").keypress(function (e) {
 
 <script>
     const inputs = document.getElementById("inputs");
+    const otpinput = document.getElementById("otp_code");
 
 inputs.addEventListener("input", function (e) {
     const target = e.target;
@@ -152,6 +153,7 @@ inputs.addEventListener("input", function (e) {
 
     if (val != "") {
         const next = target.nextElementSibling;
+        otpinput.value = otpinput.value + val;
         if (next) {
             next.focus();
         }
@@ -164,6 +166,7 @@ inputs.addEventListener("keyup", function (e) {
 
     if (key == "backspace" || key == "delete") {
         target.value = "";
+
         const prev = target.previousElementSibling;
         if (prev) {
             prev.focus();
