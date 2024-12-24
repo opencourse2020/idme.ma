@@ -169,6 +169,43 @@ inputs.addEventListener("keyup", function (e) {
         return;
     }
 });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  //put something to paste into the console
+  console.log('ABCD17');
+
+  //handle pasting in the code
+  document.addEventListener('paste', handlePaste);
+
+  //as you type jump to the next input
+  // let inputs = document.querySelectorAll('.code__input');
+  inputs_elements.forEach((input, index, arr) => {
+    input.addEventListener('input', function (ev) {
+      // arr[input]
+      input.value = input.value.toUpperCase();
+      arr[index + 1]?.focus();
+    });
+  });
+});
+
+function handlePaste(ev) {
+  if (ev.target.localName !== 'input') return;
+  ev.preventDefault();
+  let paste = (ev.clipboardData || window.clipboardData).getData('text');
+  paste = paste.toUpperCase();
+  console.log(paste);
+  // let inputs = document.querySelectorAll('.code__input');
+  if (paste.length !== inputs_elements.length) return; //handle as you want
+  inputs_elements.forEach((input, index) => {
+    input.focus();
+    input.value = paste[index];
+  });
+}
+
+
+
+
 </script>
 
 {% endblock js %}
