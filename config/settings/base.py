@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+    'allauth.mfa',
     # 'allauth.socialaccount.providers.apple',
     # "allauth.socialaccount.providers.facebook",
     'allauth.socialaccount.providers.google',
@@ -82,9 +83,6 @@ INSTALLED_APPS = [
     "idme.profiles.apps.ProfilesConfig",
     "idme.api.apps.IdmeConfig",
     # "api.chat.apps.ChatConfig",
-
-
-    
 ]
 
 ACCOUNT_DEFAULT_HTTP_PROTOCOL ="https"
@@ -103,6 +101,16 @@ MIDDLEWARE = [
     "allauth.account.middleware.AccountMiddleware",
 
 ]
+
+MFA_ADAPTER = "allauth.mfa.adapter.DefaultMFAAdapter"
+MFA_RECOVERY_CODE_COUNT = 10
+# The number of recovery codes.
+
+MFA_TOTP_PERIOD = 30
+# The period that a TOTP code will be valid for, in seconds.
+
+MFA_TOTP_DIGITS = 6
+# The number of digits for TOTP codes.
 
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -220,8 +228,8 @@ DOMAIN = "https://idme.ma"
 # Third-party syndicma settings
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
-    # "allauth.account.auth_backends.AuthenticationBackend",
-    "idme.profiles.IdmeAPIBackend.MyAuthenticationBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+    # "idme.profiles.IdmeAPIBackend.MyAuthenticationBackend",
     "guardian.backends.ObjectPermissionBackend",
 
 )
