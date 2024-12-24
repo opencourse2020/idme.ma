@@ -35,7 +35,7 @@ import pyotp
 import qrcode
 
 
-class ProfileActivateView(AdminRequiredMixin, CustomLoginRequiredMixin, UpdateView):
+class ProfileActivateView(AdminRequiredMixin, LoginRequiredMixin, UpdateView):
     model = User
     fields = ["is_active"]
     template_name = "profiles/activate_form.html"
@@ -57,7 +57,7 @@ class ProfileActivateView(AdminRequiredMixin, CustomLoginRequiredMixin, UpdateVi
         return super().get_context_data(**kwargs)
 
 
-class ProfilesUpdateView(CustomLoginRequiredMixin, UpdateView):
+class ProfilesUpdateView(LoginRequiredMixin, UpdateView):
     model = User
     fields = ["username", "first_name", "last_name", "picture"]
     template_name = "profiles/user_form.html"
@@ -78,7 +78,7 @@ class ProfilesUpdateView(CustomLoginRequiredMixin, UpdateView):
         return super().get_context_data(**kwargs)
 
 
-class ProfileUpdateView(CustomLoginRequiredMixin, UpdateView):
+class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = User
     fields = ["email"]
     formset_class = None
@@ -113,7 +113,7 @@ class ProfileUpdateView(CustomLoginRequiredMixin, UpdateView):
             return super().form_invalid(form)
 
 
-class LanguageUpdateView(CustomLoginRequiredMixin, UpdateView):
+class LanguageUpdateView(LoginRequiredMixin, UpdateView):
     model = User
     form_class = forms.LanguageForm
     template_name = "profiles/language_form.html"
@@ -126,7 +126,7 @@ class LanguageUpdateView(CustomLoginRequiredMixin, UpdateView):
         return super().get_context_data(**kwargs)
 
 
-class AdminUpdateView(CustomLoginRequiredMixin, ProfileUpdateView):
+class AdminUpdateView(LoginRequiredMixin, ProfileUpdateView):
     template_name = "profiles/profile_form.html"
     success_url = reverse_lazy("profiles:profile")
     formset_class = forms.AdminFormSet
@@ -144,7 +144,7 @@ class AdminUpdateView(CustomLoginRequiredMixin, ProfileUpdateView):
     #     kwargs.update({"yearofbirth": self.request.user.professor})
     #     return kwargs
 
-class RegularUpdateView(CustomLoginRequiredMixin, ProfileUpdateView):
+class RegularUpdateView(LoginRequiredMixin, ProfileUpdateView):
     template_name = "profiles/profile_form.html"
     success_url = reverse_lazy("profiles:profile")
     formset_class = forms.RegularFormSet
@@ -156,11 +156,11 @@ class RegularUpdateView(CustomLoginRequiredMixin, ProfileUpdateView):
         return super().get_context_data(**kwargs)
 
 
-class ProfileDetailView(CustomLoginRequiredMixin, TemplateView):
+class ProfileDetailView(LoginRequiredMixin, TemplateView):
     template_name = "profiles/profile.html"
 
 
-class ProfileView(CustomLoginRequiredMixin, RedirectView):
+class ProfileView(LoginRequiredMixin, RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         if hasattr(self.request.user, "admin"):
             return reverse_lazy("profiles:admin")
@@ -170,7 +170,7 @@ class ProfileView(CustomLoginRequiredMixin, RedirectView):
         return super().get_redirect_url(*args, **kwargs)
 
 
-class DispatchLoginView(CustomLoginRequiredMixin, RedirectView):
+class DispatchLoginView(LoginRequiredMixin, RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         if hasattr(self.request.user, "admin"):
             return reverse_lazy("idmeapi:sdashboard")
@@ -182,7 +182,7 @@ class DispatchLoginView(CustomLoginRequiredMixin, RedirectView):
         return super().get_redirect_url(*args, **kwargs)
 
 
-class ReviewCreateView(CustomLoginRequiredMixin, CreateView):
+class ReviewCreateView(LoginRequiredMixin, CreateView):
     form_class = forms.ReviewForm
 
     def get_success_url(self):
