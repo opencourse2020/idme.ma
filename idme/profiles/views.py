@@ -144,7 +144,7 @@ class AdminUpdateView(ProfileUpdateView):
     #     kwargs.update({"yearofbirth": self.request.user.professor})
     #     return kwargs
 
-class RegularUpdateView(LoginRequiredMixin, ProfileUpdateView):
+class RegularUpdateView(ProfileUpdateView):
     template_name = "profiles/profile_form.html"
     success_url = reverse_lazy("profiles:profile")
     formset_class = forms.RegularFormSet
