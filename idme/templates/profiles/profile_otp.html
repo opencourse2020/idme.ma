@@ -174,8 +174,11 @@ inputs.addEventListener("keyup", function (e) {
 
     if (key == "backspace" || key == "delete") {
         target.value = "";
-
-        otpinput.value = otp.substring(0, otp.length-1);
+        var otpcode = "";
+        Array.from(inputs_elements).forEach((input) => {
+        otpcode = otpcode + input.value;
+            });
+        // otpinput.value = otp.substring(0, otp.length-1);
         const prev = target.previousElementSibling;
         if (prev) {
             prev.focus();
