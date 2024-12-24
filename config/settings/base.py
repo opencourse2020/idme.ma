@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.sites",
     "django.contrib.humanize",
+    'widget_tweaks',
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
