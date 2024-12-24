@@ -156,10 +156,11 @@ inputs.addEventListener("input", function (e) {
 
     if (val != "") {
         const next = target.nextElementSibling;
-        inputs_elements.forEach((input) => {
-            otpcode = otpcode + input.value;
-        });
-        otpinput.value = otpcode;
+        Array.from(inputs_elements).forEach((input) => {
+        otpcode = otpcode + input.value;
+            });
+
+        // otpinput.value = otpcode;
         if (next) {
             next.focus();
         }
