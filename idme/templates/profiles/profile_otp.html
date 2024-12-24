@@ -140,8 +140,9 @@ $("#otp_code").keypress(function (e) {
 
 <script>
     const inputs = document.getElementById("inputs");
+    const inputs_elements = inputs.children;
     const otpinput = document.getElementById("otp_code");
-    const inputs_arr = inputs[0];
+    const inputs_arr = Array.from(inputs_elements);
     var otp = otpinput.value;
     var otpcode;
 inputs.addEventListener("input", function (e) {
@@ -155,7 +156,7 @@ inputs.addEventListener("input", function (e) {
 
     if (val != "") {
         const next = target.nextElementSibling;
-        Array.from(inputs_arr.elements).forEach((input) => {
+        inputs_elements.forEach((input) => {
             otpcode = otpcode + input.value;
         });
         otpinput.value = otpcode;
