@@ -79,10 +79,9 @@
                 <form method="POST" action="{% url 'profiles:verify_mfa' %}" class="form text-center">
                     {% csrf_token %}
                     <div class="form-group text-">
-                        <div class="mx-auto" style="width: 50%;">
-                            <input type="hidden mb-2" id="otp_code" name="otp_code" maxlength="6" required
-                                   class="form-control" >
-                        </div>
+<!--                        <div class="mx-auto" style="width: 50%;">-->
+                            <input type="hidden mb-2" id="otp_code" name="otp_code" >
+<!--                        </div>-->
                         <div id="inputs" class="inputs mb-2">
                             <input class="input" type="text"
                                 inputmode="numeric" maxlength="1" />
