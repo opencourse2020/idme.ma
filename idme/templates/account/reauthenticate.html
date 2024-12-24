@@ -30,7 +30,6 @@
 
 
 {% block content_body %}
-{% block reauthenticate_content %}
     {% element p %}
         {% blocktranslate %}Enter your password:{% endblocktranslate %}
     {% endelement %}
@@ -48,7 +47,6 @@
             {% endelement %}
         {% endslot %}
     {% endelement %}
-{% endblock %}
 {% endblock content_body %}
 
 {% block js %}
