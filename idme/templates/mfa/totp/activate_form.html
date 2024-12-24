@@ -69,7 +69,7 @@
                             <div>
                                 <form method="post">
                                     {% csrf_token %}
-                                <img src="{{ totp_svg_data_uri }}" alt="{{ form.secret }}">
+                                <img src="{{ totp_svg_data_uri }}" class="card-img p-1 mb-2 border border-2 border-success" alt="{{ form.secret }}" style="max-width: 200px; height: 200px">
                                 <div class="form-group">
                                     <label for="authenticator_secret">Authenticator secret</label>
                                     <input id="authenticator_secret" type="text" class="form-control" value="{{ form.secret }}" disabled>
@@ -102,6 +102,12 @@
 
 
                         </div>
+                        <div class="card-arrow">
+                        <div class="card-arrow-top-left"></div>
+                        <div class="card-arrow-top-right"></div>
+                        <div class="card-arrow-bottom-left"></div>
+                        <div class="card-arrow-bottom-right"></div>
+                    </div>
                     </div>
                 </div>
             </div>
