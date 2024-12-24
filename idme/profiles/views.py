@@ -126,7 +126,7 @@ class LanguageUpdateView(LoginRequiredMixin, UpdateView):
         return super().get_context_data(**kwargs)
 
 
-class AdminUpdateView(LoginRequiredMixin, ProfileUpdateView):
+class AdminUpdateView(ProfileUpdateView):
     template_name = "profiles/profile_form.html"
     success_url = reverse_lazy("profiles:profile")
     formset_class = forms.AdminFormSet
