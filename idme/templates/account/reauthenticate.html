@@ -31,9 +31,16 @@
 
 
 {% block content_body %}
-    <p>
-        {% blocktranslate %}Enter your password:{% endblocktranslate %}
-    </p>
+<div class="row justify-content-center">
+            <div class="col-12 col-md-5">
+                <div class="card">
+                    <div class="card-header d-flex align-items-center bg-inverse bg-opacity-10 fw-400">
+                        <h5 class="card-title">{% blocktranslate %}Enter your password:{% endblocktranslate %}</h5>
+
+                        <hr/>
+                    </div>
+                    <div class="card-body">
+
     <form form=form method="post" action='account_reauthenticate' >
 
             {% csrf_token %}
@@ -41,6 +48,10 @@
             <button type="submit" tags="primary,reauthenticate" >{% trans "Confirm" %}</button>
 
     </form>
+                    </div>
+                </div>
+            </div>
+</div>
 {% endblock content_body %}
 
 {% block js %}
