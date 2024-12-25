@@ -10,7 +10,7 @@
 
 
 
-{% block page_title %}
+{% block head_title %}
     <h1 class="mb-0 pb-0 display-4" id="title">{% trans "Edit Profile" %}</h1>
     <nav class="breadcrumb-container d-inline-block" aria-label="breadcrumb">
         <ul class="breadcrumb pt-0">
@@ -21,9 +21,9 @@
         </ul>
     </nav>
 
-{% endblock page_title %}
+{% endblock head_title %}
 
-{% block main %}
+{% block content_body %}
     <div class="container">
 
         <div class="row justify-content-center">
@@ -53,9 +53,17 @@
             </div>
         </div>
     </div>
-{% endblock main %}
+{% endblock content_body %}
 
-{% block create_button %}
-    {{ block.super }}
-{% endblock create_button %}
+{% block js %}
+  {{ block.super }}
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+
+
+{% endblock js %}
+
 
