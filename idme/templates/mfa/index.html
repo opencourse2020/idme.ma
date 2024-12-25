@@ -35,20 +35,20 @@
                 <div class="col-12 col-md-5">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="mb-0">{% trans "Two-Factor Authentication" %}</h3>
-                            <p class="mb-0">{% trans "Enable 2FA to your account" %}</p>
+                            <h5 class="card-title mb-0">{% trans "Two-Factor Authentication" %}</h5>
+                            <p class="small text-inverse text-opacity-50 mb-0">{% trans "Enable 2FA to your account" %}</p>
                         </div>
                         <div class="card-body text-center">
                             {% if "totp" in MFA_SUPPORTED_TYPES %}
                                 <div class="panel">
-                                    <h4>{% trans "Authenticator App" %}</h4>
+                                    <h5 class="card-title >{% trans "Authenticator App" %}</h5>
                                     {% if authenticators.totp %}
-                                        <p>{% trans "Authentication using an authenticator app is active." %}</p>
+                                        <p class="small text-inverse text-opacity-50">{% trans "Authentication using an authenticator app is active." %}</p>
                                         <a href="{% url 'mfa_deactivate_totp' %}" class="btn btn-danger delete panel">
                                             <i class="far fa-lg fa-fw me-2 fa-window-close"></i>{% trans "Deactivate" %}
                                         </a>
                                     {% else %}
-                                        <p>{% trans "n Authenticator app is not active." %}</p>
+                                        <p class="small text-inverse text-opacity-50">{% trans "n Authenticator app is not active." %}</p>
                                         <a href="{% url 'mfa_activate_totp' %}" class="btn btn-dark panel">
                                             {% trans "Activate" %}
                                         </a>
@@ -60,7 +60,7 @@
                             {% with total_count=authenticators.recovery_codes.generate_codes|length unused_count=authenticators.recovery_codes.get_unused_codes|length %}
 
                                 <div class="panel">
-                                    <h4>{% trans "Recovery Codes" %}</h4>
+                                    <h5 class="card-title >{% trans "Recovery Codes" %}</h5>
 
                                     {% if authenticators.recovery_codes %}
                                     {% blocktranslate count unused_count=unused_count %}There is {{ unused_count }} out of {{ total_count }} recovery codes available.{% plural %}There are {{ unused_count }} out of {{ total_count }} recovery codes available.{% endblocktranslate %}
