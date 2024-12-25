@@ -1,23 +1,30 @@
+{% extends "base.html" %}
 {% load i18n %}
 {% load static %}
 {% load crispy_forms_tags %}
 
-<!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
-<head>
-	<meta charset="utf-8">
-	<title>{% trans "Login" %}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content={% trans "Analytic Tools for Startups and Existing Companies" %}>
-        <meta name="author" content="">
-	
-	<!-- ================== BEGIN core-css ================== -->
-	<link href={% static "assets/css/vendor.min.css" %} rel="stylesheet">
-    <link href={% static "assets/css/app.min.css" %} rel="stylesheet">
-	<!-- ================== END core-css ================== -->
-	
-</head>
-<body class='pace-top'>
+{% block head_title %}
+
+<title>{% trans "Login" %}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content={% trans "Streamline user onboarding and protect your business with our secure, AI-powered ID verification service, ensuring compliance and preventing fraud." %}>
+<meta name="author" content="">
+{% endblock head_title%}
+
+{% block css %}
+
+    {{ block.super }}
+
+{% endblock css %}
+
+{% block content_head %}
+
+{% endblock content_head %}
+
+{% block content_body %}
+
+<div class="row justify-content-center">
+    <div class="col-12 col-md-5">
 	<!-- BEGIN #app -->
 	<div id="app" class="app app-full-height app-without-header">
 		<!-- BEGIN login -->
@@ -55,12 +62,16 @@
 		<!-- END btn-scroll-top -->
 	</div>
 	<!-- END #app -->
-	
-	<!-- ================== BEGIN core-js ================== -->
-	<script src={% static "assets/js/vendor.min.js"%}></script>
-	<script src={% static "assets/js/app.min.js"%}></script>
-	<!-- ================== END core-js ================== -->
-	
-	
-</body>
-</html>
+	</div>
+</div>
+{% endblock content_body %}
+
+{% block js %}
+  {{ block.super }}
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+{% endblock js %}
