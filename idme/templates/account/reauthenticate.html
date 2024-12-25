@@ -31,23 +31,17 @@
 
 
 {% block content_body %}
-    {% element p %}
+    <p>
         {% blocktranslate %}Enter your password:{% endblocktranslate %}
-    {% endelement %}
+    </p>
     {% url 'account_reauthenticate' as action_url %}
-    {% element form form=form method="post" action=action_url %}
-        {% slot body %}
+    <form form=form method="post" action=action_url >
+
             {% csrf_token %}
-            {% element fields form=form unlabeled=True %}
-            {% endelement %}
-            {{ redirect_field }}
-        {% endslot %}
-        {% slot actions %}
-            {% element button type="submit" tags="primary,reauthenticate" %}
-                {% trans "Confirm" %}
-            {% endelement %}
-        {% endslot %}
-    {% endelement %}
+            {{ form|crispy }}
+            <button type="submit" tags="primary,reauthenticate" >{% trans "Confirm" %}</button>
+
+    </form>
 {% endblock content_body %}
 
 {% block js %}
