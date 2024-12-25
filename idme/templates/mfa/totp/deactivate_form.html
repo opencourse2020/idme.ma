@@ -37,14 +37,14 @@
                             {% trans "Deactivate Authenticator App" %}
                         </h3>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body text-center">
 
                             <p>You are about to deactivate authenticator app based authentication. Are you sure?
                         </p>
                         <form  method="post">
                             {% csrf_token %}
 
-                            <button type="submit">{% trans "Deactivate" %}</button>
+                            <button class="btn btn-danger" type="submit">{% trans "Deactivate" %}</button>
                         </form>
 
 </div>
