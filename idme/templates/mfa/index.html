@@ -22,9 +22,7 @@
     <li class="breadcrumb-item active">{% trans "2FA" %}</li>
 </ul>
 
-<h1 class="page-header">
-    {% trans "Two-Factor Authentication" %}
-</h1>
+
 {% endblock content_head %}
 
 
@@ -40,7 +38,7 @@
                             <h3 class="mb-0">{% trans "Two-Factor Authentication" %}</h3>
                             <p class="mb-0">{% trans "Enable 2FA to your account" %}</p>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body text-center">
                             {% if "totp" in MFA_SUPPORTED_TYPES %}
                                 <div class="panel">
                                     <h4>{% trans "Authenticator App" %}</h4>
@@ -50,7 +48,7 @@
                                             {% trans "Deactivate" %}
                                         </a>
                                     {% else %}
-                                        <p>A{% trans "n authenticator app is not active." %}</p>
+                                        <p>{% trans "n Authenticator app is not active." %}</p>
                                         <a href="{% url 'mfa_activate_totp' %}" class="btn btn-dark panel">
                                             {% trans "Activate" %}
                                         </a>
