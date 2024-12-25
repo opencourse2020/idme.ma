@@ -41,13 +41,13 @@
                     </div>
                     <div class="card-body">
 
-    <form form=form method="post" action='' >
+                        <form form=form method="post" action='' >
 
-            {% csrf_token %}
-            {{ form|crispy }}
-            <button type="submit" style="float: right;" class="btn btn-success" tags="primary,reauthenticate">{% trans "Confirm" %}</button>
+                                {% csrf_token %}
+                                {{ form|crispy }}
+                                <button type="submit" style="float: right;" class="btn btn-success" tags="primary,reauthenticate">{% trans "Confirm" %}</button>
 
-    </form>
+                        </form>
                     </div>
                      <div class="card-arrow">
                         <div class="card-arrow-top-left"></div>

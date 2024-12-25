@@ -12,12 +12,8 @@
 {% endblock head_title%}
 
 {% block css %}
-
     {{ block.super }}
-
 {% endblock css %}
-
-
 
 {% block content_head %}
 
@@ -26,8 +22,6 @@
     {% trans "Recovery Codes" %}
 </h1>
 {% endblock content_head %}
-
-
 
 {% block content_body %}
 <div class="row justify-content-center">
@@ -40,12 +34,12 @@
                     </div>
                     <div class="card-body">
 
-                    <p>You are about to generate a new set of recovery codes for your account.
-                    This action will invalidate your existing codes.</p>
+                    <p>{% trans "You are about to generate a new set of recovery codes for your account.
+                    This action will invalidate your existing codes."%}</p>
                     <form  method="post">
                         {% csrf_token %}
 
-                        <button type="submit">Regenerate Now</button>
+                        <button type="submit">{% trans "Regenerate Now"%}</button>
                     </form>
 
                     </div>
