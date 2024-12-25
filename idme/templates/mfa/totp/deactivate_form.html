@@ -1,18 +1,67 @@
-{% extends 'base.html' %}
-{% load widget_tweaks %}
+{% extends "base.html" %}
+{% load allauth %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
 
-{% block content %}
+{% block head_title %}
+
+<title>{% trans "Deactivate 2FA" %}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content={% trans "Streamline user onboarding and protect your business with our secure, AI-powered ID verification service, ensuring compliance and preventing fraud." %}>
+<meta name="author" content="">
+{% endblock head_title%}
+
+{% block css %}
+
+    {{ block.super }}
+
+{% endblock css %}
 
 
-<h1>Deactivate Authenticator App
-</h1>
-<p>You are about to deactivate authenticator app based authentication. Are you sure?
-</p>
-<form  method="post">
-    {% csrf_token %}
 
-    <button type="submit">Deactivate</button>
-</form>
+{% block content_head %}
 
 
-{% endblock content %}
+<h3 class="page-header">
+    {% trans "Deactivate Authenticator App" %}
+</h3>
+{% endblock content_head %}
+
+
+
+{% block content_body %}
+<div class="row ">
+            <div class="col-12 col-md-5">
+                <div class="card">
+                    <div class="card-body">
+
+                            <p>You are about to deactivate authenticator app based authentication. Are you sure?
+                        </p>
+                        <form  method="post">
+                            {% csrf_token %}
+
+                            <button type="submit">Deactivate</button>
+                        </form>
+
+</div>
+            <div class="card-arrow">
+                <div class="card-arrow-top-left"></div>
+                <div class="card-arrow-top-right"></div>
+                <div class="card-arrow-bottom-left"></div>
+                <div class="card-arrow-bottom-right"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content_body %}
+
+{% block js %}
+  {{ block.super }}
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+{% endblock js %}

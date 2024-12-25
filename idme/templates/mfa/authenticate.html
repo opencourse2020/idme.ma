@@ -36,12 +36,14 @@
 <div class="row ">
     <div class="col-12 col-md-5">
         <div class="card">
+            <div class="card-body">
             <p>Enter your one time code (otp) from your AUth App in the case if you lost your auth app you can use recovery codes</p>
             <form  method="post">
                 {% csrf_token %}
                 {{form}}
                 <button type="submit">Sign in</button>
             </form>
+                </div>
             <div class="card-arrow">
                 <div class="card-arrow-top-left"></div>
                 <div class="card-arrow-top-right"></div>
