@@ -45,7 +45,7 @@
                                     {% if authenticators.totp %}
                                         <p>{% trans "Authentication using an authenticator app is active." %}</p>
                                         <a href="{% url 'mfa_deactivate_totp' %}" class="btn btn-danger delete panel">
-                                            {% trans "Deactivate" %} <i class="far fa-lg fa-fw me-2 fa-window-close"></i>
+                                            <i class="far fa-lg fa-fw me-2 fa-window-close"></i> {% trans "Deactivate" %}
                                         </a>
                                     {% else %}
                                         <p>{% trans "n Authenticator app is not active." %}</p>
@@ -72,9 +72,9 @@
                                     <br /><br>
                                     <div class="btn-group">
 
-                                        <a href="{% url 'mfa_generate_recovery_codes' %}" class="btn btn-outline-success">{% trans "Generate" %}<i class="far fa-lg fa-fw me-2 fa-edit"></i></a>
-                                        <a href="{% url 'mfa_view_recovery_codes' %}" class="btn btn-outline-success">{% trans "View" %} <i class="fas fa-lg fa-fw me-2 fa-eye"></i></a>
-                                        <a href="{% url 'mfa_download_recovery_codes' %}" class="btn btn-outline-success">{% trans "Download" %} <i class="fas fa-lg fa-fw me-2 fa-download"></i></a>
+                                        <a href="{% url 'mfa_generate_recovery_codes' %}" class="btn btn-outline-success"><i class="far fa-lg fa-fw me-2 fa-edit"></i> {% trans "Generate" %}</a>
+                                        <a href="{% url 'mfa_view_recovery_codes' %}" class="btn btn-outline-success"><i class="fas fa-lg fa-fw me-2 fa-eye"></i> {% trans "View" %}</a>
+                                        <a href="{% url 'mfa_download_recovery_codes' %}" class="btn btn-outline-success"><i class="fas fa-lg fa-fw me-2 fa-download"></i> {% trans "Download" %}</a>
                                     </div>
 
                                     {% endif %}
