@@ -41,7 +41,7 @@
                         <div class="card-body text-center">
                             {% if "totp" in MFA_SUPPORTED_TYPES %}
                                 <div class="panel">
-                                    <h5 class="card-title >{% trans "Authenticator App" %}</h5>
+                                    <h5 class="card-title" >{% trans "Authenticator App" %}</h5>
                                     {% if authenticators.totp %}
                                         <p class="small text-inverse text-opacity-50">{% trans "Authentication using an authenticator app is active." %}</p>
                                         <a href="{% url 'mfa_deactivate_totp' %}" class="btn btn-danger delete panel">
@@ -60,7 +60,7 @@
                             {% with total_count=authenticators.recovery_codes.generate_codes|length unused_count=authenticators.recovery_codes.get_unused_codes|length %}
 
                                 <div class="panel">
-                                    <h5 class="card-title >{% trans "Recovery Codes" %}</h5>
+                                    <h5 class="card-title" >{% trans "Recovery Codes" %}</h5>
 
                                     {% if authenticators.recovery_codes %}
                                     {% blocktranslate count unused_count=unused_count %}There is {{ unused_count }} out of {{ total_count }} recovery codes available.{% plural %}There are {{ unused_count }} out of {{ total_count }} recovery codes available.{% endblocktranslate %}
