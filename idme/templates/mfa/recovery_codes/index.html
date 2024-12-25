@@ -1,22 +1,46 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% load allauth %}
+{% load allauth account %}
+{% load static %}
+{% load crispy_forms_tags %}
 
-{% block content %}
+{% block head_title %}
 
-<main>
-    <section class="pt-5 pb-5">
-        <div class="container">
-            <div class="row mt-0 mt-md-4">
+<title>{% trans "Recovery Codes" %}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content={% trans "Streamline user onboarding and protect your business with our secure, AI-powered ID verification service, ensuring compliance and preventing fraud." %}>
+<meta name="author" content="">
+{% endblock head_title%}
 
-                <div class="col-lg-12 col-md-12 col-12">
-                    <div class="card">
-                        <div class="card-body">
+{% block css %}
+
+    {{ block.super }}
+
+{% endblock css %}
 
 
-    {% element h1 %}
+
+{% block content_head %}
+
+
+<h1 class="page-header">
+    {% trans "Recovery Codes" %}
+</h1>
+{% endblock content_head %}
+
+
+
+{% block content_body %}
+
+<div class="row justify-content-center">
+            <div class="col-12 col-md-5">
+                <div class="card">
+                    <div class="card-header d-flex align-items-center bg-inverse bg-opacity-10 fw-400">
+    {% element h5 %}
     {% translate "Recovery Codes" %}
 {% endelement %}
+                        </div>
+                    <div class="card-body">
     {% blocktranslate count unused_count=unused_codes|length %}There is {{ unused_count }} out of {{ total_count }} recovery codes available.{% plural %}There are {{ unused_count }} out of {{ total_count }} recovery codes available.{% endblocktranslate %}
     <br><span>Unused Code</span>
     {% element field id="recovery_codes" type="textarea" disabled=True rows=unused_codes|length readonly=True %}
@@ -36,13 +60,20 @@
 {% element button href=generate_url %}
 {% translate "Generate new codes" %}
 {% endelement %}
+
                     </div>
                 </div>
             </div>
-            </div>
-        </div>
-    </section>
-</main>
+</div>
 
+{% endblock content_body %}
 
-{% endblock content %}
+{% block js %}
+  {{ block.super }}
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+{% endblock js %}
