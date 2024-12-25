@@ -44,7 +44,7 @@
                     <div class="card-body">
                             {% blocktranslate count unused_count=unused_codes|length %}There is {{ unused_count }} out of {{ total_count }} recovery codes available.{% plural %}There are {{ unused_count }} out of {{ total_count }} recovery codes available.{% endblocktranslate %}
                             <br><span>Unused Code</span>
-                            {% element field id="recovery_codes" type="textarea" rows=unused_codes|length readonly=True %}
+                            {% element field id="recovery_codes" type="textarea" class="form-control" rows=unused_codes|length disabled readonly=True %}
 
                             {% comment %} djlint:off {% endcomment %}
                         {% slot value %}{% for code in unused_codes %}{% if forloop.counter0 %}
