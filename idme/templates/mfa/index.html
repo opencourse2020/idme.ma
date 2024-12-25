@@ -33,9 +33,7 @@
 
 
 
-            <div class="row mt-0 mt-md-4">
-
-                <div class="col-lg-12 col-md-12 col-12">
+            <div class="row ">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="mb-0">{% trans "Two-Factor Authentication" %}</h3>
@@ -73,11 +71,11 @@
 
                                     {% if is_mfa_enabled %}
                                     <br /><br>
-                                    <div class="btn-group bg-light">
+                                    <div class="btn-group">
 
-                                        <a href="{% url 'mfa_generate_recovery_codes' %}" class="btn btn-outline-success btn-link">{% trans "Generate" %}</a>
-                                        <a href="{% url 'mfa_view_recovery_codes' %}" class="btn btn-outline-success btn-link">{% trans "View" %}</a>
-                                        <a href="{% url 'mfa_download_recovery_codes' %}" class="btn btn-outline-success btn-link">{% trans "Download" %}</a>
+                                        <a href="{% url 'mfa_generate_recovery_codes' %}" class="btn btn-outline-success">{% trans "Generate" %}</a>
+                                        <a href="{% url 'mfa_view_recovery_codes' %}" class="btn btn-outline-success">{% trans "View" %}</a>
+                                        <a href="{% url 'mfa_download_recovery_codes' %}" class="btn btn-outline-success">{% trans "Download" %}</a>
                                     </div>
 
                                     {% endif %}
@@ -90,6 +88,12 @@
 
 
 
+                        </div>
+                        <div class="card-arrow">
+                            <div class="card-arrow-top-left"></div>
+                            <div class="card-arrow-top-right"></div>
+                            <div class="card-arrow-bottom-left"></div>
+                            <div class="card-arrow-bottom-right"></div>
                         </div>
                     </div>
                 </div>
