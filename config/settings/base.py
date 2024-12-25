@@ -113,6 +113,8 @@ MFA_TOTP_PERIOD = 30
 MFA_TOTP_DIGITS = 6
 # The number of digits for TOTP codes.
 
+MFA_TOTP_ISSUER = "idme.ma"
+
 CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = "config.urls"
