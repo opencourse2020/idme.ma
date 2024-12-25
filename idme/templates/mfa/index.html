@@ -72,9 +72,9 @@
                                     <br /><br>
                                     <div class="btn-group">
 
-                                        <a href="{% url 'mfa_generate_recovery_codes' %}" class="btn btn-outline-success">{% trans "Generate" %}</a>
-                                        <a href="{% url 'mfa_view_recovery_codes' %}" class="btn btn-outline-success">{% trans "View" %}</a>
-                                        <a href="{% url 'mfa_download_recovery_codes' %}" class="btn btn-outline-success">{% trans "Download" %}</a>
+                                        <a href="{% url 'mfa_generate_recovery_codes' %}" class="btn btn-outline-success">{% trans "Generate" %}<i class="far fa-lg fa-fw me-2 fa-edit"></i></a>
+                                        <a href="{% url 'mfa_view_recovery_codes' %}" class="btn btn-outline-success">{% trans "View" %} <i class="fas fa-lg fa-fw me-2 fa-eye"></i></a>
+                                        <a href="{% url 'mfa_download_recovery_codes' %}" class="btn btn-outline-success">{% trans "Download" %} <i class="fas fa-lg fa-fw me-2 fa-download"></i></a>
                                     </div>
 
                                     {% endif %}
