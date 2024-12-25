@@ -1,10 +1,10 @@
 from .base import *  # noqa
 from .base import env
 
-EMAIL_CONFIG = env.email_url("DJANGO_EMAIL_URL")
-vars().update(EMAIL_CONFIG)
-SERVER_EMAIL = EMAIL_CONFIG["EMAIL_HOST_USER"]
-EMAIL_TIMEOUT = 5
+# EMAIL_CONFIG = env.email_url("DJANGO_EMAIL_URL")
+# vars().update(EMAIL_CONFIG)
+# SERVER_EMAIL = EMAIL_CONFIG["EMAIL_HOST_USER"]
+# EMAIL_TIMEOUT = 5
 
 SECRET_KEY = env.str("DJANGO_SECRET_KEY")
 ADMIN_URL = env.str("DJANGO_ADMIN_URL")
