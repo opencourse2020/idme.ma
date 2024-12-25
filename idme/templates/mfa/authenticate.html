@@ -15,7 +15,7 @@
 {% block css %}
 
     {{ block.super }}
-
+    <link href={% static "css/otp_code.css" %} rel="stylesheet">
 {% endblock css %}
 
 {% block content_head %}
@@ -36,7 +36,21 @@
             <p>{% trans "Enter your one time code (otp) from your AUth App in the case if you lost your auth app you can use recovery codes"%}</p>
             <form  method="post">
                 {% csrf_token %}
-                {{form}}
+<!--                {{form}}-->
+                <div id="inputs" class="inputs mb-2">
+                                        <input class="input" type="text" inputmode="numeric" maxlength="1" autofocus />
+                                        <input class="input" type="text"
+                                            inputmode="numeric" maxlength="1" />
+                                        <input class="input" type="text"
+                                            inputmode="numeric" maxlength="1" />
+                                        <input class="input" type="text"
+                                            inputmode="numeric" maxlength="1" />
+                                        <input class="input" type="text"
+                                            inputmode="numeric" maxlength="1" />
+                                        <input class="input" type="text"
+                                            inputmode="numeric" maxlength="1" />
+                                    </div>
+                <input type="hidden" id="id_code" name="code" value="" class="form-control">
                 <button class="btn btn-success mt-2" type="submit">{% trans "Sign in" %}</button>
             </form>
                 </div>
@@ -53,10 +67,12 @@
 
 {% block js %}
   {{ block.super }}
-
+<script src={% static "js/otp_code.js" %}></script>
 <script>
 function goBack() {
   window.history.back();
 }
 </script>
+
+
 {% endblock js %}
