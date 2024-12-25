@@ -6,7 +6,7 @@
 
 {% block head_title %}
 
-<title>{% trans "Deactivate 2FA" %}</title>
+<title xmlns="http://www.w3.org/1999/html">{% trans "Deactivate 2FA" %}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content={% trans "Streamline user onboarding and protect your business with our secure, AI-powered ID verification service, ensuring compliance and preventing fraud." %}>
 <meta name="author" content="">
@@ -40,7 +40,7 @@
                     <div class="card-body text-center">
 
                             <p>{% trans "You are about to deactivate authenticator app based authentication." %}</p>
-                        <p  class="text-danger bg-white mb-4">{% trans "Are you sure?" %}</p>
+                        <p  class="text-danger bg-white mb-4 h5"><strong>{% trans "Are you sure?" %}</strong></p>
 
                         <form  method="post">
                             {% csrf_token %}
