@@ -39,8 +39,9 @@
                     </div>
                     <div class="card-body text-center">
 
-                            <p>You are about to deactivate authenticator app based authentication. Are you sure?
-                        </p>
+                            <p>{% trans "You are about to deactivate authenticator app based authentication." %}</p>
+                        <p  class="text-danger bg-white mb-4">{% trans "Are you sure?" %}</p>
+
                         <form  method="post">
                             {% csrf_token %}
 
