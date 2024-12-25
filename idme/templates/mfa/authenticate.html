@@ -1,15 +1,64 @@
-{% extends 'base.html' %}
-{% load widget_tweaks %}
+{% extends "base.html" %}
+{% load allauth %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
 
-{% block content %}
+{% block head_title %}
+
+<title>{% trans "ID Verify2FA Authenticate" %}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content={% trans "Streamline user onboarding and protect your business with our secure, AI-powered ID verification service, ensuring compliance and preventing fraud." %}>
+<meta name="author" content="">
+{% endblock head_title%}
+
+{% block css %}
+
+    {{ block.super }}
+
+{% endblock css %}
 
 
-<h1> 2FA</h1>
-<p>Enter your one time code (otp) from your AUth App in the case if you lost your auth app you can use recovery codes</p>
-<form  method="post">
-    {% csrf_token %}
-    {{form}}
-    <button type="submit">Sign in</button>
-</form>
 
-{% endblock content %}
+{% block content_head %}
+
+
+<h3 class="page-header">
+    {% trans "2FA" %}
+</h3>
+{% endblock content_head %}
+
+
+
+{% block content_body %}
+
+
+<div class="row ">
+    <div class="col-12 col-md-5">
+        <div class="card">
+            <p>Enter your one time code (otp) from your AUth App in the case if you lost your auth app you can use recovery codes</p>
+            <form  method="post">
+                {% csrf_token %}
+                {{form}}
+                <button type="submit">Sign in</button>
+            </form>
+            <div class="card-arrow">
+                <div class="card-arrow-top-left"></div>
+                <div class="card-arrow-top-right"></div>
+                <div class="card-arrow-bottom-left"></div>
+                <div class="card-arrow-bottom-right"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content_body %}
+
+{% block js %}
+  {{ block.super }}
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+{% endblock js %}
