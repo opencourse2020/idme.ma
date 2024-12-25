@@ -45,7 +45,7 @@
 
             {% csrf_token %}
             {{ form|crispy }}
-            <button type="submit" tags="primary,reauthenticate" >{% trans "Confirm" %}</button>
+            <button type="submit" style="float: right;" class="btn btn-success" tags="primary,reauthenticate">{% trans "Confirm" %}</button>
 
     </form>
                     </div>
