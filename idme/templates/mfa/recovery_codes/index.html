@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% load allauth account %}
+{% load allauth %}
+{% load account %}
 {% load static %}
 {% load crispy_forms_tags %}
 
@@ -36,14 +37,14 @@
             <div class="col-12 col-md-5">
                 <div class="card">
                     <div class="card-header d-flex align-items-center bg-inverse bg-opacity-10 fw-400">
-    {% element h5 %}
-    {% translate "Recovery Codes" %}
-{% endelement %}
-                        </div>
+                        <h5 class="card-title">
+                        {% translate "Recovery Codes" %}
+                        </h5>
+                    </div>
                     <div class="card-body">
     {% blocktranslate count unused_count=unused_codes|length %}There is {{ unused_count }} out of {{ total_count }} recovery codes available.{% plural %}There are {{ unused_count }} out of {{ total_count }} recovery codes available.{% endblocktranslate %}
     <br><span>Unused Code</span>
-    {% element field id="recovery_codes" type="textarea" disabled=True rows=unused_codes|length readonly=True %}
+    <textarea id="recovery_codes" type="textarea" disabled=True rows=unused_codes|length readonly=True ></textarea>
 
     {% comment %} djlint:off {% endcomment %}
 {% slot value %}{% for code in unused_codes %}{% if forloop.counter0 %}
