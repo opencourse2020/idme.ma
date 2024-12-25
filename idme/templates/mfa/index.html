@@ -45,7 +45,7 @@
                                     {% if authenticators.totp %}
                                         <p>{% trans "Authentication using an authenticator app is active." %}</p>
                                         <a href="{% url 'mfa_deactivate_totp' %}" class="btn btn-danger delete panel">
-                                            {% trans "Deactivate" %}
+                                            {% trans "Deactivate" %} <i class="far fa-lg fa-fw me-2 fa-window-close"></i>
                                         </a>
                                     {% else %}
                                         <p>{% trans "n Authenticator app is not active." %}</p>
