@@ -5,7 +5,7 @@
 {% load allauth %}
 
 
-<title>{% trans "Confirm E-mail Address" %}</title>
+<title>{% trans "Verify Your Email Address" %}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content={% trans "Streamline user onboarding and protect your business with our secure, AI-powered ID verification service, ensuring compliance and preventing fraud." %}>
 <meta name="author" content="">
@@ -24,27 +24,18 @@
     <div class="row justify-content-center">
     <div class="col-12 col-md-5">
             <div class="card mb-5 mt-4">
+                <div class="card-header">
+                            <h5 class="card-title mb-0">{% trans "Two-Factor Authentication" %}</h5>
+                            <p class="small text-inverse text-opacity-50 mb-0">{% trans "Enable 2FA to your account" %}</p>
+                        </div>
                 <div class="card-body p-3">
-                    <h1>{% trans "Confirm E-mail Address" %}</h1>
 
-                    {% if confirmation %}
 
-                    {% user_display confirmation.email_address.user as user_display %}
+            <p>
+                {% blocktrans %}We have sent an email to you for verification. Follow the link provided to finalize the signup process. If you do not see the verification email in your main inbox, check your spam folder. Please contact us if you do not receive the verification email within a few minutes.{% endblocktrans %}
+            </p>
 
-                    <p>{% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is an e-mail address for user {{ user_display }}.{% endblocktrans %}</p>
 
-                    <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
-                    {% csrf_token %}
-                        <button type="submit" class="btn btn-primary">{% trans 'Confirm' %}</button>
-                    </form>
-
-                    {% else %}
-
-                    {% url 'account_email' as email_url %}
-
-                    <p>{% blocktrans %}This e-mail confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new e-mail confirmation request</a>.{% endblocktrans %}</p>
-
-                    {% endif %}
                 </div>
                 <div class="card-arrow">
                     <div class="card-arrow-top-left"></div>
@@ -67,3 +58,4 @@ function goBack() {
 
 
 {% endblock js %}
+{% trans "Verify Your Email Address" %}
