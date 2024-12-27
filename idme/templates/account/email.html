@@ -17,7 +17,7 @@
 
 {% block content_head %}
  <ul class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">{% trans "Profile" %}</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'profiles:profile' %}">{% trans "Profile" %}</a></li>
         <li class="breadcrumb-item active">{% trans "Manage Emails" %}</li>
     </ul>
 {% endblock content_head %}
