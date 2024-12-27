@@ -20,14 +20,11 @@
 
 
 {% block content_head %}
-    <h1 class="mb-0 pb-0 display-4" id="title">{% trans "Edit Profile" %}</h1>
-    <nav class="breadcrumb-container d-inline-block" aria-label="breadcrumb">
         <ul class="breadcrumb pt-0">
             <li class="breadcrumb-item"><a href="{% url 'idmeapi:sdashboard' %}">{% trans "Home" %}</a></li>
             <li class="breadcrumb-item"><a href="{% url 'profiles:profile' %}">{% trans "Profile" %}</a></li>
             <li class="breadcrumb-item"><a href="">{% trans "Language" %}</a></li>
         </ul>
-    </nav>
 
 {% endblock content_head %}
 
@@ -36,10 +33,9 @@
         <div class="row gx-4">
             <div class="col-12 col-md-5">
                 <div class="card">
-                    <div class="card-header border-0 pb-0">
+                    <div class="card-header">
                         <h3 class="card-title">{{ title }}</h3>
 
-                        <hr/>
                     </div>
                     <div class="card-body">
                         <form method='POST' action='' id="change-language-form" enctype='multipart/form-data'>{% csrf_token %}
