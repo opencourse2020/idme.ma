@@ -44,7 +44,7 @@
                     <div class="card-body">
                         <form method='POST' action='' id="change-language-form" enctype='multipart/form-data'>{% csrf_token %}
                             {{ form|crispy }}
-                            <input name="next" type="hidden" value="{{ redirect_to }}
+                            <input name="next" type="hidden" value="{{ redirect_to }}">
                             <input type="hidden" value="{{ langs.code }}" name="language" id="language"/>
 
                               <input type="button" value='{% trans "Save" %}' class="btn btn-primary py-2 px-5 change-language">
