@@ -90,10 +90,10 @@
             </div>
         </div>
     </div>
-{% endblock %}
+{% endblock content_body %}
 
 
-{% block project_js %}
+{% block js %}
     {{ block.super }}
 <script type="text/javascript">
 (function() {
@@ -108,5 +108,4 @@
   }
 })();
 </script>
-
-{% content_body %}
+{% endblock js %}
