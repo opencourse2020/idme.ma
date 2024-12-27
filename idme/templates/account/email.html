@@ -32,11 +32,10 @@
                     <h5 class="card-title">{% trans "E-mail Addresses" %}</h5>
                 </div>
                 <div class="card-body p-3">
-    <h1>{% trans "E-mail Addresses" %}</h1>
 {% if user.emailaddress_set.all %}
 
 
-<form action="{% url 'account_email' %}" class="email_list bg-white p-4 contact-form" method="post">
+<form action="{% url 'account_email' %}" class="email_list contact-form" method="post">
 {% csrf_token %}
 <fieldset class="blockLabels">
 <p>{% trans 'The following e-mail addresses are associated with your account:' %}</p>
@@ -58,7 +57,7 @@
 </div>
   {% endfor %}
 
-<div class="buttonHolder mt-3">
+<div class="btn-group mt-3">
       <button class="btn btn-primary mr-1 mb-1" type="submit" name="action_primary" >{% trans 'Make Primary' %}</button>
       <button class="btn btn-primary mr-1 mb-1" type="submit" name="action_send" >{% trans 'Re-send Verification' %}</button>
       <button class="btn btn-primary mr-1 mb-1" type="submit" name="action_remove" >{% trans 'Remove' %}</button>
@@ -73,9 +72,9 @@
 {% endif %}
 <br>
 <br>
-    <h2>{% trans "Add E-mail Address" %}</h2>
+    <h3 class="card-title">{% trans "Add E-mail Address" %}</h3>
 
-    <form method="post" action="{% url 'account_email' %}" class="add_email  bg-white p-4 contact-form">
+    <form method="post" action="{% url 'account_email' %}" class="add_email contact-form">
         {% csrf_token %}
         {{ form|crispy }}
         <button class="btn btn-success py-2 px-5" style="float: right;" name="action_add" type="submit">{% trans "Add E-mail" %}</button>
