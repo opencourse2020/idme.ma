@@ -2,6 +2,13 @@
 {% load i18n %}
 {% load static %}
 {% load crispy_forms_tags %}
+{% block head_title %}
+
+<title>{% trans "Personal Information" %}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content={% trans "Streamline user onboarding and protect your business with our secure, AI-powered ID verification service, ensuring compliance and preventing fraud." %}>
+<meta name="author" content="">
+{% endblock head_title%}
 {% block css %}
 
     {{ block.super }}
@@ -10,18 +17,13 @@
 
 
 
-{% block head_title %}
-    <h1 class="mb-0 pb-0 display-4" id="title">{% trans "Edit Profile" %}</h1>
-    <nav class="breadcrumb-container d-inline-block" aria-label="breadcrumb">
-        <ul class="breadcrumb pt-0">
-            <li class="breadcrumb-item"><a href="{% url 'idmeapi:sdashboard' %}">{% trans "Home" %}</a></li>
-            <li class="breadcrumb-item"><a href="{% url 'profiles:profile' %}">{% trans "Profile" %}</a></li>
-            <li class="breadcrumb-item"><a href="">{% trans "Profile Form" %}</a></li>
+{% block content_head %}
+    <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">{% trans "Home" %}</a></li>
+    <li class="breadcrumb-item active">{% trans "Edit Your Profile" %}</li>
+</ul>
 
-        </ul>
-    </nav>
-
-{% endblock head_title %}
+{% endblock content_head %}
 
 {% block content_body %}
 
@@ -31,7 +33,7 @@
             <div class="card-header">
                 <h5 class="card-title">{{ title }}</h5>
 
-                <hr/>
+
             </div>
             <div class="card-body">
                 <form method='POST' action='' enctype='multipart/form-data'>{% csrf_token %}
