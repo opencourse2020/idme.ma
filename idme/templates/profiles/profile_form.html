@@ -25,38 +25,38 @@
 
 {% block content_body %}
 
-        <div class="row justify-content-center">
+<div class="row justify-content-center">
     <div class="col-lg-6">
-                <div class="card">
-                    <div class="card-header border-0 pb-0">
-                        <h5 class="card-title">{{ title }}</h5>
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">{{ title }}</h5>
 
-                        <hr/>
-                    </div>
-                    <div class="card-body">
-                        <form method='POST' action='' enctype='multipart/form-data'>{% csrf_token %}
+                <hr/>
+            </div>
+            <div class="card-body">
+                <form method='POST' action='' enctype='multipart/form-data'>{% csrf_token %}
 
-                            {{ formset.management_form }}
-                            {{ form|crispy }}
-                            {% for profile_form in formset %}
-                              {{ profile_form|crispy }}
-                            {% endfor %}
+                    {{ formset.management_form }}
+                    {{ form|crispy }}
+                    {% for profile_form in formset %}
+                    {{ profile_form|crispy }}
+                    {% endfor %}
 
 
-                              <input type="submit" value='{% trans "Save" %}' class="btn btn-primary py-2 px-5">
+                    <input type="submit" value='{% trans "Save" %}' class="btn btn-primary py-2 px-5">
 
-                        </form>
-                        <br>
-                    </div>
-                    <div class="card-arrow">
-                        <div class="card-arrow-top-left"></div>
-                        <div class="card-arrow-top-right"></div>
-                        <div class="card-arrow-bottom-left"></div>
-                        <div class="card-arrow-bottom-right"></div>
-                    </div>
-                </div>
+                </form>
+                <br>
+            </div>
+            <div class="card-arrow">
+                <div class="card-arrow-top-left"></div>
+                <div class="card-arrow-top-right"></div>
+                <div class="card-arrow-bottom-left"></div>
+                <div class="card-arrow-bottom-right"></div>
             </div>
         </div>
+    </div>
+</div>
 {% endblock content_body %}
 
 {% block js %}
