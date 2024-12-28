@@ -69,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function handlePaste(ev) {
+
   if (ev.target.localName !== 'input') return;
   ev.preventDefault();
   let paste = (ev.clipboardData || window.clipboardData).getData('text');
@@ -78,10 +79,14 @@ function handlePaste(ev) {
     let inputs_elements = inputs.children;
   // let inputs = document.querySelectorAll('.code__input');
   if (paste.length !== inputs_elements.length) return; //handle as you want
+    var otpcode = "";
   Array.from(inputs_elements).forEach((input, index) => {
     input.focus();
     input.value = paste[index];
+    otpcode = otpcode + input.value;
+
   });
+  otpinput.value = otpcode;
 }
 
 
