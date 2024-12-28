@@ -23,9 +23,14 @@ from django.views.i18n import JavaScriptCatalog
 
 from django.contrib.auth.models import User
 
+
 from django_otp.admin import OTPAdminSite
 from django_otp.plugins.otp_totp.models import TOTPDevice
 from django_otp.plugins.otp_totp.admin import TOTPDeviceAdmin
+from idme.api.models import IDVerify
+
+
+
 # from api.verify.views import FileUpdateView, DocumentScanView, PictureVerifyView, FileUpdatetestView, \
 #     DocumentVerifiedView, HeadshotVerifiedView
 
@@ -45,11 +50,12 @@ class OTPAdmin(OTPAdminSite):
 admin_site = OTPAdmin(name='OTPAdmin')
 admin_site.register(User)
 admin_site.register(TOTPDevice, TOTPDeviceAdmin)
+admin_site.register(IDVerify)
 
 
 
 urlpatterns = [
-    path(settings.ADMIN_URL, admin.site.urls),
+    path(settings.ADMIN_URL, admin_site.urls),
     # path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
     path("", RedirectView.as_view(pattern_name="idmeapi:sdashboard")),
     path("accounts/", include("allauth.urls")),
