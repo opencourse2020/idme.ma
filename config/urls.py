@@ -20,6 +20,12 @@ from django.views.generic import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.i18n import JavaScriptCatalog
+
+from django.contrib.auth.models import User
+
+from django_otp.admin import OTPAdminSite
+from django_otp.plugins.otp_totp.models import TOTPDevice
+from django_otp.plugins.otp_totp.admin import TOTPDeviceAdmin
 # from api.verify.views import FileUpdateView, DocumentScanView, PictureVerifyView, FileUpdatetestView, \
 #     DocumentVerifiedView, HeadshotVerifiedView
 
@@ -32,6 +38,15 @@ from idme.profiles.views import ProfileView
 #
 # router.register(r"verify/", FileUpdateView, basename="verify")
 # router.register(r"chat/", ChatGenerateView, basename="chat")
+
+class OTPAdmin(OTPAdminSite):
+   pass
+
+admin_site = OTPAdmin(name='OTPAdmin')
+admin_site.register(User)
+admin_site.register(TOTPDevice, TOTPDeviceAdmin)
+
+
 
 urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
