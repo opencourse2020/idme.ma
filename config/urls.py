@@ -23,7 +23,7 @@ from django.views.i18n import JavaScriptCatalog
 
 from idme.profiles.models import User, Admin, Enterprise
 from idme.api.models import IDVerify
-from allauth.models import site
+# from allauth.models import site
 from allauth.mfa.models import Authenticator
 from allauth.account.models import EmailAddress
 from allauth.socialaccount.models import SocialAccount, SocialApp, SocialToken
@@ -40,7 +40,7 @@ model_objects = (
     Admin,
     IDVerify,
     Enterprise,
-    site,
+    # site,
     Authenticator,
     EmailAddress,
     SocialApp,
