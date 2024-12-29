@@ -77,7 +77,7 @@ INSTALLED_APPS = [
     "django_filters",
     "guardian",
     "django_extensions",
-    # "admin_honeypot",
+    "admin_honeypot",
     'django_otp',
     'django_otp.plugins.otp_totp',
     "honeypot",
@@ -86,6 +86,7 @@ INSTALLED_APPS = [
     "idme.profiles.apps.ProfilesConfig",
     "idme.api.apps.IdmeConfig",
     # "api.chat.apps.ChatConfig",
+    'defender',
 ]
 
 ACCOUNT_DEFAULT_HTTP_PROTOCOL ="https"
@@ -103,6 +104,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     'user_language_middleware.UserLanguageMiddleware',
     "allauth.account.middleware.AccountMiddleware",
+    'defender.middleware.FailedLoginMiddleware',
 
 ]
 

@@ -8,6 +8,7 @@ from .base import env
 
 SECRET_KEY = env.str("DJANGO_SECRET_KEY")
 ADMIN_URL = env.str("DJANGO_ADMIN_URL")
+ADMIN_URL_DEFENDER = ADMIN_URL + "/defender/"
 ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS")
 OPENAI_KEY = env.str("DJANGO_OPENAI")
 GEMINIAPI_KEY = env.str("DJANGO_GEMINIAPI")
