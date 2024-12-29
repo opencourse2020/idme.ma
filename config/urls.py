@@ -37,9 +37,9 @@ from django_otp.plugins.otp_totp.admin import TOTPDeviceAdmin
 
 model_objects = (
     # User,
-    Admin,
-    IDVerify,
-    Enterprise,
+    # Admin,
+    # IDVerify,
+    # Enterprise,
     # site,
     Authenticator,
     EmailAddress,
