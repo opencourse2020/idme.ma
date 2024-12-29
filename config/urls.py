@@ -35,21 +35,7 @@ from django_otp.plugins.otp_totp.admin import TOTPDeviceAdmin
 
 
 
-model_objects = (
-    # User,
-    # Admin,
-    # IDVerify,
-    # Enterprise,
-    # site,
-    Authenticator,
-    EmailAddress,
-    SocialApp,
-    SocialToken,
-    SocialAccount
-    )
 
-for m in model_objects:
-    admin.site.register(m)
 
 
 
@@ -72,6 +58,21 @@ class OTPAdmin(OTPAdminSite):
 admin_site = OTPAdmin(name='OTPAdmin')
 # admin_site.register(User)
 admin_site.register(TOTPDevice, TOTPDeviceAdmin)
+model_objects = (
+    User,
+    Admin,
+    IDVerify,
+    Enterprise,
+    # site,
+    Authenticator,
+    EmailAddress,
+    SocialApp,
+    SocialToken,
+    SocialAccount
+    )
+
+for m in model_objects:
+    admin.site.register(m)
 # admin_site.register(IDVerify)
 
 
