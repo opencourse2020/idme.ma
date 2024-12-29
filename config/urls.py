@@ -70,9 +70,9 @@ class OTPAdmin(OTPAdminSite):
    pass
 
 admin_site = OTPAdmin(name='OTPAdmin')
-admin_site.register(User)
+# admin_site.register(User)
 admin_site.register(TOTPDevice, TOTPDeviceAdmin)
-admin_site.register(IDVerify)
+# admin_site.register(IDVerify)
 
 
 
