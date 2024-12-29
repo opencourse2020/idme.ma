@@ -55,7 +55,7 @@ admin_site.register(IDVerify)
 
 
 urlpatterns = [
-    path(settings.ADMIN_URL, admin_site.urls),
+    path(settings.ADMIN_URL, admin.site.urls),
     # path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
     path("", RedirectView.as_view(pattern_name="idmeapi:sdashboard")),
     path("accounts/", include("allauth.urls")),
