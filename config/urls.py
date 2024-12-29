@@ -63,15 +63,15 @@ model_objects = (
     Admin,
     IDVerify,
     Enterprise,
-    # Authenticator,
-    # EmailAddress,
-    # SocialApp,
-    # SocialToken,
-    # SocialAccount
+    Authenticator,
+    EmailAddress,
+    SocialApp,
+    SocialToken,
+    SocialAccount
     )
 
 for m in model_objects:
-    admin.site.register(m)
+    admin_site.register(m)
 # admin_site.register(IDVerify)
 
 
