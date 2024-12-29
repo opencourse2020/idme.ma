@@ -21,13 +21,35 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.i18n import JavaScriptCatalog
 
-from django.contrib.auth.models import User
+from idme.profiles.models import User, Admin, Enterprise
+from idme.api.models import IDVerify
+from allauth.models import site
+from allauth.mfa.models import Authenticator
+from allauth.account.models import EmailAddress
+from allauth.socialaccount.models import SocialAccount, SocialApp, SocialToken
 
 
 from django_otp.admin import OTPAdminSite
 from django_otp.plugins.otp_totp.models import TOTPDevice
 from django_otp.plugins.otp_totp.admin import TOTPDeviceAdmin
-from idme.api.models import IDVerify
+
+
+
+model_objects = (
+    User,
+    Admin,
+    IDVerify,
+    Enterprise,
+    site,
+    Authenticator,
+    EmailAddress,
+    SocialApp,
+    SocialToken,
+    SocialAccount
+    )
+
+for m in model_objects:
+    admin.site.register(m)
 
 
 
@@ -55,7 +77,7 @@ admin_site.register(IDVerify)
 
 
 urlpatterns = [
-    path(settings.ADMIN_URL, admin.site.urls),
+    path(settings.ADMIN_URL, admin_site.urls),
     # path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
     path("", RedirectView.as_view(pattern_name="idmeapi:sdashboard")),
     path("accounts/", include("allauth.urls")),
