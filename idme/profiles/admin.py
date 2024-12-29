@@ -26,19 +26,19 @@ from . import models
 #     resource_class = UserResource
 
 
-admin.site.register(models.User)
+# admin.site.register(models.User)
 
 # admin.site.register(models.Tenant, TenantAdmin)
 
 
 
 
-model_objects = (
-    models.Admin,
-    models.Regular,
-    models.Review,
-    models.Enterprise
-    )
-
-for m in model_objects:
-    admin.site.register(m)
+# model_objects = (
+#     models.Admin,
+#     models.Regular,
+#     models.Review,
+#     models.Enterprise
+#     )
+#
+# for m in model_objects:
+#     admin.site.register(m)
