@@ -36,7 +36,7 @@ from django_otp.plugins.otp_totp.admin import TOTPDeviceAdmin
 
 
 model_objects = (
-    User,
+    # User,
     Admin,
     IDVerify,
     Enterprise,
