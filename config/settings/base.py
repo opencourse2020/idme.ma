@@ -86,7 +86,7 @@ INSTALLED_APPS = [
     "idme.profiles.apps.ProfilesConfig",
     "idme.api.apps.IdmeConfig",
     # "api.chat.apps.ChatConfig",
-    # 'defender',
+    'defender',
     "axes",
 ]
 
