@@ -8,6 +8,7 @@ import datetime as dt
 import hmac
 import hashlib
 from base64 import b64encode
+import difflib
 
 def period_7d(date):
     x=dt.date.isocalendar(date)
@@ -89,3 +90,23 @@ def verifySignature(receivedSignature: str, secret, params):
   if signature == receivedSignature:
     return True
   return False
+
+
+def check_name(name, fname, lname):
+    name_str = name.lower().split()
+
+    similar = difflib.get_close_matches(fname, name_str)
+    # similar = []
+    if len(similar) > 0:
+        fname_status = True
+    else:
+        fname_status = False
+
+    similar = difflib.get_close_matches(lname, name_str)
+    if len(similar) > 0:
+        lname_status = True
+    else:
+        lname_status = False
+
+    if fname_status and lname_status:
+        return True

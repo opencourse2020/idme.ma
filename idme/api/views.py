@@ -36,7 +36,7 @@ import numpy as np
 import seaborn as sns
 from datetime import datetime as dt
 from .id_recognize import idrecognize
-from .tools import verifySignature
+from .tools import verifySignature, check_name
 from obfuskey import Obfuskey, alphabets
 # Create your views here.
 
@@ -89,17 +89,19 @@ class FileUpdateView(CreateView, JsonFormMixin):
     customer = int(client_user[0])
 
     obj, created = models.IDVerify.objects.update_or_create(
-        client_user=clientuser, defaults={'customer_id': customer, 'client_num': client, 'idcard': filename})
+        client_user=clientuser, defaults={'customer_id': customer, 'client_num': client})
     result = idrecognize(str(client), side)
     if result:
         if side == 1:
             temp_user_data = models.IDVerifyTmp.objects.filter(pk=customer).first()
-            temp_cin = temp_user_data.user_id
+            temp_cin = temp_user_data.user_id.lower()
             temp_fname = temp_user_data.firstname.lower()
             temp_lname = temp_user_data.lastname.lower()
             temp_name = temp_fname + " " + temp_lname
             temp_email = temp_user_data.user_email
             temp_phone = temp_user_data.user_phone
+            name_verified = False
+            user_id_verified = False
             identification = result.get("Identity")
             if identification:
                 identification.strip()
@@ -109,12 +111,19 @@ class FileUpdateView(CreateView, JsonFormMixin):
             city = result.get("City of Birth")
             dob = result.get("Date of Birth (DOB)")
             expiry_date = result.get("Expiration Date (EXP)")
+
+            if check_name(name, temp_fname, temp_lname):
+                name_verified = True
+            if identification.lower() == temp_cin:
+                user_id_verified = True
+
             obj, created = models.IDVerify.objects.update_or_create(
                 client_user=clientuser,
                 defaults={'customer_id': customer, 'user_id': identification, 'name': name, 'birth_city': city,
                           'dob': dob, 'expiry_date': expiry_date, 'client_num': client, 'user_email': temp_email,
                           'user_phone': temp_phone, 'temp_user_id': temp_cin, 'firstname': name,
-                          'temp_firstname': temp_fname, 'temp_lastname': temp_lname}
+                          'temp_firstname': temp_fname, 'temp_lastname': temp_lname, 'idcard_f': filename,
+                          'user_id_verified': user_id_verified, 'name_verified': name_verified}
             )
             result = {'id': identification, 'name': name, 'city': city, 'dob': dob, 'expire': expiry_date}
             temp_user_data.delete()
@@ -124,7 +133,7 @@ class FileUpdateView(CreateView, JsonFormMixin):
             gender = result.get("Gender")
             obj, created = models.IDVerify.objects.update_or_create(
                 client_user=clientuser,
-                defaults={'user_id': identification, 'address': address, 'gender': gender, 'client_num': client}
+                defaults={'user_id': identification, 'address': address, 'gender': gender, 'client_num': client, 'idcard_b': filename}
             )
             result = {'address': address, 'gender': gender}
         # if expiry_date_text.find("-"):

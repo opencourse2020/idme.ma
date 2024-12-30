@@ -34,12 +34,17 @@ class IDVerify(models.Model):
     user_email = models.CharField(max_length=100, null=True, blank=True)
     user_phone = models.CharField(max_length=25, null=True, blank=True)
     expiry_date = models.CharField(max_length=30, null=True, blank=True)
-    idcard = ContentTypeRestrictedFileField(upload_to=document_directory_path,
+    idcard_f = ContentTypeRestrictedFileField(upload_to=document_directory_path,
                                              content_types=['image/bmp', 'image/gif', 'image/jpeg', 'image/png', ],
                                              max_upload_size=52428800, blank=True, null=True)
+    idcard_b = ContentTypeRestrictedFileField(upload_to=document_directory_path,
+                                            content_types=['image/bmp', 'image/gif', 'image/jpeg', 'image/png', ],
+                                            max_upload_size=52428800, blank=True, null=True)
     verification_created_date = models.DateTimeField(auto_now_add=True)
     verification_modified_date = models.DateTimeField(auto_now=True)
     sent = models.BooleanField(default=False)
+    name_verified = models.BooleanField(default=False)
+    user_id_verified = models.BooleanField(default=False)
     def __str__(self):
         return "{}-{}".format(str(self.client_num), str(self.customer_id))
 
