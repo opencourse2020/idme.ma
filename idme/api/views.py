@@ -41,7 +41,7 @@ from obfuskey import Obfuskey, alphabets
 # Create your views here.
 
 # Set the lenght of the hash key
-obfuscator = Obfuskey(alphabets.BASE36, key_length=18)
+obfuscator = Obfuskey(alphabets.BASE36, key_length=20)
 
 class IDVerifyView(TemplateView):
     # model = models.IDVerify
@@ -60,8 +60,8 @@ class IDVerifyView(TemplateView):
             user_id = "{:06d}".format(userid)
 
         # clientid = "{:06d}".format(dt.now().hour*10000+dt.now().minute*100+dt.now().second)
-        sec = "{:02d}".format(dt.now().second)
-        client_user_id = obfuscator.get_value("{}XX{}XX{}".format(user_id, clientid, sec))
+        call_time = "{:04d}".format(dt.now().minute*100+dt.now().second)
+        client_user_id = obfuscator.get_value("{}XX{}XX{}".format(user_id, clientid, call_time))
         kwargs["clientid"] = client_user_id
         return super(IDVerifyView, self).get_context_data(**kwargs)
 

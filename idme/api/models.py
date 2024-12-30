@@ -21,7 +21,7 @@ class IDVerify(models.Model):
     client_num = models.IntegerField()
     customer_id = models.IntegerField()
     user_id = models.CharField(max_length=20, null=True, blank=True)
-    client_user = models.CharField(max_length=18, null=True, blank=True)
+    client_user = models.CharField(max_length=24, null=True, blank=True)
     name = models.CharField(max_length=100, null=True, blank=True)
     address = models.CharField(max_length=100, null=True, blank=True)
     birth_city = models.CharField(max_length=100, null=True, blank=True)
