@@ -10,7 +10,7 @@ import os
 
 def document_directory_path(instance, filename):
 
-    return 'id_cards/user_{0}/{1}'.format(instance.client_num, filename)
+    return 'id_cards/client_{0}/user_{1}/{2}'.format(instance.client_num, instance.customer_id, filename)
 
 
 class IDVerify(models.Model):
@@ -45,6 +45,7 @@ class IDVerify(models.Model):
     sent = models.BooleanField(default=False)
     name_verified = models.BooleanField(default=False)
     user_id_verified = models.BooleanField(default=False)
+    ip_address = models.CharField(max_length=30, null=True, blank=True)
     def __str__(self):
         return "{}-{}".format(str(self.client_num), str(self.customer_id))
 

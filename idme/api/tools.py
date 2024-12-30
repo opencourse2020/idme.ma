@@ -9,6 +9,7 @@ import hmac
 import hashlib
 from base64 import b64encode
 import difflib
+from ipware import get_client_ip
 
 def period_7d(date):
     x=dt.date.isocalendar(date)
@@ -110,3 +111,12 @@ def check_name(name, fname, lname):
 
     if fname_status and lname_status:
         return True
+
+
+def check_ip(request):
+    client_ip, is_routable = get_client_ip(request, request_header_order=['X_FORWARDED_FOR', 'HTTP_X_FORWARDED_FOR', 'REMOTE_ADDR'])
+    if client_ip and is_routable:
+        return client_ip
+    else:
+        return None
+

@@ -36,7 +36,7 @@ import numpy as np
 import seaborn as sns
 from datetime import datetime as dt
 from .id_recognize import idrecognize
-from .tools import verifySignature, check_name
+from .tools import verifySignature, check_name, check_ip
 from obfuskey import Obfuskey, alphabets
 # Create your views here.
 
@@ -77,6 +77,7 @@ class FileUpdateView(CreateView, JsonFormMixin):
   def post(self, request, *args, **kwargs):
     # file_serializer = FileSerializer(data=request.data)
 
+    ip_address = check_ip(request)
 
     # if file_serializer.is_valid():
     filename = request.FILES['file']
@@ -87,9 +88,14 @@ class FileUpdateView(CreateView, JsonFormMixin):
     client_user = clientuser.split("XX")
     client = int(client_user[1])
     customer = int(client_user[0])
-
-    obj, created = models.IDVerify.objects.update_or_create(
-        client_user=clientuser, defaults={'customer_id': customer, 'client_num': client})
+    if side == 1:
+        obj, created = models.IDVerify.objects.update_or_create(
+            client_user=clientuser, defaults={'customer_id': customer, 'client_num': client,
+                                              'idcard_f': filename, 'ip_address': ip_address})
+    elif side == 2:
+        obj, created = models.IDVerify.objects.update_or_create(
+            client_user=clientuser, defaults={'customer_id': customer, 'client_num': client,
+                                              'idcard_b': filename, 'ip_address': ip_address})
     result = idrecognize(str(client), side)
     if result:
         if side == 1:
@@ -97,7 +103,6 @@ class FileUpdateView(CreateView, JsonFormMixin):
             temp_cin = temp_user_data.user_id.lower()
             temp_fname = temp_user_data.firstname.lower()
             temp_lname = temp_user_data.lastname.lower()
-            temp_name = temp_fname + " " + temp_lname
             temp_email = temp_user_data.user_email
             temp_phone = temp_user_data.user_phone
             name_verified = False
@@ -122,7 +127,7 @@ class FileUpdateView(CreateView, JsonFormMixin):
                 defaults={'customer_id': customer, 'user_id': identification, 'name': name, 'birth_city': city,
                           'dob': dob, 'expiry_date': expiry_date, 'client_num': client, 'user_email': temp_email,
                           'user_phone': temp_phone, 'temp_user_id': temp_cin, 'firstname': name,
-                          'temp_firstname': temp_fname, 'temp_lastname': temp_lname, 'idcard_f': filename,
+                          'temp_firstname': temp_fname, 'temp_lastname': temp_lname,
                           'user_id_verified': user_id_verified, 'name_verified': name_verified}
             )
             result = {'id': identification, 'name': name, 'city': city, 'dob': dob, 'expire': expiry_date}
@@ -133,7 +138,7 @@ class FileUpdateView(CreateView, JsonFormMixin):
             gender = result.get("Gender")
             obj, created = models.IDVerify.objects.update_or_create(
                 client_user=clientuser,
-                defaults={'user_id': identification, 'address': address, 'gender': gender, 'client_num': client, 'idcard_b': filename}
+                defaults={'user_id': identification, 'address': address, 'gender': gender, 'client_num': client}
             )
             result = {'address': address, 'gender': gender}
         # if expiry_date_text.find("-"):
