@@ -52,7 +52,7 @@ class IDVerifyView(TemplateView):
         postData = self.request.GET
         userid = postData.get("user")  #clfid: client for user id
         client = int(postData.get('client'))
-        clientuser = userid + "@" + client
+        clientuser = str(userid) + "@" + str(client)
         fname = postData.get('fname')
         lname = postData.get('lname')
         email = postData.get('email')
