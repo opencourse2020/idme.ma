@@ -86,7 +86,8 @@ INSTALLED_APPS = [
     "idme.profiles.apps.ProfilesConfig",
     "idme.api.apps.IdmeConfig",
     # "api.chat.apps.ChatConfig",
-    'defender',
+    # 'defender',
+    "axes",
 ]
 
 ACCOUNT_DEFAULT_HTTP_PROTOCOL ="https"
@@ -104,7 +105,8 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     'user_language_middleware.UserLanguageMiddleware',
     "allauth.account.middleware.AccountMiddleware",
-    "defender.middleware.FailedLoginMiddleware",
+    'axes.middleware.AxesMiddleware',
+    # "defender.middleware.FailedLoginMiddleware",
 
 ]
 
@@ -235,6 +237,7 @@ DOMAIN = "https://idme.ma"
 
 # Third-party syndicma settings
 AUTHENTICATION_BACKENDS = (
+    'axes.backends.AxesStandaloneBackend',
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
     # "idme.profiles.IdmeAPIBackend.MyAuthenticationBackend",
