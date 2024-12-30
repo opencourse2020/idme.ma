@@ -79,9 +79,11 @@ class FileUpdateView(CreateView, JsonFormMixin):
     filename = request.FILES['file']
     side = int(request.POST.get("side"))
     client_user_id = request.POST.get("cid")
-    clientuser = obfuscator.get_key(int(client_user_id))
-    client = int(clientuser.split("XX")[1])
-    customer = int(clientuser.split("XX")[0])
+
+    clientuser = obfuscator.get_key(int(client_user_id)).split("XX")
+    print(clientuser)
+    client = int(clientuser[1])
+    customer = int(clientuser[0])
 
     print(client)
     obj, created = models.IDVerify.objects.update_or_create(
