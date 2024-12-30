@@ -49,10 +49,14 @@ class IDVerifyView(TemplateView):
     template_name = "idmeapi/idverify.html"
     # success_url = reverse_lazy("coeanalytics:analytictypes:list")
     def get_context_data(self, **kwargs):
-        # clientid = int(self.kwargs.get("client_id"))
-        clientid = int(self.request.user.id)
-        user_id = "{:06d}".format(int(self.kwargs.get("user_id")))
-        clientid = "{:06d}".format(dt.now().hour*10000+dt.now().minute*100+dt.now().second)
+        postData = self.request.POST
+
+        client_id = int(postData.get("client"))
+        clientid = "{:06d}".format(client_id)
+        userid = int(postData.get("user"))
+        # clientid = int(self.request.user.id)
+        user_id = "{:06d}".format(userid)
+        # clientid = "{:06d}".format(dt.now().hour*10000+dt.now().minute*100+dt.now().second)
         sec = "{:02d}".format(dt.now().second)
         client_user_id = obfuscator.get_value("{}XX{}XX{}".format(user_id, clientid, sec))
         kwargs["clientid"] = client_user_id
