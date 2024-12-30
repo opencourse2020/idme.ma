@@ -113,7 +113,7 @@ class FileUpdateView(CreateView, JsonFormMixin):
                 client_user=clientuser,
                 defaults={'customer_id': customer, 'user_id': identification, 'name': name, 'birth_city': city,
                           'dob': dob, 'expiry_date': expiry_date, 'client_num': client, 'user_email': temp_email,
-                          'user_phone': temp_phone, 'temp_user_id': temp_cin,
+                          'user_phone': temp_phone, 'temp_user_id': temp_cin, 'firstname': name,
                           'temp_firstname': temp_fname, 'temp_lastname': temp_lname}
             )
             result = {'id': identification, 'name': name, 'city': city, 'dob': dob, 'expire': expiry_date}
