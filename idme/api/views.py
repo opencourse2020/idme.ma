@@ -51,6 +51,8 @@ class IDVerifyView(TemplateView):
     def get_context_data(self, **kwargs):
         postData = self.request.GET
         client_user = postData.get("clfuid")  #clfid: client for user id
+        clientid = 0
+        user_id = 0
         if client_user:
             client_id = int(client_user.split("@")[0])
             userid = int(client_user.split("@")[1])
