@@ -86,7 +86,6 @@ INSTALLED_APPS = [
     "idme.profiles.apps.ProfilesConfig",
     "idme.api.apps.IdmeConfig",
     # "api.chat.apps.ChatConfig",
-    # 'defender',
     "axes",
 ]
 
@@ -106,7 +105,6 @@ MIDDLEWARE = [
     'user_language_middleware.UserLanguageMiddleware',
     "allauth.account.middleware.AccountMiddleware",
     'axes.middleware.AxesMiddleware',
-    # "defender.middleware.FailedLoginMiddleware",
 
 ]
 

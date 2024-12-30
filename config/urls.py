@@ -34,10 +34,6 @@ from django_otp.plugins.otp_totp.models import TOTPDevice
 from django_otp.plugins.otp_totp.admin import TOTPDeviceAdmin
 
 from axes.models import AccessAttempt, AccessFailureLog, AccessLog
-# from defender.models import AccessAttempt
-
-
-
 
 
 # from api.verify.views import FileUpdateView, DocumentScanView, PictureVerifyView, FileUpdatetestView, \
