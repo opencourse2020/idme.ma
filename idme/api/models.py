@@ -23,6 +23,7 @@ class IDVerify(models.Model):
     user_id = models.CharField(max_length=20, null=True, blank=True)
     temp_user_id = models.CharField(max_length=20, null=True, blank=True)
     client_user = models.CharField(max_length=24, null=True, blank=True)
+    name = models.CharField(max_length=100, null=True, blank=True)
     firstname = models.CharField(max_length=50, null=True, blank=True)
     lastname = models.CharField(max_length=50, null=True, blank=True)
     temp_firstname = models.CharField(max_length=50, null=True, blank=True)

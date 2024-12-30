@@ -111,6 +111,8 @@ def check_name(name, fname, lname):
 
     if fname_status and lname_status:
         return True
+    else:
+        return False
 
 
 def check_ip(request):

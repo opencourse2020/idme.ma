@@ -107,6 +107,8 @@ class FileUpdateView(CreateView, JsonFormMixin):
             temp_phone = temp_user_data.user_phone
             name_verified = False
             user_id_verified = False
+            fname = ""
+            lname = ""
             identification = result.get("Identity")
             if identification:
                 identification.strip()
@@ -119,14 +121,16 @@ class FileUpdateView(CreateView, JsonFormMixin):
 
             if check_name(name, temp_fname, temp_lname):
                 name_verified = True
+                fname = temp_fname
+                lname = temp_lname
             if identification.lower() == temp_cin:
                 user_id_verified = True
 
             obj, created = models.IDVerify.objects.update_or_create(
                 client_user=clientuser,
-                defaults={'customer_id': customer, 'user_id': identification, 'name': name, 'birth_city': city,
+                defaults={'customer_id': customer, 'user_id': identification, 'lastname': lname, 'birth_city': city,
                           'dob': dob, 'expiry_date': expiry_date, 'client_num': client, 'user_email': temp_email,
-                          'user_phone': temp_phone, 'temp_user_id': temp_cin, 'firstname': name,
+                          'user_phone': temp_phone, 'temp_user_id': temp_cin, 'firstname': fname, 'name': name,
                           'temp_firstname': temp_fname, 'temp_lastname': temp_lname,
                           'user_id_verified': user_id_verified, 'name_verified': name_verified}
             )
