@@ -41,6 +41,7 @@ class IDVerify(models.Model):
 
 
 class IDVerifyTmp(models.Model):
+    client_user = models.CharField(max_length=24, null=True, blank=True)
     client_num = models.IntegerField()
     user_id = models.CharField(max_length=20, null=True, blank=True)
     firstname = models.CharField(max_length=50, null=True, blank=True)

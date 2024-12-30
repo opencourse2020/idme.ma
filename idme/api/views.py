@@ -52,12 +52,14 @@ class IDVerifyView(TemplateView):
         postData = self.request.GET
         userid = postData.get("user")  #clfid: client for user id
         client = int(postData.get('client'))
+        clientuser = userid + "@" + client
         fname = postData.get('fname')
         lname = postData.get('lname')
         email = postData.get('email')
         phone = postData.get('phone')
-        obj, created = models.IDVerifyTmp.objects.create(user_id=userid, firstname=fname, lastname=lname,
-                                                         user_email=email, user_phone=phone, client_num=client)
+        obj, created = models.IDVerifyTmp.objects.update_or_create(
+            client_user=clientuser, default={'user_id': userid, 'firstname': fname, 'lastname': lname,
+                                             'user_email': email, 'user_phone': phone, 'client_num': client})
         clientid = "{:06d}".format(obj.client)
         user_id = "{:06d}".format(obj.pk)
 
