@@ -7,7 +7,7 @@ from . import models
 class IDVerifyCreateForm(forms.ModelForm):
     class Meta:
         model = models.IDVerify
-        fields = ["idcard"]
+        fields = ["idcard_f"]
 
         labels = {
             "idcard": _("ID Card")
