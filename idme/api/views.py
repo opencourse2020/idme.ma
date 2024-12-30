@@ -54,8 +54,8 @@ class IDVerifyView(TemplateView):
         clientid = 0
         user_id = 0
         if client_user:
-            client_id = int(client_user.split("@")[0])
-            userid = int(client_user.split("@")[1])
+            client_id = int(client_user.split("@")[1])
+            userid = int(client_user.split("@")[0])
             clientid = "{:06d}".format(client_id)
             user_id = "{:06d}".format(userid)
 
