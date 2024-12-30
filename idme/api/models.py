@@ -27,6 +27,8 @@ class IDVerify(models.Model):
     birth_city = models.CharField(max_length=100, null=True, blank=True)
     gender = models.CharField(max_length=1, choices=categories, default="M")
     dob = models.CharField(max_length=30, null=True, blank=True)
+    user_email = models.CharField(max_length=100, null=True, blank=True)
+    user_phone = models.CharField(max_length=25, null=True, blank=True)
     expiry_date = models.CharField(max_length=30, null=True, blank=True)
     idcard = ContentTypeRestrictedFileField(upload_to=document_directory_path,
                                              content_types=['image/bmp', 'image/gif', 'image/jpeg', 'image/png', ],
@@ -37,3 +39,14 @@ class IDVerify(models.Model):
     def __str__(self):
         return "{}-{}".format(str(self.client_num), str(self.customer_id))
 
+
+class IDVerifyTmp(models.Model):
+    client_num = models.IntegerField()
+    user_id = models.CharField(max_length=20, null=True, blank=True)
+    firstname = models.CharField(max_length=50, null=True, blank=True)
+    lastname = models.CharField(max_length=50, null=True, blank=True)
+    user_email = models.CharField(max_length=100, null=True, blank=True)
+    user_phone = models.CharField(max_length=25, null=True, blank=True)
+
+    def __str__(self):
+        return "{}-{}".format(str(self.client_num), str(self.user_id))

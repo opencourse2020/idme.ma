@@ -50,16 +50,16 @@ class IDVerifyView(TemplateView):
     # success_url = reverse_lazy("coeanalytics:analytictypes:list")
     def get_context_data(self, **kwargs):
         postData = self.request.GET
-        client_user = postData.get("clfuid")  #clfid: client for user id
-        client = postData.get('client')
-        print('client:', client)
-        clientid = 0
-        user_id = 0
-        if client_user:
-            client_id = int(client_user.split("@")[1])
-            userid = int(client_user.split("@")[0])
-            clientid = "{:06d}".format(client_id)
-            user_id = "{:06d}".format(userid)
+        userid = postData.get("user")  #clfid: client for user id
+        client = int(postData.get('client'))
+        fname = postData.get('fname')
+        lname = postData.get('lname')
+        email = postData.get('email')
+        phone = postData.get('phone')
+        obj, created = models.IDVerifyTmp.objects.create(user_id=userid, firstname=fname, lastname=lname,
+                                                         user_email=email, user_phone=phone, client_num=client)
+        clientid = "{:06d}".format(obj.client)
+        user_id = "{:06d}".format(obj.pk)
 
         # clientid = "{:06d}".format(dt.now().hour*10000+dt.now().minute*100+dt.now().second)
         call_time = "{:04d}".format(dt.now().minute*100+dt.now().second)
@@ -85,7 +85,9 @@ class FileUpdateView(CreateView, JsonFormMixin):
     client_user = clientuser.split("XX")
     client = int(client_user[1])
     customer = int(client_user[0])
-
+    temp_user_data = models.IDVerifyTmp.objects.filter(pk=customer).first()
+    temp_cin = temp_user_data.user_id
+    temp_name = temp_user_data.firstname.lower() + " " + temp_user_data.lastname.lower()
     obj, created = models.IDVerify.objects.update_or_create(
         client_user=clientuser, defaults={'customer_id': customer, 'client_num': client, 'idcard': filename})
     result = idrecognize(str(client), side)
