@@ -202,8 +202,8 @@ def process_card_id(file_path, generative_ai, prompt):
 
 
 # @print_progress
-def idrecognize(client, side):
-    media_path = Path(media_folder + "/id_cards/user_" + client)
+def idrecognize(client, userid, side):
+    media_path = Path(media_folder + "/id_cards/client_" + client + "/user_" + userid)
     result = None
     print(media_path)
     if side == 1:
