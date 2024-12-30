@@ -49,7 +49,7 @@ class IDVerifyView(TemplateView):
     template_name = "idmeapi/idverify.html"
     # success_url = reverse_lazy("coeanalytics:analytictypes:list")
     def get_context_data(self, **kwargs):
-        postData = self.request.POST
+        postData = self.request.GET
 
         client_id = int(postData.get("client"))
         clientid = "{:06d}".format(client_id)
