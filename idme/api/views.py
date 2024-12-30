@@ -90,7 +90,7 @@ class FileUpdateView(CreateView, JsonFormMixin):
     print(client)
     print(customer)
     obj, created = models.IDVerify.objects.update_or_create(
-        client_user=clientuser, defaults={'client_num': client, 'idcard': filename})
+        client_user=clientuser, defaults={'customer_id': customer, 'client_num': client, 'idcard': filename})
     result = idrecognize(str(client), side)
     if result:
         if side == 1:
