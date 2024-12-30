@@ -75,20 +75,15 @@ class FileUpdateView(CreateView, JsonFormMixin):
 
 
     # if file_serializer.is_valid():
-    print("Step 1")
     filename = request.FILES['file']
     side = int(request.POST.get("side"))
     client_user_id = request.POST.get("cid")
 
     clientuser = obfuscator.get_key(int(client_user_id))
-    print(clientuser)
     client_user = clientuser.split("XX")
-    print(client_user)
     client = int(client_user[1])
     customer = int(client_user[0])
 
-    print(client)
-    print(customer)
     obj, created = models.IDVerify.objects.update_or_create(
         client_user=clientuser, defaults={'customer_id': customer, 'client_num': client, 'idcard': filename})
     result = idrecognize(str(client), side)
