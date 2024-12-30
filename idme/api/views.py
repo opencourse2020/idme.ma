@@ -50,12 +50,13 @@ class IDVerifyView(TemplateView):
     # success_url = reverse_lazy("coeanalytics:analytictypes:list")
     def get_context_data(self, **kwargs):
         postData = self.request.GET
+        client_user = postData.get("clfuid")  #clfid: client for user id
+        if client_user:
+            client_id = int(client_user.split("@")[0])
+            userid = int(client_user.split("@")[1])
+            clientid = "{:06d}".format(client_id)
+            user_id = "{:06d}".format(userid)
 
-        client_id = int(postData.get("client"))
-        clientid = "{:06d}".format(client_id)
-        userid = int(postData.get("user"))
-        # clientid = int(self.request.user.id)
-        user_id = "{:06d}".format(userid)
         # clientid = "{:06d}".format(dt.now().hour*10000+dt.now().minute*100+dt.now().second)
         sec = "{:02d}".format(dt.now().second)
         client_user_id = obfuscator.get_value("{}XX{}XX{}".format(user_id, clientid, sec))
