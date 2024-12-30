@@ -19,6 +19,7 @@ class IDVerify(models.Model):
         ('F', _("Female")),
     )
     client_num = models.IntegerField()
+    customer_id = models.IntegerField()
     user_id = models.CharField(max_length=20, null=True, blank=True)
     client_user = models.CharField(max_length=18, null=True, blank=True)
     name = models.CharField(max_length=100, null=True, blank=True)

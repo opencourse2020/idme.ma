@@ -81,6 +81,8 @@ class FileUpdateView(CreateView, JsonFormMixin):
     client_user_id = request.POST.get("cid")
     clientuser = obfuscator.get_key(int(client_user_id))
     client = int(clientuser.split("XX")[1])
+    customer = int(clientuser.split("XX")[0])
+
     print(client)
     obj, created = models.IDVerify.objects.update_or_create(
         client_user=clientuser, defaults={'client_num': client, 'idcard': filename})
@@ -98,7 +100,7 @@ class FileUpdateView(CreateView, JsonFormMixin):
             expiry_date = result.get("Expiration Date (EXP)")
             obj, created = models.IDVerify.objects.update_or_create(
                 client_user=clientuser,
-                defaults={'user_id': identification, 'name': name, 'birth_city': city, 'dob': dob,
+                defaults={'customer_id': customer, 'user_id': identification, 'name': name, 'birth_city': city, 'dob': dob,
                           'expiry_date': expiry_date, 'client_num': client}
             )
             result = {'id': identification, 'name': name, 'city': city, 'dob': dob, 'expire': expiry_date}
