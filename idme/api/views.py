@@ -87,14 +87,15 @@ class FileUpdateView(CreateView, JsonFormMixin):
     client_user = clientuser.split("XX")
     client = int(client_user[1])
     customer = int(client_user[0])
-    temp_user_data = models.IDVerifyTmp.objects.filter(pk=customer).first()
-    temp_cin = temp_user_data.user_id
-    temp_name = temp_user_data.firstname.lower() + " " + temp_user_data.lastname.lower()
+
     obj, created = models.IDVerify.objects.update_or_create(
         client_user=clientuser, defaults={'customer_id': customer, 'client_num': client, 'idcard': filename})
     result = idrecognize(str(client), side)
     if result:
         if side == 1:
+            temp_user_data = models.IDVerifyTmp.objects.filter(pk=customer).first()
+            temp_cin = temp_user_data.user_id
+            temp_name = temp_user_data.firstname.lower() + " " + temp_user_data.lastname.lower()
             identification = result.get("Identity")
             if identification:
                 identification.strip()
@@ -110,6 +111,7 @@ class FileUpdateView(CreateView, JsonFormMixin):
                           'expiry_date': expiry_date, 'client_num': client}
             )
             result = {'id': identification, 'name': name, 'city': city, 'dob': dob, 'expire': expiry_date}
+            temp_user_data.delete()
         elif side == 2:
             # identification = result.get("Identity").strip()
             address = result.get("Address")
