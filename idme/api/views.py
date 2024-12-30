@@ -95,7 +95,11 @@ class FileUpdateView(CreateView, JsonFormMixin):
         if side == 1:
             temp_user_data = models.IDVerifyTmp.objects.filter(pk=customer).first()
             temp_cin = temp_user_data.user_id
-            temp_name = temp_user_data.firstname.lower() + " " + temp_user_data.lastname.lower()
+            temp_fname = temp_user_data.firstname.lower()
+            temp_lname = temp_user_data.lastname.lower()
+            temp_name = temp_fname + " " + temp_lname
+            temp_email = temp_user_data.user_email
+            temp_phone = temp_user_data.user_phone
             identification = result.get("Identity")
             if identification:
                 identification.strip()
@@ -107,8 +111,10 @@ class FileUpdateView(CreateView, JsonFormMixin):
             expiry_date = result.get("Expiration Date (EXP)")
             obj, created = models.IDVerify.objects.update_or_create(
                 client_user=clientuser,
-                defaults={'customer_id': customer, 'user_id': identification, 'name': name, 'birth_city': city, 'dob': dob,
-                          'expiry_date': expiry_date, 'client_num': client}
+                defaults={'customer_id': customer, 'user_id': identification, 'name': name, 'birth_city': city,
+                          'dob': dob, 'expiry_date': expiry_date, 'client_num': client, 'user_email': temp_email,
+                          'user_phone': temp_phone, 'temp_user_id': temp_cin,
+                          'temp_firstname': temp_fname, 'temp_lastname': temp_lname}
             )
             result = {'id': identification, 'name': name, 'city': city, 'dob': dob, 'expire': expiry_date}
             temp_user_data.delete()
