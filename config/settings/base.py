@@ -104,7 +104,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     'user_language_middleware.UserLanguageMiddleware',
     "allauth.account.middleware.AccountMiddleware",
-    "defender.middlewares.FailedLoginMiddlewares",
+    "defender.middleware.FailedLoginMiddleware",
 
 ]
 
