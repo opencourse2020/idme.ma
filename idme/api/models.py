@@ -35,5 +35,5 @@ class IDVerify(models.Model):
     verification_modified_date = models.DateTimeField(auto_now=True)
     sent = models.BooleanField(default=False)
     def __str__(self):
-        return str(self.user_id)
+        return "{}-{}".format(str(self.client_num), self.user_id)
 
