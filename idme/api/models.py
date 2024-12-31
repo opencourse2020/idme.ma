@@ -65,14 +65,14 @@ class IDVerify(models.Model):
         return "{}-{}".format(str(self.client_num.pk), lname)
 
 
-class IDVerifyTmp(models.Model):
-    client_user = models.CharField(max_length=30, null=True, blank=True)
-    client_num = models.ForeignKey(Admin, on_delete=models.CASCADE, null=True, blank=True)
-    user_id = models.CharField(max_length=20, null=True, blank=True)
-    firstname = models.CharField(max_length=50, null=True, blank=True)
-    lastname = models.CharField(max_length=50, null=True, blank=True)
-    user_email = models.CharField(max_length=100, null=True, blank=True)
-    user_phone = models.CharField(max_length=25, null=True, blank=True)
-
-    def __str__(self):
-        return "{}-{}".format(str(self.client_num.pk), str(self.user_id))
+# class IDVerifyTmp(models.Model):
+#     client_user = models.CharField(max_length=30, null=True, blank=True)
+#     client_num = models.ForeignKey(Admin, on_delete=models.CASCADE, null=True, blank=True)
+#     user_id = models.CharField(max_length=20, null=True, blank=True)
+#     firstname = models.CharField(max_length=50, null=True, blank=True)
+#     lastname = models.CharField(max_length=50, null=True, blank=True)
+#     user_email = models.CharField(max_length=100, null=True, blank=True)
+#     user_phone = models.CharField(max_length=25, null=True, blank=True)
+#
+#     def __str__(self):
+#         return "{}-{}".format(str(self.client_num.pk), str(self.user_id))
