@@ -60,7 +60,9 @@ class IDVerify(models.Model):
     picture_verified = models.BooleanField(default=False)
     ip_address = models.CharField(max_length=30, null=True, blank=True)
     def __str__(self):
-        return "{}-{}".format(str(self.client_num.pk), str(self.customer_id))
+        lname = self.temp_lastname.strip()
+        lname = lname.replace(" ", "_")
+        return "{}-{}".format(str(self.client_num.pk), lname)
 
 
 class IDVerifyTmp(models.Model):
