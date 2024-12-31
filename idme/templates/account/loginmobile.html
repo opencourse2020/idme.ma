@@ -1,0 +1,88 @@
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+      {% block head_title %}
+            <title>{% trans "Login to" %}&nbsp;Idme.ma</title>
+      {% endblock %}
+
+{% block css %}
+{{ block.super }}
+{% endblock css %}
+
+{% block page_header %}
+
+{% endblock page_header %}
+
+{% block page_footer %}
+
+{% endblock page_footer %}
+
+
+
+    
+{% block page_title %}
+
+{% endblock page_title %}
+{% block content %}
+            
+    <div class="page-content pb-0">
+        
+        
+        <div class="card rounded-0 mb-0" data-card-height="cover-full">
+            <div class="card-center ps-3">
+                <div class="text-center">
+                    <h1 class="font-40 font-800 pb-2">App<span class="gradient-highlight p-2 mx-1 color-white scale-box d-inline-block rounded-s border-0">Kit</span></h1>
+                    <h5 class="mt-n2 opacity-30 mb-4">Powered by Enabled.</h5>
+                </div>
+                
+                <div class="ms-3 me-4 mb-n3">
+                    <div class="input-style no-borders no-icon validate-field mb-4">
+                        <input type="name" class="form-control validate-name" id="form1a" placeholder="Username">
+                        <label for="form1a" class="color-highlight">Username</label>
+                        <i class="fa fa-times disabled invalid color-red-dark"></i>
+                        <i class="fa fa-check disabled valid color-green-dark"></i>
+                        <em>(required)</em>
+                    </div>
+                    <div class="input-style no-borders no-icon validate-field mb-4">
+                        <input type="password" class="form-control validate-password" id="form1ab" placeholder="Password">
+                        <label for="form1ab" class="color-highlight">Password</label>
+                        <i class="fa fa-times disabled invalid color-red-dark"></i>
+                        <i class="fa fa-check disabled valid color-green-dark"></i>
+                        <em>(required)</em>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-check icon-check text-start float-start opacity-50">
+                        <input class="form-check-input" type="checkbox" value="" id="check4">
+                        <label class="form-check-label font-13" for="check4">Remember Me</label>
+                        <i class="icon-check-1 far fa-circle color-gray-dark font-14"></i>
+                        <i class="icon-check-2 fa fa-check-circle font-14 color-highlight"></i>
+                    </div>
+
+                    <a href="#" class="font-11 float-end color-theme opacity-30">Forgot Password?</a>
+                    <div class="clearfix"></div>
+                </div>
+
+                
+                <a href="#" class="btn btn-center-l gradient-highlight rounded-sm btn-l font-13 font-600 mt-5 border-0">Sign In</a>
+                <span class="text-center d-block font-600 opacity-30 mt-3 mb-3">or</span>
+                <div class="text-center">
+                    <a href="#" class="icon bg-transparent icon-m border rounded-xl border-xs mx-1 border-gray-dark color-facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="icon bg-transparent icon-m border rounded-xl border-xs mx-1 border-gray-dark color-google"><i class="fab fa-google"></i></a>
+                    <a href="#" class="icon bg-transparent icon-m border rounded-xl border-xs mx-1 border-gray-dark color-twitter"><i class="fab  font-18 fa-twitter"></i></a>
+                </div>
+                
+            </div>
+        </div>    
+    </div>
+    
+    {% endblock content %}
+    <!-- Page content ends here-->
+         
+    
+</div>
+
+{% block project_js %}
+<script type="text/javascript" src={% static "vendor/mobile/scripts/bootstrap.min.js" %}></script>
+    <script type="text/javascript" src={% static "vendor/mobile/scripts/custom.js" %}></script>
+{% endblock project_js %}

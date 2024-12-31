@@ -71,7 +71,7 @@
 {#        <a href="#" data-menu="menu-share" class="header-icon header-icon-3"><i class="fas fa-share-alt"></i></a>#}
       </div>
 {% endblock page_header %}
-
+{% block page_footer %}
     <div id="footer-bar" class="footer-bar-6">
         <a href="index-components.html"><i class="fa fa-layer-group"></i><span>Features</span></a>
         <a href="index-pages.html"><i class="fa fa-file"></i><span>Pages</span></a>
@@ -79,6 +79,8 @@
         <a href="index-projects.html"><i class="fa fa-image"></i><span>Projects</span></a>
         <a href="#" data-menu="menu-main"><i class="fa fa-bars"></i><span>Menu</span></a>
     </div>
+
+    {% endblock page_footer %}
     {% block page_title %}
 
             {% block page_title_name %}

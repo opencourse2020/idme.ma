@@ -175,7 +175,7 @@ class ProfileView(LoginRequiredMixin, RedirectView):
 
 class MobileLoginView(FormView):
     form_class = forms.SignInForm
-    template_name = "account/mobilelogin.html"
+    template_name = "account/loginmobile.html"
     success_url = reverse_lazy("profiles:dispatch_login")
 
 
