@@ -59,6 +59,7 @@ class IDVerifyView(TemplateView):
         kwargs["email"] = postData.get('email')
         kwargs["phone"] = postData.get('phone')
         kwargs["address"] = postData.get('cust_address')
+        print("address1:", postData.get('cust_address'))
         kwargs["lname"] = lname
 
         # convert last name to ASCII value and create a unique client/user ID
@@ -108,6 +109,7 @@ class FileUpdateView(CreateView, JsonFormMixin):
     temp_email = request.POST.get("custem")
     temp_phone = request.POST.get("custtel")
     temp_address = request.POST.get("custadd")
+    print("address2:", temp_address)
 
     clientuser = obfuscator.get_key(int(client_user_id))
     client_user = clientuser.split("X")
