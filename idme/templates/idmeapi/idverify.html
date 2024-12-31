@@ -248,6 +248,7 @@
                                                             <input class="hidden" id="ci-cust-ln" value="{{ lname }}" style="display: none;">
                                                             <input class="hidden" id="ci-cust-tel" value="{{ phone }}" style="display: none;">
                                                             <input class="hidden" id="ci-cust-em" value="{{ email }}" style="display: none;">
+                                                            <input class="hidden" id="ci-cust-add" value="{{ address }}" style="display: none;">
                                                             <div class="row gx-0 align-items-center">
                                                                 <div class="col">
 
@@ -441,6 +442,7 @@
         let ln = $("#ci-cust-ln").val();
         let tel = $("#ci-cust-tel").val();
         let em = $("#ci-cust-em").val();
+        let add = $("#ci-cust-add").val();
 
         let url = 'https://idme.ma/idme.apis/idverify/';
         const formData = new FormData();
@@ -465,6 +467,8 @@
             formData.append('lname', ln);
             formData.append('custem', em);
             formData.append('custtel', tel);
+            formData.append('custadd', add);
+
             $.ajax({
                 type: 'POST',
                 url: url,
@@ -534,7 +538,7 @@
         let ln = $("#ci-cust-ln").val();
         let tel = $("#ci-cust-tel").val();
         let em = $("#ci-cust-em").val();
-
+        let add = $("#ci-cust-add").val();
         let url = 'https://idme.ma/idme.apis/idverify/';
         const formData = new FormData();
         var datalink = $("#datalinkb").val();
@@ -558,6 +562,7 @@
             formData.append('lname', ln);
             formData.append('custem', em);
             formData.append('custtel', tel);
+            formData.append('custadd', add);
             $.ajax({
                 type: 'POST',
                 url: url,

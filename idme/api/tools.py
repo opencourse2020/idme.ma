@@ -8,7 +8,7 @@ import datetime as dt
 import hmac
 import hashlib
 from base64 import b64encode
-import difflib
+from difflib import get_close_matches, SequenceMatcher
 from ipware import get_client_ip
 
 def period_7d(date):
@@ -96,14 +96,14 @@ def verifySignature(receivedSignature: str, secret, params):
 def check_name(name, fname, lname):
     name_str = name.lower().split()
 
-    similar = difflib.get_close_matches(fname, name_str)
+    similar = get_close_matches(fname, name_str)
     # similar = []
     if len(similar) > 0:
         fname_status = True
     else:
         fname_status = False
 
-    similar = difflib.get_close_matches(lname, name_str)
+    similar = get_close_matches(lname, name_str)
     if len(similar) > 0:
         lname_status = True
     else:
@@ -120,5 +120,14 @@ def check_ip(request):
     if client_ip and is_routable:
         return client_ip
     else:
-        return None
+        return "127.0.0.1"
 
+
+def check_address(address, temp_address):
+    seq_match = SequenceMatcher(None, address, temp_address)
+    ratio = seq_match.ratio()
+    print('ratio=', ratio)
+    if ratio >= 0.8:
+        return True
+    else:
+        return False

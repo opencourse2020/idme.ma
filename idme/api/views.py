@@ -37,7 +37,7 @@ import numpy as np
 import seaborn as sns
 from datetime import datetime as dt
 from .id_recognize import idrecognize
-from .tools import verifySignature, check_name, check_ip
+from .tools import verifySignature, check_name, check_ip, check_address
 from obfuskey import Obfuskey, alphabets
 # Create your views here.
 
@@ -58,6 +58,7 @@ class IDVerifyView(TemplateView):
         lname = postData.get('lname')
         kwargs["email"] = postData.get('email')
         kwargs["phone"] = postData.get('phone')
+        kwargs["address"] = postData.get('cust_address')
         kwargs["lname"] = lname
 
         # convert last name to ASCII value and create a unique client/user ID
@@ -106,6 +107,7 @@ class FileUpdateView(CreateView, JsonFormMixin):
     temp_lname = request.POST.get("lname")
     temp_email = request.POST.get("custem")
     temp_phone = request.POST.get("custtel")
+    temp_address = request.POST.get("custadd")
 
     clientuser = obfuscator.get_key(int(client_user_id))
     client_user = clientuser.split("X")
@@ -118,15 +120,15 @@ class FileUpdateView(CreateView, JsonFormMixin):
     if side == 1:
         obj, created = models.IDVerify.objects.update_or_create(
             client_user=clientuser, defaults={'idcard_f': filename, 'ip_address': ip_address,
-                                              'temp_user_id': temp_userid, 'temp_firstname': temp_fname,
-                                              'temp_lastname': temp_lname, 'user_email': temp_email,
-                                              'user_phone': temp_phone, 'client_num': client})
+                                              'temp_address': temp_address, 'temp_user_id': temp_userid,
+                                              'temp_firstname': temp_fname, 'temp_lastname': temp_lname,
+                                              'user_email': temp_email, 'user_phone': temp_phone, 'client_num': client})
     elif side == 2:
         obj, created = models.IDVerify.objects.update_or_create(
             client_user=clientuser, defaults={'idcard_b': filename, 'ip_address': ip_address,
-                                              'temp_user_id': temp_userid, 'temp_firstname': temp_fname,
-                                              'temp_lastname': temp_lname, 'user_email': temp_email,
-                                              'user_phone': temp_phone, 'client_num': client})
+                                              'temp_address': temp_address, 'temp_user_id': temp_userid,
+                                              'temp_firstname': temp_fname, 'temp_lastname': temp_lname,
+                                              'user_email': temp_email, 'user_phone': temp_phone, 'client_num': client})
 
     lname_adjusted = obj.temp_lastname.strip().replace(" ", "_")
     result = idrecognize(str(client), lname_adjusted, side)
@@ -166,12 +168,17 @@ class FileUpdateView(CreateView, JsonFormMixin):
             result = {'id': identification, 'name': name, 'city': city, 'dob': dob, 'expire': expiry_date}
             # temp_user_data.delete()
         elif side == 2:
+            address_verified = False
             identification = result.get("Identity").strip()
             address = result.get("Address")
             gender = result.get("Gender")
+
+            if check_address(address, temp_address):
+                address_verified = True
+
             obj, created = models.IDVerify.objects.update_or_create(
                 client_user=clientuser,
-                defaults={'address': address, 'gender': gender}
+                defaults={'address': address, 'gender': gender, 'address_verified': address_verified}
             )
             result = {'address': address, 'gender': gender}
         # if expiry_date_text.find("-"):

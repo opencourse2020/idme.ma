@@ -34,6 +34,7 @@ class IDVerify(models.Model):
     temp_firstname = models.CharField(max_length=50, null=True, blank=True)
     temp_lastname = models.CharField(max_length=50, null=True, blank=True)
     address = models.CharField(max_length=100, null=True, blank=True)
+    temp_address = models.CharField(max_length=100, null=True, blank=True)
     birth_city = models.CharField(max_length=100, null=True, blank=True)
     gender = models.CharField(max_length=1, choices=categories, default="M")
     dob = models.CharField(max_length=30, null=True, blank=True)
