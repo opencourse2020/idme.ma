@@ -153,7 +153,7 @@ class FileUpdateView(CreateView, JsonFormMixin):
                 name_verified = True
                 fname = temp_fname
                 lname = temp_lname
-            if identification.lower() == temp_cin:
+            if identification.lower() == temp_userid:
                 user_id_verified = True
 
             obj, created = models.IDVerify.objects.update_or_create(
