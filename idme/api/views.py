@@ -24,6 +24,7 @@ from guardian.mixins import LoginRequiredMixin
 from django.views.decorators.csrf import csrf_exempt
 from . import models, forms
 from .mixins import JsonFormMixin
+from idme.profiles.models import Admin
 from .serializers import FileSerializer
 from idme.profiles.models import Admin, User, Regular, Enterprise
 from django.conf import settings
@@ -51,8 +52,8 @@ class IDVerifyView(TemplateView):
     def get_context_data(self, **kwargs):
         postData = self.request.GET
         userid = postData.get("user").upper()  #clfid: client for user id
-        client = int(postData.get('client'))
-
+        client_id = int(postData.get('client'))
+        client = Admin.objects.get(pk=client_id)
         fname = postData.get('fname')
         lname = postData.get('lname')
         email = postData.get('email')
@@ -66,7 +67,7 @@ class IDVerifyView(TemplateView):
         lname_left = str(num_val)[:20]
         int_lname_left = int(lname_left)
         user_id = "{:020d}".format(int_lname_left)
-        clientid = "{:08d}".format(client)
+        clientid = "{:08d}".format(client_id)
         call_time = "{:04d}".format(dt.now().minute * 100 + dt.now().second)
         client_user_id = "{}X{}X{}".format(user_id, clientid, call_time)
         clientuser = obfuscator.get_value(client_user_id)
