@@ -41,7 +41,7 @@ from obfuskey import Obfuskey, alphabets
 # Create your views here.
 
 # Set the lenght of the hash key
-obfuscator = Obfuskey(alphabets.BASE36, key_length=20)
+obfuscator = Obfuskey(alphabets.BASE36, key_length=34)
 
 class IDVerifyView(TemplateView):
     # model = models.IDVerify
@@ -50,23 +50,37 @@ class IDVerifyView(TemplateView):
     # success_url = reverse_lazy("coeanalytics:analytictypes:list")
     def get_context_data(self, **kwargs):
         postData = self.request.GET
-        userid = postData.get("user")  #clfid: client for user id
+        userid = postData.get("user").upper()  #clfid: client for user id
         client = int(postData.get('client'))
-        clientuser = str(userid) + "@" + str(client)
+
         fname = postData.get('fname')
         lname = postData.get('lname')
         email = postData.get('email')
         phone = postData.get('phone')
-        obj, created = models.IDVerifyTmp.objects.update_or_create(
-            client_user=clientuser, defaults={'user_id': userid, 'firstname': fname, 'lastname': lname,
-                                             'user_email': email, 'user_phone': phone, 'client_num': client})
-        clientid = "{:06d}".format(obj.client_num)
-        user_id = "{:06d}".format(obj.pk)
 
+        # convert last name to ASCII value and create a unique client/user ID
+        # from the last name of the user, the client id and (minutes+seconds)
+        lname_upper = lname.upper()
+        nchars = len(lname_upper)
+        num_val = sum(ord(lname_upper[byte]) << 8 * (nchars - byte - 1) for byte in range(nchars))
+        lname_left = str(num_val)[:20]
+        int_lname_left = int(lname_left)
+        user_id = "{:020d}".format(int_lname_left)
+        clientid = "{:08d}".format(client)
+        call_time = "{:04d}".format(dt.now().minute * 100 + dt.now().second)
+        client_user_id = "{}X{}X{}".format(user_id, clientid, call_time)
+        clientuser = obfuscator.get_value(client_user_id)
+        # clientuser = str(num_val) + "@" + str(client)
+        obj, created = models.IDVerify.objects.update_or_create(
+            client_user=client_user_id, defaults={'temp_user_id': userid, 'temp_firstname': fname, 'temp_lastname': lname,
+                                             'user_email': email, 'user_phone': phone, 'client_num': client})
+        # clientid = "{:08d}".format(obj.client_num)
+        # user_id = "{:020d}".format(num_val)
+        # num_chars = "{:02d}".format(nchars)
         # clientid = "{:06d}".format(dt.now().hour*10000+dt.now().minute*100+dt.now().second)
-        call_time = "{:04d}".format(dt.now().minute*100+dt.now().second)
-        client_user_id = obfuscator.get_value("{}XX{}XX{}".format(user_id, clientid, call_time))
-        kwargs["clientid"] = client_user_id
+        # call_time = "{:04d}".format(dt.now().minute*100+dt.now().second)
+        # client_user_id = obfuscator.get_value("{}X{}X{}".format(user_id, clientid, num_chars))
+        kwargs["clientid"] = clientuser
         return super(IDVerifyView, self).get_context_data(**kwargs)
 
 class FileUpdateView(CreateView, JsonFormMixin):
@@ -85,26 +99,28 @@ class FileUpdateView(CreateView, JsonFormMixin):
     client_user_id = request.POST.get("cid")
 
     clientuser = obfuscator.get_key(int(client_user_id))
-    client_user = clientuser.split("XX")
-    client = int(client_user[1])
+    client_user = clientuser.split("X")
     customer = int(client_user[0])
+    client = int(client_user[1])
+    call_time = int(client_user[2])
+
+    # clientuser_id = str(userid) + "@" + str(client)
     if side == 1:
         obj, created = models.IDVerify.objects.update_or_create(
-            client_user=clientuser, defaults={'customer_id': customer, 'client_num': client,
-                                              'idcard_f': filename, 'ip_address': ip_address})
+            client_user=clientuser, defaults={'customer_id': customer, 'idcard_f': filename, 'ip_address': ip_address})
     elif side == 2:
         obj, created = models.IDVerify.objects.update_or_create(
-            client_user=clientuser, defaults={'customer_id': customer, 'client_num': client,
-                                              'idcard_b': filename, 'ip_address': ip_address})
+            client_user=clientuser, defaults={'customer_id': customer, 'idcard_b': filename, 'ip_address': ip_address})
+
     result = idrecognize(str(client), str(customer), side)
     if result:
         if side == 1:
-            temp_user_data = models.IDVerifyTmp.objects.filter(pk=customer).first()
-            temp_cin = temp_user_data.user_id.lower()
-            temp_fname = temp_user_data.firstname.lower()
-            temp_lname = temp_user_data.lastname.lower()
-            temp_email = temp_user_data.user_email
-            temp_phone = temp_user_data.user_phone
+            # temp_user_data = models.IDVerifyTmp.objects.filter(pk=customer).first()
+            temp_cin = obj.temp_user_id.lower()
+            temp_fname = obj.temp_firstname.lower()
+            temp_lname = obj.temp_lastname.lower()
+            # temp_email = obj.user_email
+            # temp_phone = obj.user_phone
             name_verified = False
             user_id_verified = False
             fname = ""
@@ -128,21 +144,19 @@ class FileUpdateView(CreateView, JsonFormMixin):
 
             obj, created = models.IDVerify.objects.update_or_create(
                 client_user=clientuser,
-                defaults={'customer_id': customer, 'user_id': identification, 'lastname': lname, 'birth_city': city,
-                          'dob': dob, 'expiry_date': expiry_date, 'client_num': client, 'user_email': temp_email,
-                          'user_phone': temp_phone, 'temp_user_id': temp_cin, 'firstname': fname, 'name': name,
-                          'temp_firstname': temp_fname, 'temp_lastname': temp_lname,
+                defaults={'user_id': identification, 'lastname': lname, 'birth_city': city,
+                          'dob': dob, 'expiry_date': expiry_date, 'firstname': fname, 'name': name,
                           'user_id_verified': user_id_verified, 'name_verified': name_verified}
             )
             result = {'id': identification, 'name': name, 'city': city, 'dob': dob, 'expire': expiry_date}
-            temp_user_data.delete()
+            # temp_user_data.delete()
         elif side == 2:
             identification = result.get("Identity").strip()
             address = result.get("Address")
             gender = result.get("Gender")
             obj, created = models.IDVerify.objects.update_or_create(
                 client_user=clientuser,
-                defaults={'user_id': identification, 'address': address, 'gender': gender, 'client_num': client}
+                defaults={'address': address, 'gender': gender}
             )
             result = {'address': address, 'gender': gender}
         # if expiry_date_text.find("-"):
