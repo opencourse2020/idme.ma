@@ -11,11 +11,11 @@ import os
 
 def document_directory_path(instance, filename):
 
-    return 'id_cards/client_{0}/user_{1}/{2}'.format(instance.client_num, instance.lastname, filename)
+    return 'id_cards/client_{0}/user_{1}/{2}'.format(instance.client_num, instance.temp_lastname, filename)
 
 def picture_directory_path(instance, filename):
 
-    return 'profile_pics/client_{0}/user_{1}/{2}'.format(instance.client_num, instance.lastname, filename)
+    return 'profile_pics/client_{0}/user_{1}/{2}'.format(instance.client_num, instance.temp_lastname, filename)
 
 class IDVerify(models.Model):
     categories = (
