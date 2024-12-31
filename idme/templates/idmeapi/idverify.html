@@ -148,8 +148,7 @@
                                         </div>
                                         <div class="card-footer bg-none p-3">
                                             <button type="button" id="IdVerification" class="btn btn-success btn-sm" style="float: right;">{% trans "Verify Front" %} </button>
-                                            <input class="hidden" id="datalink" value="">
-                                            <input class="hidden" id="datalinkb" value="">
+
                                             <div id="alert-box"></div>
 
                                         </div>
@@ -224,6 +223,8 @@
                                                                 <div class="form-group row mb-3">
                                                                     <!--                                                        <label for="idcard" class="col-sm-2 col-form-label">{% trans "Upload Your ID" %}</label>-->
                                                                     <div class="col-sm-10">
+                                                                        <input class="hidden" id="datalink" value="">
+                                                                        <input class="hidden" id="datalinkb" value="">
                                                                         <input class="form-control" accept="image/*" type="file" id="idcardb" onchange="loadFileb(event)">
                                                                     </div>
                                                                 </div>
