@@ -51,13 +51,14 @@ class IDVerifyView(TemplateView):
     # success_url = reverse_lazy("coeanalytics:analytictypes:list")
     def get_context_data(self, **kwargs):
         postData = self.request.GET
-        userid = postData.get("user").upper()  #clfid: client for user id
+        kwargs["userid"] = postData.get("user").upper()  #clfid: client for user id
         client_id = int(postData.get('client'))
-        client = Admin.objects.get(pk=client_id)
-        fname = postData.get('fname')
+
+        kwargs["fname"] = postData.get('fname')
         lname = postData.get('lname')
-        email = postData.get('email')
-        phone = postData.get('phone')
+        kwargs["email"] = postData.get('email')
+        kwargs["phone"] = postData.get('phone')
+        kwargs["lname"] = lname
 
         # convert last name to ASCII value and create a unique client/user ID
         # from the last name of the user, the client id and (minutes+seconds)
@@ -71,10 +72,11 @@ class IDVerifyView(TemplateView):
         call_time = "{:04d}".format(dt.now().minute * 100 + dt.now().second)
         client_user_id = "{}X{}X{}".format(user_id, clientid, call_time)
         clientuser = obfuscator.get_value(client_user_id)
-        # clientuser = str(num_val) + "@" + str(client)
-        obj, created = models.IDVerify.objects.update_or_create(
-            client_user=client_user_id, defaults={'temp_user_id': userid, 'temp_firstname': fname, 'temp_lastname': lname,
-                                             'user_email': email, 'user_phone': phone, 'client_num': client})
+
+
+        # obj, created = models.IDVerify.objects.update_or_create(
+        #     client_user=client_user_id, defaults={'temp_user_id': userid, 'temp_firstname': fname, 'temp_lastname': lname,
+        #                                      'user_email': email, 'user_phone': phone, 'client_num': client})
         # clientid = "{:08d}".format(obj.client_num)
         # user_id = "{:020d}".format(num_val)
         # num_chars = "{:02d}".format(nchars)
@@ -92,26 +94,39 @@ class FileUpdateView(CreateView, JsonFormMixin):
   def post(self, request, *args, **kwargs):
     # file_serializer = FileSerializer(data=request.data)
 
+    # Get IP Address
     ip_address = check_ip(request)
 
-    # if file_serializer.is_valid():
+    # get dat from template
     filename = request.FILES['file']
     side = int(request.POST.get("side"))
     client_user_id = request.POST.get("cid")
+    temp_userid = request.POST.get("custid")
+    temp_fname = request.POST.get("fname")
+    temp_lname = request.POST.get("lname")
+    temp_email = request.POST.get("custem")
+    temp_phone = request.POST.get("custtel")
 
     clientuser = obfuscator.get_key(int(client_user_id))
     client_user = clientuser.split("X")
     customer = int(client_user[0])
-    client = int(client_user[1])
+    client_id = int(client_user[1])
     call_time = int(client_user[2])
+    client = Admin.objects.get(pk=client_id)
 
     # clientuser_id = str(userid) + "@" + str(client)
     if side == 1:
         obj, created = models.IDVerify.objects.update_or_create(
-            client_user=clientuser, defaults={'idcard_f': filename, 'ip_address': ip_address})
+            client_user=clientuser, defaults={'idcard_f': filename, 'ip_address': ip_address,
+                                              'temp_user_id': temp_userid, 'temp_firstname': temp_fname,
+                                              'temp_lastname': temp_lname, 'user_email': temp_email,
+                                              'user_phone': temp_phone, 'client_num': client})
     elif side == 2:
         obj, created = models.IDVerify.objects.update_or_create(
-            client_user=clientuser, defaults={'idcard_b': filename, 'ip_address': ip_address})
+            client_user=clientuser, defaults={'idcard_b': filename, 'ip_address': ip_address,
+                                              'temp_user_id': temp_userid, 'temp_firstname': temp_fname,
+                                              'temp_lastname': temp_lname, 'user_email': temp_email,
+                                              'user_phone': temp_phone, 'client_num': client})
 
     lname_adjusted = obj.temp_lastname.strip().replace(" ", "_")
     result = idrecognize(str(client), lname_adjusted, side)
@@ -119,11 +134,7 @@ class FileUpdateView(CreateView, JsonFormMixin):
     if result:
         if side == 1:
             # temp_user_data = models.IDVerifyTmp.objects.filter(pk=customer).first()
-            temp_cin = obj.temp_user_id.lower()
-            temp_fname = obj.temp_firstname.lower()
-            temp_lname = obj.temp_lastname.lower()
-            # temp_email = obj.user_email
-            # temp_phone = obj.user_phone
+
             name_verified = False
             user_id_verified = False
             fname = ""

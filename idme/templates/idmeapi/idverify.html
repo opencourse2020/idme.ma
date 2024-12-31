@@ -243,6 +243,11 @@
                                                         <div class="accordion-body">
                                                             <h5 class="card-title">{% trans "Capture Photo With Camera"%}</h5>
                                                             <input class="hidden" id="ci-x-photo" value="{{clientid}}">
+                                                            <input class="hidden" id="ci-cust-id" value="{{ userid }}" style="display: none;">
+                                                            <input class="hidden" id="ci-cust-fn" value="{{ fname }}" style="display: none;">
+                                                            <input class="hidden" id="ci-cust-ln" value="{{ lname }}" style="display: none;">
+                                                            <input class="hidden" id="ci-cust-tel" value="{{ phone }}" style="display: none;">
+                                                            <input class="hidden" id="ci-cust-em" value="{{ email }}" style="display: none;">
                                                             <div class="row gx-0 align-items-center">
                                                                 <div class="col">
 
@@ -431,6 +436,12 @@
         $("#label_expire").hide();
         $("#loadingstate").show();
 
+        let custid = $("#ci-cust-id").val();
+        let fn = $("#ci-cust-fn").val();
+        let ln = $("#ci-cust-ln").val();
+        let tel = $("#ci-cust-tel").val();
+        let em = $("#ci-cust-em").val();
+
         let url = 'https://idme.ma/idme.apis/idverify/';
         const formData = new FormData();
         var datalink = $("#datalink").val();
@@ -449,6 +460,11 @@
             formData.append('file', file);
             formData.append('side', "1");
             formData.append('cid', cid);
+            formData.append('custid', custid);
+            formData.append('fname', fn);
+            formData.append('lname', ln);
+            formData.append('custem', em);
+            formData.append('custtel', tel);
             $.ajax({
                 type: 'POST',
                 url: url,
@@ -513,6 +529,11 @@
         $("#label_gender").hide();
 
         $("#loadingstateb").show();
+        let custid = $("#ci-cust-id").val();
+        let fn = $("#ci-cust-fn").val();
+        let ln = $("#ci-cust-ln").val();
+        let tel = $("#ci-cust-tel").val();
+        let em = $("#ci-cust-em").val();
 
         let url = 'https://idme.ma/idme.apis/idverify/';
         const formData = new FormData();
@@ -532,6 +553,11 @@
             formData.append('file', file);
             formData.append('side', "2");
             formData.append('cid', cid);
+            formData.append('custid', custid);
+            formData.append('fname', fn);
+            formData.append('lname', ln);
+            formData.append('custem', em);
+            formData.append('custtel', tel);
             $.ajax({
                 type: 'POST',
                 url: url,
