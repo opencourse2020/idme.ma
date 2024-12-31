@@ -81,7 +81,7 @@ urlpatterns = [
     # path(settings.ADMIN_URL_DEFENDER, include('defender.urls')), # defender admin
     path(settings.ADMIN_URL, admin_site.urls),
     # path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
-    path("", RedirectView.as_view(pattern_name="idmeapi:sdashboard")),
+    path("", RedirectView.as_view(pattern_name="profiles:dispatch_login")),
     path("accounts/", include("allauth.urls")),
     path("accounts/profile/", ProfileView.as_view()),
     path("idme.apis/", include("idme.api.urls", namespace="idme-apis")),
