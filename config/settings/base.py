@@ -287,7 +287,7 @@ LOGIN_REDIRECT_URL = "profiles:dispatch_login"
 
 ACCOUNT_LOGOUT_REDIRECT_URL = "account_login"
 
-LOGIN_URL = "account_login"
+LOGIN_URL = "/profiles/dispatch/"
 #LOGIN_URLS = '/accounts/login/'
 
 LOGIN_EXEMPT_URLS = (
