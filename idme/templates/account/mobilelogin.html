@@ -74,7 +74,7 @@
 
                     {{ form.remember|as_crispy_field }}
                 <div class="divider my-2 mb-4"></div>
-                    {{ form.captcha|as_crispy_field }}
+
                                 {% if redirect_field_value %}
                                     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                                 {% endif %}
