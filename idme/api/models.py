@@ -11,11 +11,11 @@ import os
 
 def document_directory_path(instance, filename):
 
-    return 'id_cards/client_{0}/user_{1}/{2}'.format(instance.client_num, instance.customer_id, filename)
+    return 'id_cards/client_{0}/user_{1}/{2}'.format(instance.client_num, instance.lastname, filename)
 
 def picture_directory_path(instance, filename):
 
-    return 'profile_pics/client_{0}/user_{1}/{2}'.format(instance.client_num, instance.customer_id, filename)
+    return 'profile_pics/client_{0}/user_{1}/{2}'.format(instance.client_num, instance.lastname, filename)
 
 class IDVerify(models.Model):
     categories = (
@@ -24,7 +24,7 @@ class IDVerify(models.Model):
     )
     client_num = models.ForeignKey(Admin, on_delete=models.CASCADE, null=True, blank=True)
     customer_id = models.IntegerField(null=True, blank=True)
-    user_id = models.CharField(max_length=20, null=True, blank=True)
+    user_id = models.CharField(max_length=20, null=True, blank=True)  # for instance CIN or  passport number
     temp_user_id = models.CharField(max_length=20, null=True, blank=True)
     client_user = models.CharField(max_length=34, null=True, blank=True)
     name = models.CharField(max_length=100, null=True, blank=True)
