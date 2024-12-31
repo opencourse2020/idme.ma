@@ -171,7 +171,7 @@ class FileUpdateView(CreateView, JsonFormMixin):
             # temp_user_data.delete()
         elif side == 2:
             address_verified = False
-            identification = result.get("Identity").strip()
+            # identification = result.get("Identity").strip()
             address = result.get("Address")
             gender = result.get("Gender")
 
