@@ -149,6 +149,7 @@
                                         <div class="card-footer bg-none p-3">
                                             <button type="button" id="IdVerification" class="btn btn-success btn-sm" style="float: right;">{% trans "Verify Front" %} </button>
                                             <input class="hidden" id="datalink">
+                                            <input class="hidden" id="datalinkb">
                                             <div id="alert-box"></div>
 
                                         </div>
@@ -179,8 +180,8 @@
 
                                                               </div>
                                                             </div>
-                                                            <label for="alert-idb" id="label_idb" style="display: none">{% trans "ID:"%}</label>
-                                                            <div id="alert-idb"></div>
+{#                                                            <label for="alert-idb" id="label_idb" style="display: none">{% trans "ID:"%}</label>#}
+{#                                                            <div id="alert-idb"></div>#}
                                                             <label for="alert-address" id="label_address" style="display: none">{% trans "Address:"%}</label>
                                                             <div id="alert-address"></div>
                                                             <label for="alert-gender" id="label_gender" style="display: none">{% trans "Gender:"%}</label>
@@ -257,7 +258,7 @@
                                         </div>
                                         <div class="card-footer bg-none p-3">
                                             <button type="button" id="IdVerificationb" class="btn btn-success btn-sm" style="float: right;">{% trans "Verify Back" %} </button>
-                                            <input class="hidden" id="datalinkb">
+
                                             <div id="alert-boxb"></div>
 
                                         </div>
@@ -390,10 +391,10 @@
     };
     var loadFileb = function(event) {
         var output = document.getElementById('captureimgb');
-        var datalink = document.getElementById('datalinkb');
+        var datalinkb = document.getElementById('datalinkb');
         var alertmsg = document.getElementById('alert-boxb');
 
-        datalink.value = "1";
+        datalinkb.value = "1";
         alertmsg.style.display = "none";
         output.src = URL.createObjectURL(event.target.files[0]);
         output.onload = function() {
@@ -403,9 +404,9 @@
 
     var loadPhotob = function(event) {
         var output = document.getElementById('captureimgb');
-        var datalink = document.getElementById('datalinkb');
+        var datalinkb = document.getElementById('datalinkb');
         var alertmsg = document.getElementById('alert-boxb');
-        datalink.value = "2";
+        datalinkb.value = "2";
         alertmsg.style.display = "none";
         output.src = URL.createObjectURL(event.target.files[0]);
         output.onload = function() {
@@ -504,10 +505,10 @@
     $("#IdVerificationb").click(function () {
 
             //clear existing data
-        $("#alert-idb").hide();
+        {#$("#alert-idb").hide();#}
         $("#alert-address").hide();
         $("#alert-gender").hide();
-        $("#label_idb").hide();
+        {#$("#label_idb").hide();#}
         $("#label_address").hide();
         $("#label_gender").hide();
 
@@ -541,7 +542,7 @@
                 success: function (data) {
                     if (data) {
                         var result = data;
-                        var id = result.id;
+                        {#var id = result.id;#}
                         var address = result.address;
                         var gender = result.gender;
                         $("#loadingstateb").hide();
@@ -549,19 +550,19 @@
                         // $("#alert-id").html(`<div class="alert alert-light p-0"         role="alert">
                         //    ${id}
                         //     </div>`);
-                        $("#alert-idb").html(`<div class="alert alert-light p-0"         role="alert">
-                           ${id}
-                            </div>`);
+                        {#$("#alert-idb").html(`<div class="alert alert-light p-0"         role="alert">#}
+                        {#   ${id}#}
+                        {#    </div>`);#}
                         $("#alert-address").html(`<div class="alert alert-light p-0"         role="alert">
                            ${address}
                             </div>`);
                         $("#alert-gender").html(`<div class="alert alert-light p-0"         role="alert">
                            ${gender}
                             </div>`);
-                        $("#label_idb").show();
+                        {#$("#label_idb").show();#}
                         $("#label_address").show();
                         $("#label_gender").show();
-                        $("#alert-idb").show();
+                        {#$("#alert-idb").show();#}
                         $("#alert-address").show();
                         $("#alert-gender").show();
                     }
