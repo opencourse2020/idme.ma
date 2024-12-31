@@ -121,7 +121,7 @@ class Profile(models.Model):
     # yearofbirth = models.SmallIntegerField(choices=YEARS, null=True)
 
     def __str__(self):
-        return self.pk
+        return str(self.pk)
 
     class Meta:
         abstract = True
