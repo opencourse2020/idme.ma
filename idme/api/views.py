@@ -146,8 +146,8 @@ class FileUpdateView(CreateView, JsonFormMixin):
                 identification = result.get("Driver's License Number")
             name = result.get("Name")
             city = result.get("City of Birth")
-            dob = result.get("Date of Birth (DOB)")
-            expiry_date = result.get("Expiration Date (EXP)")
+            dob = result.get("Date of Birth (DOB)").replace(".", "-")
+            expiry_date = result.get("Expiration Date (EXP)").replace(".", "-")
 
             if check_name(name, temp_fname, temp_lname):
                 name_verified = True
