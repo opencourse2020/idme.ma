@@ -54,25 +54,25 @@
                 <div class="content px-4">
                 <form action="{% url 'account_login' %}" class="login-form" method="POST">
                 {% csrf_token %}
-
-                <div class="input-style input-transparent no-borders has-icon validate-field mb-4">
-                        <i class="fa fa-user"></i>
-                        {{ form.login }}
-                        <label for="form1a" class="color-highlight">Username</label>
-                        <i class="fa fa-times disabled invalid color-red-dark"></i>
-                        <i class="fa fa-check disabled valid color-green-dark"></i>
-                        <em>(required)</em>
-                    </div>
-                    <div class="input-style input-transparent no-borders has-icon validate-field mb-4">
-                        <i class="fa fa-lock"></i>
-                        {{ form.password }}
-                        <label for="form1a" class="color-highlight">Password</label>
-                        <i class="fa fa-times disabled invalid color-red-dark"></i>
-                        <i class="fa fa-check disabled valid color-green-dark"></i>
-                        <em>(required)</em>
-                    </div>
-
-                    {{ form.remember|as_crispy_field }}
+                    {{ form|crispy }}
+{#                <div class="input-style input-transparent no-borders has-icon validate-field mb-4">#}
+{#                        <i class="fa fa-user"></i>#}
+{#                        {{ form.login }}#}
+{#                        <label for="form1a" class="color-highlight">Username</label>#}
+{#                        <i class="fa fa-times disabled invalid color-red-dark"></i>#}
+{#                        <i class="fa fa-check disabled valid color-green-dark"></i>#}
+{#                        <em>(required)</em>#}
+{#                    </div>#}
+{#                    <div class="input-style input-transparent no-borders has-icon validate-field mb-4">#}
+{#                        <i class="fa fa-lock"></i>#}
+{#                        {{ form.password }}#}
+{#                        <label for="form1a" class="color-highlight">Password</label>#}
+{#                        <i class="fa fa-times disabled invalid color-red-dark"></i>#}
+{#                        <i class="fa fa-check disabled valid color-green-dark"></i>#}
+{#                        <em>(required)</em>#}
+{#                    </div>#}
+{##}
+{#                    {{ form.remember|as_crispy_field }}#}
                 <div class="divider my-2 mb-4"></div>
 
                                 {% if redirect_field_value %}
