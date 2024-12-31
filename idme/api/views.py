@@ -59,14 +59,16 @@ class IDVerifyView(TemplateView):
         kwargs["email"] = postData.get('email')
         kwargs["phone"] = postData.get('phone')
         kwargs["address"] = postData.get('cust_address')
-        print("address1:", postData.get('cust_address'))
         kwargs["lname"] = lname
 
         # convert last name to ASCII value and create a unique client/user ID
         # from the last name of the user, the client id and (minutes+seconds)
         lname_upper = lname.upper()
         nchars = len(lname_upper)
+        # convert last name to ASCII representation
         num_val = sum(ord(lname_upper[byte]) << 8 * (nchars - byte - 1) for byte in range(nchars))
+        # convert last name ASCII value to text
+        # y = ''.join(chr((num_val >> 8 * (nchars - byte - 1)) & 0xFF) for byte in range(nchars))
         lname_left = str(num_val)[:20]
         int_lname_left = int(lname_left)
         user_id = "{:020d}".format(int_lname_left)
@@ -92,7 +94,7 @@ class FileUpdateView(CreateView, JsonFormMixin):
   # parser_classes = (MultiPartParser, FormParser)
   # parser_classes = (FileUploadParser,)
 
-  @csrf_exempt
+  # @csrf_exempt
   def post(self, request, *args, **kwargs):
     # file_serializer = FileSerializer(data=request.data)
 
@@ -109,7 +111,6 @@ class FileUpdateView(CreateView, JsonFormMixin):
     temp_email = request.POST.get("custem")
     temp_phone = request.POST.get("custtel")
     temp_address = request.POST.get("custadd")
-    print("address2:", temp_address)
 
     clientuser = obfuscator.get_key(int(client_user_id))
     client_user = clientuser.split("X")

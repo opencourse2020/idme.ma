@@ -7,6 +7,7 @@
 import datetime as dt
 import hmac
 import hashlib
+import re
 from base64 import b64encode
 from difflib import get_close_matches, SequenceMatcher
 from ipware import get_client_ip
@@ -126,8 +127,17 @@ def check_ip(request):
 def check_address(address, temp_address):
     seq_match = SequenceMatcher(None, address, temp_address)
     ratio = seq_match.ratio()
-    print('ratio=', ratio)
     if ratio >= 0.8:
+        return True
+    else:
+        return False
+
+
+def checkmobile(request):
+
+    MOBILE_AGENT_RE = re.compile(r".*(iphone|mobile|androidtouch)", re.IGNORECASE)
+
+    if MOBILE_AGENT_RE.match(request.META['HTTP_USER_AGENT']):
         return True
     else:
         return False

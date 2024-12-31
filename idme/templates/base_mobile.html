@@ -1,0 +1,157 @@
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <meta name="description" content={% trans "Streamline user onboarding and protect your business with our secure, AI-powered ID verification service, ensuring compliance and preventing fraud. " %}>
+    <meta name="author" content="">
+
+
+    <!-- ===============================================-->
+    <!--    Document Title-->
+    <!-- ===============================================-->
+      {% block head_title %}
+            <title>Idme.ma</title>
+      {% endblock %}
+
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <link rel="apple-touch-icon" sizes="180x180" href={% static "assets/favicons/apple-touch-icon.png" %}>
+    <link rel="icon" type="image/png" sizes="32x32" href={% static "assets/favicons/favicon-32x32.png" %}>
+    <link rel="icon" type="image/png" sizes="16x16" href={% static "assets/favicons/favicon-16x16.png" %}>
+    <link rel="shortcut icon" type="image/x-icon" href={% static "assets/favicons/favicon.ico" %}>
+    <link rel="manifest" href={% static "vendor/mobile/_manifest.json" %}>
+    <meta name="msapplication-TileImage" content={% static "assets/favicons/mstile-150x150.png" %}>
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+  {% block css %}
+      <link rel="stylesheet" type="text/css" href="{% static 'vendor/mobile/styles/bootstrap.css'  %}">
+      <link rel="stylesheet" href="{% static 'vendor/mobile/styles/style.css'  %}" type="text/css" >
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="{% static 'vendor/mobile/fonts/css/fontawesome-all.min.css'  %}">
+      <style>
+      .bg-x7 {
+        background-image: url(/static/pictures/mail_message.jpg);
+      }
+
+      </style>
+  {% endblock css %}
+{#  <link rel="manifest" href="_manifest.json">#}
+{#<link rel="apple-touch-icon" sizes="180x180" href="app/icons/icon-192x192.png">#}
+  </head>
+
+
+  <body class="theme-light" data-highlight="highlight-red">
+        <div id="preloader"><div class="spinner-border color-highlight" role="status"></div></div>
+    <!-- ===============================================-->
+    <!--    Main Content-->
+    <!-- ===============================================-->
+
+    <div  id="page">
+
+{% block page_header %}
+      <div class="header header-auto-show header-fixed header-logo-center">
+
+            <a href="{% url 'mobile:dashboard' %}" class="header-title">Ahmed Rafiq</a>
+
+        <a href="#" data-menu="menu-main" class="header-icon header-icon-1"><i class="fas fa-bars"></i></a>
+        <a href="#" data-toggle-theme class="header-icon header-icon-4 show-on-theme-dark"><i class="fas fa-sun"></i></a>
+        <a href="#" data-toggle-theme class="header-icon header-icon-4 show-on-theme-light"><i class="fas fa-moon"></i></a>
+{#        <a href="#" data-menu="menu-share" class="header-icon header-icon-3"><i class="fas fa-share-alt"></i></a>#}
+      </div>
+{% endblock page_header %}
+
+    <div id="footer-bar" class="footer-bar-6">
+        <a href="index-components.html"><i class="fa fa-layer-group"></i><span>Features</span></a>
+        <a href="index-pages.html"><i class="fa fa-file"></i><span>Pages</span></a>
+        <a href="{% url 'mobile:dashboard' %}" class="circle-nav active-nav"><i class="fa fa-home"></i><span>{% trans "Welcome" %}</span></a>
+        <a href="index-projects.html"><i class="fa fa-image"></i><span>Projects</span></a>
+        <a href="#" data-menu="menu-main"><i class="fa fa-bars"></i><span>Menu</span></a>
+    </div>
+    {% block page_title %}
+
+            {% block page_title_name %}
+                <div class="page-title page-title-fixed">
+                <h1>Ahmed Rafiq</h1>
+            {% endblock page_title_name %}
+
+{#            <a href="#" class="page-title-icon shadow-xl bg-theme color-theme" data-menu="menu-share"><i class="fa fa-share-alt"></i></a>#}
+            {% block page_title_body %}
+                <a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-light" data-toggle-theme><i class="fa fa-moon"></i></a>
+                <a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-dark" data-toggle-theme><i class="fa fa-lightbulb color-yellow-dark"></i></a>
+                <a href="#" class="page-title-icon shadow-xl bg-theme color-theme" data-menu="menu-main"><i class="fa fa-bars"></i></a>
+                </div>
+                 <div class="page-title-clear"></div>
+
+        <div id="menu-main" class="menu menu-box-left rounded-0" data-menu-width="280" data-menu-active="nav-welcome" data-menu-load={% static "vendor/mobile/html/menu-main.html" %}></div>
+        <div id="menu-share" class="menu menu-box-bottom rounded-m"  data-menu-load={% static "vendor/mobile/html/menu-share.html"%} data-menu-height="370"> </div>
+        <div id="menu-colors" class="menu menu-box-bottom rounded-m" data-menu-load={% static "vendor/mobile/html/menu-colors.html"%} data-menu-height="480"></div>
+
+            {% endblock page_title_body %}
+
+    {% endblock page_title %}
+
+
+    {% block content %}
+        <div class="page-content">
+    {% endblock content %}
+        {% block page_title_content %}
+
+        {% endblock page_title_content %}
+
+        {% block main %}
+
+        {% endblock main %}
+
+    </div>
+    <!-- ===============================================-->
+    <!--    End of Main Content-->
+    <!-- ===============================================-->
+    </div>
+
+
+{% block project_js %}
+    <!-- ===============================================-->
+    <!--    JavaScripts-->
+    <!-- ===============================================-->
+
+    <script src={% static "vendor/mobile/scripts/jquery.min.js" %}></script>
+    <script type="text/javascript" src={% static "vendor/mobile/scripts/bootstrap.min.js" %}></script>
+    <script type="text/javascript" src={% static "vendor/mobile/scripts/custom.js" %}></script>
+     <script src={% static "vendor/select2/select2.min.js" %}></script>
+{#    <script src={% static "js/appliedpayments.js" %}></script>#}
+
+
+        <script>
+
+            $(function () {
+
+
+                $('.change-language').click(function (e) {
+                    $('#language').val($(this).attr('data-lang-code'));
+                    $('#change-language-form').submit();
+                });
+            });
+
+        </script>
+
+
+
+{% endblock project_js %}
+
+
+
+  </body>
+
+</html>

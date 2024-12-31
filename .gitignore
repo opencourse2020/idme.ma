@@ -168,3 +168,4 @@ cython_debug/
 /static/
 /media/
 /idme/profiles/migrations/
+/idme/mobile/migrations/

@@ -86,6 +86,7 @@ urlpatterns = [
     path("accounts/profile/", ProfileView.as_view()),
     path("idme.apis/", include("idme.api.urls", namespace="idme-apis")),
     path("profiles/", include("idme.profiles.urls", namespace="profiles")),
+    path("mobile/", include("idme.mobile.urls", namespace="mobile")),
     path("jsi18n/", JavaScriptCatalog.as_view(), name="javascript-catalog"),
     path("i18n/", include("django.conf.urls.i18n")),
 

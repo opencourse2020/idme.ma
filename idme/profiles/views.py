@@ -12,6 +12,7 @@ from django.views.generic import (
     DetailView,
     ListView,
     DeleteView,
+    FormView,
 )
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -28,6 +29,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.text import slugify
 from . import forms, models
 from .mixins import (RegularRequiredMixin, AdminRequiredMixin, AdminAllowedMixing, JsonFormMixin, CustomLoginRequiredMixin)
+from idme.api.tools import checkmobile
 from django.contrib import messages
 from datetime import datetime, date, timedelta
 User = get_user_model()
@@ -144,6 +146,7 @@ class AdminUpdateView(ProfileUpdateView):
     #     kwargs.update({"yearofbirth": self.request.user.professor})
     #     return kwargs
 
+
 class RegularUpdateView(ProfileUpdateView):
     template_name = "profiles/profile_form.html"
     success_url = reverse_lazy("profiles:profile")
@@ -170,14 +173,33 @@ class ProfileView(LoginRequiredMixin, RedirectView):
         return super().get_redirect_url(*args, **kwargs)
 
 
+class MobileLoginView(FormView):
+    form_class = forms.SignInForm
+    template_name = "account/mobilelogin.html"
+    success_url = reverse_lazy("profiles:dispatch_login")
+
+
+class DispatchDeviceView(RedirectView):
+    def get_redirect_url(self, *args, **kwargs):
+        if checkmobile(self.request):
+            return reverse_lazy("profiles:mobilelogin")
+        else:
+            return reverse_lazy("account_login")
+
+        return super().get_redirect_url(*args, **kwargs)
+
+
 class DispatchLoginView(LoginRequiredMixin, RedirectView):
     def get_redirect_url(self, *args, **kwargs):
-        if hasattr(self.request.user, "admin"):
-            return reverse_lazy("idmeapi:sdashboard")
-        elif hasattr(self.request.user, "regular"):
-            return reverse_lazy("idmeapi:sdashboard")
+        if checkmobile(self.request):
+            return reverse_lazy("mobile:dashboard")
         else:
-            return reverse_lazy("idmeapi:sdashboard")
+            if hasattr(self.request.user, "admin"):
+                return reverse_lazy("idmeapi:sdashboard")
+            elif hasattr(self.request.user, "regular"):
+                return reverse_lazy("idmeapi:sdashboard")
+            else:
+                return reverse_lazy("idmeapi:sdashboard")
 
         return super().get_redirect_url(*args, **kwargs)
 

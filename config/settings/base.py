@@ -85,6 +85,7 @@ INSTALLED_APPS = [
     'corsheaders',
     "idme.profiles.apps.ProfilesConfig",
     "idme.api.apps.IdmeConfig",
+    "idme.mobile.apps.MobileConfig"
     # "api.chat.apps.ChatConfig",
     "axes",
 ]
