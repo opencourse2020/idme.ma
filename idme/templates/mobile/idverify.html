@@ -45,7 +45,7 @@
                     <p class="upload-file-text color-white">Upload Image</p>
                 </div>
                 <div class="list-group list-custom-large upload-file-data disabled">
-                    <img id="image-data" src="images/empty.png" class="img-fluid">
+                    <img id="image-data" src="{% static "pictures/empty.png" %}" class="img-fluid">
                     <a href="#" class="border-0">
                         <i class="fa font-14 fa-info-circle color-blue-dark"></i>
                         <span>File Name</span>
@@ -78,31 +78,31 @@
                 <p>
                     {% trans "Upload the Back Side of your Identification Card" %}
                 </p>
-                <div class="file-data pb-5">
-                    <input type="file" id="file-uploadb" class="upload-file bg-highlight shadow-s rounded-s " accept="image/*">
+                <div class="fileb-data pb-5">
+                    <input type="file" id="file-uploadb" class="upload-fileb bg-highlight shadow-s rounded-s " accept="image/*">
                     <p class="upload-file-text color-white">Upload Image</p>
                 </div>
-                <div class="list-group list-custom-large upload-file-data disabled">
-                    <img id="image-data" src="images/empty.png" class="img-fluid">
+                <div class="list-group list-custom-large upload-fileb-data disabled">
+                    <img id="image-datab" src="{% static "pictures/empty.png" %}" class="img-fluid">
                     <a href="#" class="border-0">
                         <i class="fa font-14 fa-info-circle color-blue-dark"></i>
                         <span>File Name</span>
-                        <strong class="upload-file-name">JS Populated</strong>
+                        <strong class="upload-fileb-name">JS Populated</strong>
                     </a>
                     <a href="#" class="border-0">
                         <i class="fa font-14 fa-weight-hanging color-brown-dark"></i>
                         <span>File Size</span>
-                        <strong class="upload-file-size">JS Populated</strong>
+                        <strong class="upload-fileb-size">JS Populated</strong>
                     </a>
                     <a href="#" class="border-0">
                         <i class="fa font-14 fa-tag color-red-dark"></i>
                         <span>File Type</span>
-                        <strong class="upload-file-type">JS Populated</strong>
+                        <strong class="upload-fileb-type">JS Populated</strong>
                     </a>
                     <a href="#" class="border-0 pb-4">
                         <i class="fa font-14 fa-clock color-blue-dark"></i>
                         <span>Modified Date</span>
-                        <strong class="upload-file-modified">JS Populated</strong>
+                        <strong class="upload-fileb-modified">JS Populated</strong>
                     </a>
                 </div>
 
@@ -129,6 +129,27 @@ function goBack() {
   window.history.back();
 }
 </script>
+    <script>
+    const inputArrayb = document.getElementsByClassName('upload-fileb');
+        if(inputArrayb.length){
+            inputArrayb[0].addEventListener('change',prepareUpload,false);
+                function prepareUpload(event){
+                  if (this.files && this.files[0]) {
+                  var img = document.getElementById('image-datab');
+                  img.src = URL.createObjectURL(this.files[0]);
+              }
+                const files = event.target.files;
+                const fileName = files[0].name;
+                document.getElementsByClassName('fileb-data')[0].classList.add('disabled');
+                document.getElementsByClassName('upload-fileb-data')[0].classList.remove('disabled');
+                document.getElementsByClassName('upload-fileb-name')[0].innerHTML = files[0].name;
+                document.getElementsByClassName('upload-fileb-modified')[0].innerHTML = files[0].lastModifiedDate;
+                document.getElementsByClassName('upload-fileb-size')[0].innerHTML = files[0].size/1000+'kb';
+                document.getElementsByClassName('upload-fileb-type')[0].innerHTML = files[0].type;
+            }
+
+        }
+    </script>
 
 {% endblock project_js %}
 
