@@ -8,6 +8,30 @@
 
 {% block css %}
     {{ block.super }}
+    <style>
+    /*File Upload*/
+.upload-fileb {
+  text-indent: -999px;
+  outline: none;
+  width: 100%;
+  height: 45px;
+  color: rgba(0, 0, 0, 0) !important;
+}
+
+.upload-fileb-text {
+  pointer-events: none;
+  margin-top: -36px !important;
+  text-align: center;
+  color: #FFF;
+  height: 10px;
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.fileb-data input[type=file] {
+  font-size: 0px !important;
+}
+    </style>
 
 {% endblock css %}
 
@@ -79,7 +103,7 @@
                     {% trans "Upload the Back Side of your Identification Card" %}
                 </p>
                 <div class="fileb-data pb-5">
-                    <input type="file" id="file-uploadb" class="upload-fileb bg-highlight shadow-s rounded-s " accept="image/*">
+                    <input type="file" id="fileb-upload" class="upload-fileb bg-highlight shadow-s rounded-s " accept="image/*">
                     <p class="upload-file-text color-white">Upload Image</p>
                 </div>
                 <div class="list-group list-custom-large upload-fileb-data disabled">
