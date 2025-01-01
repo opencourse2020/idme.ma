@@ -85,15 +85,19 @@
     {% block page_title %}
 
             {% block page_title_name %}
-                <div class="page-title page-title-fixed">
-                <img src="{% static "assets/logos/idmema-logo.png" %}" class="mt-4 mb-4" width="150"></a>
+                <div class="page-title page-title-fixed justify-content-around">
+
+                <img src="{% static "assets/logos/idmema-logo.png" %}" class="me-4" width="150"></a>
+
             {% endblock page_title_name %}
 
 {#            <a href="#" class="page-title-icon shadow-xl bg-theme color-theme" data-menu="menu-share"><i class="fa fa-share-alt"></i></a>#}
             {% block page_title_body %}
+                <div>
                 <a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-light" data-toggle-theme><i class="fa fa-moon"></i></a>
                 <a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-dark" data-toggle-theme><i class="fa fa-lightbulb color-yellow-dark"></i></a>
                 <a href="#" class="page-title-icon shadow-xl bg-theme color-theme" data-menu="menu-main"><i class="fa fa-bars"></i></a>
+                </div>
                 </div>
                  <div class="page-title-clear"></div>
 
