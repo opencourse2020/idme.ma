@@ -17,4 +17,4 @@ from idme.api.views import IDVerifyView, FileUpdateView
 
 
 class DashboardView(LoginRequiredMixin, TemplateView):
-    template_name = "mobile/index.html"
+    template_name = "mobile/idverify.html"
